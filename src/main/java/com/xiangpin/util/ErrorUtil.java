@@ -1,4 +1,4 @@
-package com.zaynStudio.forum.util;
+package com.xiangpin.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
