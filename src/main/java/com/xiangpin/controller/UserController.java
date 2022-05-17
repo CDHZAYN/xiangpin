@@ -19,6 +19,14 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/test")
+    public ResponseUtil test(){
+        return ResponseUtil.response(new ErrorUtil("0001","fuck"));
+    }
 
+    @GetMapping("/login")
+    public ResponseUtil login(@RequestHeader("X-WX-OPENID")String openID, @RequestHeader("X-WX-ADDID") String appID){
+        return userService.login(openID, appID);
+    }
 
 }

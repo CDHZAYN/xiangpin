@@ -1,13 +1,15 @@
 package com.xiangpin.dao;
 
+import com.xiangpin.model.po.SeekerPO;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.List;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class UserDao {
-    public String test;
+@Repository
+@Mapper
+public interface UserDao {
+
+    List<SeekerPO> testName();
+
 }

@@ -3,8 +3,11 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/Mysql
-    username: root
-    password: zaynsalt66
+    url: jdbc:mysql://121.4.43.41:3306/weixinBackEnd
+    username: gjc
+    password: GE66ge66
     driver-class-name: com.mysql.cj.jdbc.Driver
-#todo
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.xiangpin.model.po
