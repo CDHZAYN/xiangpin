@@ -23,7 +23,7 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public ApiResponse login(@RequestHeader("X-WX-OPENID")String openID, @RequestHeader("X-WX-ADDID") String appID){
+    public ApiResponse login(@RequestHeader("x-wx-openid")String openID, @RequestHeader("x-wx-appid") String appID){
         return userService.login(openID, appID);
     }
 

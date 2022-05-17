@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tencent.tencent.dao.UserDao">
+
+    <resultMap id="seekerPO" type="com.tencent.wxcloudrun.model.po.SeekerPO">
+        <id column="userId" property="openID"/>
+        <result column="userName" property="name"/>
+        <result column="userPhone" property="phone"/>
+        <result column="userOld" property="old"/>
+        <result column="userBirth" property="birth"/>
+        <result column="userGander" property="gender"/>
+    </resultMap>
+
+    <select id="testName" resultMap="seekerPO">
+        select * from tryUser
+    </select>
+
+</mapper>
