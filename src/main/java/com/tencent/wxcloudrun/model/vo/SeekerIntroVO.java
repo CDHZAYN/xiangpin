@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SeederIntroVO {
+public class SeekerIntroVO {
 
     private String openID;
 

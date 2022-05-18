@@ -8,8 +8,13 @@ import java.util.List;
 
 @Repository
 @Mapper
-public interface UserDao {
+public interface SeekerDao {
 
-    List<SeekerPO> testName();
+    SeekerPO login();
+
+    String getOpenID(String openID);
+
+    //TODO:need to modify
+    String setAvatar(String openID);
 
 }

@@ -17,7 +17,7 @@ public class SeekerPO {
 
     private Integer old;
 
-//    private String Education;
+    private String education;
 
     private String birth;
 

@@ -1,17 +1,6 @@
-server:
-  port: 8888
-
-
 spring:
-  datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://${MYSQL_ADDRESS}/${MYSQL_DATABASE:springboot_demo}
-#    username: ${MYSQL_USERNAME}
-#    password: ${MySQL_PASSWORD}
-    url: jdbc:mysql://121.4.43.41:3306/weixinBackEnd
-    username: gjc
-    password: GE66ge66
-    driver-class-name: com.mysql.cj.jdbc.Driver
+  profiles:
+    active: dev
   mvc:
     view:
       suffix: .html
@@ -19,3 +8,31 @@ spring:
 
 mybatis:
   mapper-locations: classpath*:mapper/*Mapper.xml
+
+---
+
+spring:
+  profiles: pro
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_ADDRESS}/${MYSQL_DATABASE:springboot_demo}
+    username: ${MYSQL_USERNAME}
+    password: ${MySQL_PASSWORD}
+
+server:
+  port: 80
+
+---
+
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://121.4.43.41:3306/weixinBackEnd
+    username: gjc
+    password: GE66ge66
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+server:
+  port: 8888
+
+---
