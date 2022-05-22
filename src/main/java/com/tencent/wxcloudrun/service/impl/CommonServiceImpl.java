@@ -23,6 +23,7 @@ public class CommonServiceImpl implements CommonService {
         try {
             loginPO= commonDao.login(openID);
         } catch (Exception e) {
+            e.printStackTrace();
             return ApiResponse.error("00001","Error occurred when select a certain seeker.");
         }
         if(loginPO==null)
