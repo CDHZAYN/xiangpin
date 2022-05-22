@@ -6,22 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/common")
 public class CommonController {
 
-    private final CommonServiceImpl loginService;
+    private final CommonServiceImpl commonService;
 
     @Autowired
-    public CommonController(CommonServiceImpl loginService){
-        this.loginService=loginService;
+    public CommonController(CommonServiceImpl commonService){
+        this.commonService = commonService;
     }
 
     @GetMapping("/login")
     public ApiResponse login(@RequestHeader("x-wx-openid")String openID){
-        return loginService.login(openID);
+        return commonService.login(openID);
     }
 
     @PostMapping("/updateAvatar")
     public ApiResponse updateAvatar(@RequestHeader("x-wx-openid")String openID, @RequestBody String avatarUrl){
-        return loginService.updateAvatar(openID, avatarUrl);
+        return commonService.updateAvatar(openID, avatarUrl);
     }
 }
