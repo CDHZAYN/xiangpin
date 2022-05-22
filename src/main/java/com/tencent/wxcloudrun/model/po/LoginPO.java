@@ -12,5 +12,5 @@ public class LoginPO {
 
     String userAvatar;
 
-    String openId;
+    String openID;
 }

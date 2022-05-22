@@ -16,8 +16,4 @@
         select * from seekersTable;
     </select>
 
-    <select id="getOpenID">
-        select `seekerOpenId` from seekersTable where `seekerOpenId` = ${openID};
-    </select>
-
 </mapper>
