@@ -27,7 +27,7 @@ server:
 spring:
   profiles: dev
   datasource:
-    url: jdbc:mysql://121.4.43.41:3306/weixinBackEnd
+    url: jdbc:mysql://121.4.43.41:3306/weixinBackEnd?setUnicode=true&characterEncoding=utf8
     username: gjc
     password: GE66ge66
     driver-class-name: com.mysql.cj.jdbc.Driver

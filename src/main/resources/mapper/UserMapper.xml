@@ -13,11 +13,11 @@
     </resultMap>
 
     <select id="login" resultMap="seekerPO">
-        select * from seekerTable
+        select * from seekersTable;
     </select>
 
     <select id="getOpenID">
-        select `seekerOpenId` from seekerTable where `seekerOpenId` = ${openID}
+        select `seekerOpenId` from seekersTable where `seekerOpenId` = ${openID};
     </select>
 
 </mapper>
