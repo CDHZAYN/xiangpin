@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: pro
+    active: dev
   mvc:
     view:
       suffix: .html
@@ -16,7 +16,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${MYSQL_ADDRESS}/${MYSQL_DATABASE:springboot_demo}
     username: ${MYSQL_USERNAME}
-    password: ${MySQL_PASSWORD}
+    password: ${MYSQL_PASSWORD}
   config:
     activate:
       on-profile: pro
@@ -37,6 +37,6 @@ spring:
       on-profile: dev
 
 server:
-  port: 8888
+  port: 80
 
 ---
