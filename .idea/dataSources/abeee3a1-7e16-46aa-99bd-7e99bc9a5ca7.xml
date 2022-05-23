@@ -1213,7 +1213,6 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </column>
     <column id="296" parent="287" name="userAvatar">
       <DataType>varchar(300)|0s</DataType>
-      <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
     <column id="297" parent="287" name="openId">
