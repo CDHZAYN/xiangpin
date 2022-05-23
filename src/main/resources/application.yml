@@ -5,9 +5,9 @@ spring:
       prefix: /
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${MYSQL_ADDRESS}/${MYSQL_DATABASE:weixinBackEnd}
-    username: ${MYSQL_USERNAME}
-    password: ${MYSQL_PASSWORD}
+    url: jdbc:mysql://121.4.43.41/weixinBackEnd
+    username: gjc
+    password: GE66ge66
 
 mybatis:
   mapper-locations: classpath*:mapper/*Mapper.xml
