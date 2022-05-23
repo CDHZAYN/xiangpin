@@ -3,21 +3,21 @@
 <mapper namespace="com.tencent.wxcloudrun.dao.SeekerDao">
 
     <resultMap id="seekerPO" type="com.tencent.wxcloudrun.model.po.SeekerPO">
-        <id column="seekerId" property="openID"/>
+        <id column="seekerOpenId" property="openID"/>
         <result column="seekerName" property="name"/>
         <result column="seekerPhone" property="phone"/>
         <result column="seekerOld" property="old"/>
         <result column="seekerEducation" property="education"/>
         <result column="seekerBirth" property="birth"/>
-        <result column="seekerGander" property="gender"/>
+        <result column="seekerGender" property="gender"/>
     </resultMap>
 
     <select id="login" resultMap="seekerPO">
-        select * from seekerTable;
+        select * from seekersTable;
     </select>
 
     <select id="getOpenID">
-        select `seekerOpenId` from seekerTable where `seekerOpenId` = ${openID};
+        select `seekerOpenId` from seekersTable where `seekerOpenId` = ${openID};
     </select>
 
 </mapper>

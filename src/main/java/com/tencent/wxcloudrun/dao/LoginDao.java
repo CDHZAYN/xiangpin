@@ -5,8 +5,12 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Repository
 @Mapper
 public interface LoginDao {
-    LoginPO login();
+    LoginPO login(String openid);
+
+    List<LoginPO> test();
 }
