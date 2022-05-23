@@ -4,10 +4,10 @@ spring:
       suffix: .html
       prefix: /
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://121.4.43.41/weixinBackEnd
     username: gjc
     password: GE66ge66
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
 mybatis:
   mapper-locations: classpath*:mapper/*Mapper.xml
