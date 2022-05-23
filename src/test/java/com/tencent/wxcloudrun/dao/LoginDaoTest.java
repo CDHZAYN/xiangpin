@@ -9,5 +9,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class LoginDaoTest {
+    @Autowired
+    CommonDao commonDao;
 
+    @Test
+    void getOpenIdTest() {
+        assertNull(commonDao.login("4"));
+        System.out.println(commonDao.login("4"));
+    }
 }

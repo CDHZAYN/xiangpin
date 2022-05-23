@@ -8,12 +8,5 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class SeekerDaoTest {
-    @Autowired
-    SeekerDao seekerDao;
 
-    @Test
-    void getOpenIdTest() {
-        assertNull(seekerDao.login());
-        System.out.println(seekerDao.login());
-    }
 }
