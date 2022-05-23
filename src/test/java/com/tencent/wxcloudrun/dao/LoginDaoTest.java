@@ -14,7 +14,7 @@ class LoginDaoTest {
 
     @Test
     void getOpenIdTest() {
-        assertNull(commonDao.login("4"));
-        System.out.println(commonDao.login("4"));
+        assertNull(commonDao.login("oriVB48y-JNhIqLsdf8W1adz7j0o"));
+        System.out.println(commonDao.login("oriVB48y-JNhIqLsdf8W1adz7j0o"));
     }
 }
