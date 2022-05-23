@@ -1,0 +1,6 @@
+com\tencent\wxcloudrun\service\CommonService.class
+com\tencent\wxcloudrun\model\vo\LoginVO.class
+com\tencent\wxcloudrun\service\impl\CommonServiceImpl.class
+com\tencent\wxcloudrun\controller\CommonController.class
+com\tencent\wxcloudrun\model\po\LoginPO.class
+com\tencent\wxcloudrun\dao\CommonDao.class
