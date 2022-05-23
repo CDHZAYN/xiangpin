@@ -12,12 +12,14 @@ mybatis:
 ---
 
 spring:
-  profiles: pro
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${MYSQL_ADDRESS}/${MYSQL_DATABASE:springboot_demo}
     username: ${MYSQL_USERNAME}
     password: ${MySQL_PASSWORD}
+  config:
+    activate:
+      on-profile: pro
 
 server:
   port: 80
@@ -25,12 +27,14 @@ server:
 ---
 
 spring:
-  profiles: dev
   datasource:
-    url: jdbc:mysql://121.4.43.41:3306/weixinBackEnd?setUnicode=true&characterEncoding=utf8
-    username: gjc
-    password: GE66ge66
+    url: jdbc:mysql://121.4.43.41:3306/weixinBackEnd?setUnicode=true&characterEncoding=utf8&useSSL=false
+    username: littleb
+    password: mymmyyds
     driver-class-name: com.mysql.cj.jdbc.Driver
+  config:
+    activate:
+      on-profile: dev
 
 server:
   port: 8888

@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: pro
+    active: dev
   mvc:
     view:
       suffix: .html
@@ -28,9 +28,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://121.4.43.41:3306/weixinBackEnd?setUnicode=true&characterEncoding=utf8
-    username: gjc
-    password: GE66ge66
+    url: jdbc:mysql://121.4.43.41:3306/weixinBackEnd?setUnicode=true&characterEncoding=utf8&useSSL=false
+    username: littleb
+    password: mymmyyds
     driver-class-name: com.mysql.cj.jdbc.Driver
   config:
     activate:

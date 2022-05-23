@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface SeekerDao {
 
-    SeekerPO login();
+    List<SeekerPO> login();
 
     String getOpenID(String openID);
 
