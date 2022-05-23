@@ -1,13 +1,11 @@
 spring:
-  profiles:
-    active: dev
   mvc:
     view:
       suffix: .html
       prefix: /
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${MYSQL_ADDRESS}/${MYSQL_DATABASE:springboot_demo}
+    url: jdbc:mysql://${MYSQL_ADDRESS}/${MYSQL_DATABASE:weixinBackEnd}
     username: ${MYSQL_USERNAME}
     password: ${MYSQL_PASSWORD}
 
