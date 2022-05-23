@@ -18,13 +18,4 @@ public class SeekerController{
         this.seekerServiceImpl = seekerServiceImpl;
     }
 
-    @GetMapping("/login")
-    public ApiResponse login(@RequestHeader("x-wx-openid")String openID){
-        return seekerServiceImpl.login(openID);
-    }
-
-    @PostMapping("/updateAvatar")
-    public ApiResponse updateAvatar(@RequestHeader("x-wx-openid")String openID,@RequestBody String avatarUrl){
-        return seekerServiceImpl.updateAvatar(openID, avatarUrl);
-    }
 }

@@ -5,9 +5,4 @@ import com.tencent.wxcloudrun.dao.SeekerDao;
 
 public interface SeekerService {
 
-    ApiResponse login(String openID);
-
-    boolean verifyEmail(String userKey);
-
-
 }

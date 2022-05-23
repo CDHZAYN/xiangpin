@@ -2,15 +2,13 @@ package com.tencent.wxcloudrun.dao;
 
 import com.tencent.wxcloudrun.model.po.LoginPO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
 
 @Repository
 @Mapper
-public interface LoginDao {
-    LoginPO login(String openid);
+public interface CommonDao {
+    LoginPO login(@Param("openID") String openID);
 
-    List<LoginPO> test();
+    String getOpenID(@Param("openID") String openID);
 }
