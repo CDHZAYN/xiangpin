@@ -8,12 +8,12 @@
         <result column="userAvatar" property="userAvatar"/>
     </resultMap>
 
-    <select id="login" resultMap="loginPO" parameterType="string">
+    <select id="getLoginInfo" resultMap="loginPO">
         select * from loginTable where openId=#{openID};
     </select>
 
     <select id="getOpenID" resultType="string" parameterType="string">
-        select seekerOpenId from seekersTable where seekerOpenId = #{openID};
+        select openId from loginTable where openId = #{openID};
     </select>
 
 </mapper>

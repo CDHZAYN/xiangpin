@@ -1,8 +1,4 @@
 spring:
-  mvc:
-    view:
-      suffix: .html
-      prefix: /
   datasource:
     url: jdbc:mysql://121.4.43.41:3306/weixinBackEnd
     username: gjc

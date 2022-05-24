@@ -1,5 +1,6 @@
 package com.tencent.wxcloudrun.dao;
 
+import com.tencent.wxcloudrun.model.po.LoginPO;
 import com.tencent.wxcloudrun.model.po.SeekerPO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -10,11 +11,8 @@ import java.util.List;
 @Mapper
 public interface SeekerDao {
 
-    List<SeekerPO> login();
+    void setSeekerInfo(SeekerPO seekerPO);
 
-    String getOpenID(String openID);
-
-    //TODO:need to modify
-    String setAvatar(String openID);
+    void setSeekerLoginInfo(LoginPO loginPO);
 
 }

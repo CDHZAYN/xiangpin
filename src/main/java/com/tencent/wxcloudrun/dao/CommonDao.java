@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 public interface CommonDao {
-    LoginPO login(@Param("openID") String openID);
+
+    LoginPO getLoginInfo(@Param("openID") String openID);
 
     String getOpenID(@Param("openID") String openID);
 }

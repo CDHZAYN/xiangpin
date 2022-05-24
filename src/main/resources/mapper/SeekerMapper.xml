@@ -8,20 +8,18 @@
         <result column="seekerPhone" property="phone"/>
         <result column="seekerOld" property="old"/>
         <result column="seekerEducation" property="education"/>
-        <result column="seekerBirth" property="birth"/>
-        <result column="seekerGander" property="gender"/>
+        <result column="seekerBirth" jdbcType="DATE" property="birth" javaType="java.sql.Date"/>
+        <result column="seekerGender" property="gender"/>
     </resultMap>
-    <update id="setAvatar">
-        select userAvatar from loginTable where openId=#{openID};
-    </update>
 
-    <select id="login" resultMap="seekerPO">
-        select * from seekersTable;
-    </select>
+    <insert id="setSeekerInfo" parameterType="com.tencent.wxcloudrun.model.po.SeekerPO">
+        insert into seekersTable value (#{openID}, #{name}, #{phone}, #{old},
+                                        #{education}, #{birth,jdbcType=DATE,javaType=java.sql.Date},
+                                        #{gender});
+    </insert>
 
-    <select id="getOpenID" resultType="java.lang.String">
-        select seekerOpenId from seekersTable where seekerOpenId=#{openID};
-    </select>
-
+    <insert id="setSeekerLoginInfo" parameterType="com.tencent.wxcloudrun.model.po.LoginPO">
+        insert into loginTable value (#{userName}, #{userAvatar}, #{openID});
+    </insert>
 
 </mapper>

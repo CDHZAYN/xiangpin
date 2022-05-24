@@ -14,7 +14,7 @@ class CommonDaoTest {
 
     @Test
     void getOpenIdTest() {
-        assertNull(commonDao.login("oriVB48y-JNhIqLsdf8W1adz7j0o"));
-        System.out.println(commonDao.login("oriVB48y-JNhIqLsdf8W1adz7j0o"));
+        assertNull(commonDao.getOpenID("oriVB48y-JNhIqLsdf8W1adz7j0o"));
+        System.out.println(commonDao.getOpenID("oriVB48y-JNhIqLsdf8W1adz7j0o"));
     }
 }

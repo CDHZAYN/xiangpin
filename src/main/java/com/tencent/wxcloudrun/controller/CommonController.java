@@ -1,6 +1,7 @@
 package com.tencent.wxcloudrun.controller;
 
 import com.tencent.wxcloudrun.config.ApiResponse;
+import com.tencent.wxcloudrun.model.dto.RegisterDTO;
 import com.tencent.wxcloudrun.service.impl.CommonServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +22,4 @@ public class CommonController {
         return commonService.login(openID);
     }
 
-    @PostMapping("/updateAvatar")
-    public ApiResponse updateAvatar(@RequestHeader("x-wx-openid")String openID, @RequestBody String avatarUrl){
-        return commonService.updateAvatar(openID, avatarUrl);
-    }
 }
