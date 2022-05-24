@@ -1,17 +1,3 @@
 spring:
-  mvc:
-    view:
-      suffix: .html
-      prefix: /
-  datasource:
-    url: jdbc:mysql://121.4.43.41:3306/weixinBackEnd
-    username: gjc
-    password: GE66ge66
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
-server:
-  port: 80
-
-
-mybatis:
-  mapper-locations: classpath*:mapper/*Mapper.xml
+  profiles:
+    active: pro
