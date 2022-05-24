@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@ContextConfiguration(locations= "classpath*:application.yml")
+//@ContextConfiguration(locations= "classpath*:application.yml")
 class SeekerDaoTest {
 
 }
