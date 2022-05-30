@@ -8,9 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HRRegisterDTO {
-
-    private String openId;
-
     private String name;
 
     private String phoneNum;
