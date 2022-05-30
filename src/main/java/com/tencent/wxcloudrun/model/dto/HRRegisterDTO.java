@@ -15,7 +15,7 @@ public class HRRegisterDTO {
 
     private String phoneNum;
 
-    private boolean gender;
+    private String gender;
 
     private String avatarUrl;
 }

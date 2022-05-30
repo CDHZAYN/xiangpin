@@ -9,7 +9,16 @@
     </resultMap>
 
     <update id="setHRInfo">
-        insert HRTabel values (#{openId}, #{gender}, #{name}, #{phoneNum});
+        insert HRTable values (#{openId}, #{gender}, #{name}, #{phoneNum});
     </update>
+
+    <update id="setHRLoginInfo">
+        insert HRLoginTable values (#{userName}, #{userAvatar}, #{openID});
+    </update>
+
+    <select id="getByOpenId" resultMap="HRTable">
+        select * from HRTable where openId=#{openID};
+    </select>
+
 
 </mapper>
