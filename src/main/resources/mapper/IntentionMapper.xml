@@ -5,7 +5,10 @@
     <resultMap id="IntentionPO" type="com.tencent.wxcloudrun.model.po.IntentionPO">
         <id column="openId" property="openId"/>
         <result column="intentionId" property="intentionId"/>
-        <result column=""
+        <result column="expIndustry" property="expIndustry"/>
+        <result column="expMaxSalary" property="expMaxSalary"/>
+        <result column="expMinSalary" property="expMinSalary"/>
+        <result column="jobType" property="jobType"/>
     </resultMap>
     <insert id="createIntention">
 
