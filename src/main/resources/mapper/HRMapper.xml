@@ -16,6 +16,14 @@
         insert HRLoginTable values (#{userName}, #{userAvatar}, #{openID});
     </update>
 
+    <delete id="deleteByOpenId">
+        delete from HRTable where openId=#{openID};
+    </delete>
+
+    <delete id="deleteLoginByOpenId">
+        delete from HRLoginTable where openId=#{openID};
+    </delete>
+
     <select id="getByOpenId" resultMap="HRTable">
         select * from HRTable where openId=#{openID};
     </select>
