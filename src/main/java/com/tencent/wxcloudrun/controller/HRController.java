@@ -3,6 +3,7 @@ package com.tencent.wxcloudrun.controller;
 import com.tencent.wxcloudrun.config.ApiResponse;
 import com.tencent.wxcloudrun.model.dto.HRRegisterDTO;
 import com.tencent.wxcloudrun.model.dto.RegisterDTO;
+import com.tencent.wxcloudrun.model.vo.HRLoginVO;
 import com.tencent.wxcloudrun.service.impl.HRServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,4 +23,8 @@ public class HRController {
         return hrService.HRRegister(openID, registerDTO);
     }
 
+    @GetMapping("/login")
+        public ApiResponse login(@RequestHeader("x-wx-openid")String openID) {
+        return hrService.HRLogin(openID);
+    }
 }

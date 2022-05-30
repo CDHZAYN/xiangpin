@@ -22,4 +22,6 @@ public class CommonController {
         return commonService.login(openID);
     }
 
+
+
 }

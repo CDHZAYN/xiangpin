@@ -16,6 +16,8 @@ public interface HRDao {
 
     HRPO getByOpenId(String openID);
 
+    HRLoginPO getLoginByOpenId(String openID);
+
     void deleteByOpenId(String openID);
 
     void deleteLoginByOpenId(String openID);

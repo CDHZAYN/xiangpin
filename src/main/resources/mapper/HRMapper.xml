@@ -28,5 +28,9 @@
         select * from HRTable where openId=#{openID};
     </select>
 
+    <select id="getLoginByOpenId" resultType="com.tencent.wxcloudrun.model.po.HRLoginPO">
+        select * from HRLoginTable where openId=#{openID};
+    </select>
+
 
 </mapper>

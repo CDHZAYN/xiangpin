@@ -6,5 +6,5 @@ import com.tencent.wxcloudrun.model.dto.HRRegisterDTO;
 public interface HRService {
     ApiResponse HRRegister(String openID, HRRegisterDTO HRRegister);
 
-
+    ApiResponse HRLogin(String openID);
 }
