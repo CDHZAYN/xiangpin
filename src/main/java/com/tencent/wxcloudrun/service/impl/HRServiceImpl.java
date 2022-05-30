@@ -50,4 +50,30 @@ public class HRServiceImpl implements HRService {
         loginVO.setUserName(loginPO.getUserName());
         return ApiResponse.ok(loginVO);
     }
+
+    @Override
+    public ApiResponse HRLogin(String openID) {
+        String userOpenId = null;
+
+        try {
+            userOpenId = hrDao.getByOpenId(openID).getOpenId();
+        } catch (Exception e) {
+            return ApiResponse.error("00001", "Error occurred when select a certain user.");
+        }
+
+        if (userOpenId == null) {
+            return ApiResponse.error("00002", "User not found.");
+        }
+
+        HRLoginPO hrLoginPO = hrDao.getLoginByOpenId(openID);
+        HRLoginVO hrLoginVO = new HRLoginVO();
+
+        hrLoginVO.setUserName(hrLoginPO.getUserName());
+        if (hrLoginPO.getUserAvatar() == null) {
+            hrLoginVO.setUserAvatar(null);
+        } else {
+            hrLoginVO.setUserAvatar(hrLoginPO.getUserAvatar());
+        }
+        return ApiResponse.ok(hrLoginVO);
+    }
 }

@@ -2,6 +2,7 @@ package com.tencent.wxcloudrun.service.impl;
 
 import com.tencent.wxcloudrun.config.ApiResponse;
 import com.tencent.wxcloudrun.dao.CommonDao;
+import com.tencent.wxcloudrun.dao.HRDao;
 import com.tencent.wxcloudrun.model.dto.RegisterDTO;
 import com.tencent.wxcloudrun.model.po.LoginPO;
 import com.tencent.wxcloudrun.model.po.SeekerPO;
@@ -38,12 +39,11 @@ public class CommonServiceImpl implements CommonService {
 
         LoginPO loginPO = commonDao.getLoginInfo(openID);
         LoginVO loginVO = new LoginVO();
-        if(loginPO.getUserAvatar()==null)
+        if (loginPO.getUserAvatar() == null)
             loginVO.setUserAvatar(null);
         else
             loginVO.setUserAvatar(loginPO.getUserAvatar());
         loginVO.setUserName(loginPO.getUserName());
         return ApiResponse.ok(loginVO);
     }
-
 }
