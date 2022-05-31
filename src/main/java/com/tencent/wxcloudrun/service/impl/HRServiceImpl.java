@@ -68,8 +68,10 @@ public class HRServiceImpl implements HRService {
         String userOpenId = null;
 
         try {
-            userOpenId = hrDao.getByOpenId(openID).getOpenId();
+            userOpenId = hrDao.getOpenId(openID);
+
         } catch (Exception e) {
+            e.printStackTrace();
             return ApiResponse.error("00001", ErrorList.errorList.get("00001"));
         }
 

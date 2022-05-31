@@ -1,7 +1,5 @@
-package com.tencent.wxcloudrun.model.dto;
+package com.tencent.wxcloudrun.model.vo;
 
-import com.tencent.wxcloudrun.model.vo.CompanyVO;
-import com.tencent.wxcloudrun.model.vo.HRLoginVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +9,7 @@ import java.util.ArrayList;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class JobDTO {
+public class JobVO {
     private String jobName;
 
     private HRLoginVO hrLoginVO;
