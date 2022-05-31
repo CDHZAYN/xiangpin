@@ -1,6 +1,7 @@
 package com.tencent.wxcloudrun.service.impl;
 
 import com.tencent.wxcloudrun.config.ApiResponse;
+import com.tencent.wxcloudrun.config.ErrorList;
 import com.tencent.wxcloudrun.dao.HRDao;
 import com.tencent.wxcloudrun.model.dto.HRRegisterDTO;
 import com.tencent.wxcloudrun.model.po.HRLoginPO;
@@ -20,8 +21,19 @@ public class HRServiceImpl implements HRService {
         this.hrDao = hrDao;
     }
 
+    /**
+     * 注册功能
+     * @param openID
+     * @param hrRegister
+     * @return  返回ApiResponse
+     */
     @Override
     public ApiResponse HRRegister(String openID, HRRegisterDTO hrRegister) {
+        if (hrDao.getByOpenId(openID) != null) {
+            return ApiResponse.error("00004", ErrorList.errorList.get("00004"));
+        }
+
+
         HRPO hrpo = new HRPO();
         hrpo.setGender(hrRegister.getGender().equals("male"));
         hrpo.setName(hrRegister.getName());
@@ -42,7 +54,7 @@ public class HRServiceImpl implements HRService {
             hrDao.setHRLoginInfo(loginPO);
         } catch (Exception e) {
             e.printStackTrace();
-            return ApiResponse.error("00003", "Error occurred when register.");
+            return ApiResponse.error("00003", ErrorList.errorList.get("00003"));
         }
 
         HRLoginVO loginVO = new HRLoginVO();
@@ -58,11 +70,11 @@ public class HRServiceImpl implements HRService {
         try {
             userOpenId = hrDao.getByOpenId(openID).getOpenId();
         } catch (Exception e) {
-            return ApiResponse.error("00001", "Error occurred when select a certain user.");
+            return ApiResponse.error("00001", ErrorList.errorList.get("00001"));
         }
 
         if (userOpenId == null) {
-            return ApiResponse.error("00002", "User not found.");
+            return ApiResponse.error("00002", ErrorList.errorList.get("00002"));
         }
 
         HRLoginPO hrLoginPO = hrDao.getLoginByOpenId(openID);
