@@ -1,14 +1,13 @@
 package com.tencent.wxcloudrun.model.dto;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class RegisterDTO {
+@NoArgsConstructor
+public class SeekerBasicDTO {
 
     private String acaBg;
 

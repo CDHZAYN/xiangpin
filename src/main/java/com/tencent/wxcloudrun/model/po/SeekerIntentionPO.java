@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class IntentionPO {
-    String openId;
+public class SeekerIntentionPO {
+    String openID;
 
-    int intentionId;
+    int intentionID;
 
     String expIndustry;
 
@@ -19,4 +19,6 @@ public class IntentionPO {
     int expMinSalary;
 
     String jobType;
+
+    String expJob;
 }

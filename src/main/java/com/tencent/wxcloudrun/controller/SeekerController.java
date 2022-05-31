@@ -1,7 +1,7 @@
 package com.tencent.wxcloudrun.controller;
 
 import com.tencent.wxcloudrun.config.ApiResponse;
-import com.tencent.wxcloudrun.model.dto.RegisterDTO;
+import com.tencent.wxcloudrun.model.dto.SeekerRegisterDTO;
 import com.tencent.wxcloudrun.service.impl.SeekerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +20,12 @@ public class SeekerController{
     }
 
     @PostMapping("/register")
-    public ApiResponse register(@RequestHeader("x-wx-openid")String openID, @RequestBody RegisterDTO registerDTO){
+    public ApiResponse register(@RequestHeader("x-wx-openid")String openID, @RequestBody SeekerRegisterDTO registerDTO){
         return seekerService.seekerRegister(openID, registerDTO);
+    }
+
+    @GetMapping("/login")
+    public ApiResponse login(@RequestHeader("x-wx-openid")String openID){
+        return seekerService.seekerLogin(openID);
     }
 }

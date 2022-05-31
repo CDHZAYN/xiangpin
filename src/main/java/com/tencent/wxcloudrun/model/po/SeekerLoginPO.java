@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginPO {
+public class SeekerLoginPO {
     String userName;
 
     String userAvatar;

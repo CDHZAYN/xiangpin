@@ -9,7 +9,7 @@ import java.sql.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SeekerPO {
+public class SeekerBasicPO {
 
     private String openID;
 
