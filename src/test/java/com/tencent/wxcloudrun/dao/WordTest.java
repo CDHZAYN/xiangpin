@@ -13,8 +13,8 @@ import java.util.List;
 public class WordTest {
     @Test
     void wordTry() {
-        String text1 = "珺珺子我好喜欢你啊";
-        String text2 = "王珺哥哥我好喜欢你啊";
+        String text1 = "母舰妹妹永远滴神";
+        String text2 = "母舰姐姐永远滴神";
 
 
         TextSimilarity textSimilarity = new CosineTextSimilarity();
