@@ -2,6 +2,7 @@ package com.tencent.wxcloudrun.service.impl;
 
 
 import com.tencent.wxcloudrun.config.ApiResponse;
+import com.tencent.wxcloudrun.config.ErrorList;
 import com.tencent.wxcloudrun.dao.CommonDao;
 import com.tencent.wxcloudrun.dao.SeekerDao;
 import com.tencent.wxcloudrun.model.dto.RegisterDTO;
@@ -57,7 +58,7 @@ public class SeekerServiceImpl implements SeekerService {
             seekerDao.setSeekerLoginInfo(loginPO);
         } catch (Exception e) {
             e.printStackTrace();
-            return ApiResponse.error("00003", "Error occurred when register.");
+            return ApiResponse.error("00003", ErrorList.errorList.get("00003"));
         }
 
         LoginVO loginVO = new LoginVO();

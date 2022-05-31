@@ -1,6 +1,7 @@
 package com.tencent.wxcloudrun.service.impl;
 
 import com.tencent.wxcloudrun.config.ApiResponse;
+import com.tencent.wxcloudrun.config.ErrorList;
 import com.tencent.wxcloudrun.dao.CommonDao;
 import com.tencent.wxcloudrun.dao.HRDao;
 import com.tencent.wxcloudrun.model.dto.RegisterDTO;
@@ -32,10 +33,10 @@ public class CommonServiceImpl implements CommonService {
             userOpenID = commonDao.getOpenID(openID);
         } catch (Exception e) {
             e.printStackTrace();
-            return ApiResponse.error("00001", "Error occurred when select a certain user.");
+            return ApiResponse.error("00001", ErrorList.errorList.get("00001"));
         }
         if (userOpenID == null)
-            return ApiResponse.error("00002", "User not found.");
+            return ApiResponse.error("00002", ErrorList.errorList.get("00002"));
 
         LoginPO loginPO = commonDao.getLoginInfo(openID);
         LoginVO loginVO = new LoginVO();
