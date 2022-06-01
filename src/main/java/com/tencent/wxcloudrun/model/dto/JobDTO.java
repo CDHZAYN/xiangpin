@@ -3,7 +3,6 @@ package com.tencent.wxcloudrun.model.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 
@@ -18,8 +17,6 @@ public class JobDTO {
 
     // 职位分类
     private String jobType;
-
-
 
     private int maxSalary;
 
