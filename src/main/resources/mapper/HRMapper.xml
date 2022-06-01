@@ -32,5 +32,9 @@
         select * from HRLoginTable where openId=#{openID};
     </select>
 
+    <select id="getOpenId" resultType="java.lang.String">
+        select openId from HRLoginTable where openId=#{openID};
+    </select>
+
 
 </mapper>
