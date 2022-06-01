@@ -16,7 +16,7 @@ import java.security.NoSuchAlgorithmException;
 public class MapController {
 
     @GetMapping("/child")
-    public ApiResponse getDistrictChild(@RequestHeader String id){
+    public ApiResponse getDistrictChild(@RequestBody String id){
         RestTemplate restTemplate = new RestTemplate();
         String site = "https://apis.map.qq.com";
         String path = "/ws/district/v1/getchildren";
