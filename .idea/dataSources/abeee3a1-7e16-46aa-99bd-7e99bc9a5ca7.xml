@@ -1154,6 +1154,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <collation id="278" parent="1" name="utf8mb4_0900_bin">
       <Charset>utf8mb4</Charset>
     </collation>
+
     <user id="279" parent="1" name="gjc">
       <Plugin>caching_sha2_password</Plugin>
     </user>
