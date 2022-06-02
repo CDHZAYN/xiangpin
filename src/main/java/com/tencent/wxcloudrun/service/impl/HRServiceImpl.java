@@ -83,6 +83,7 @@ public class HRServiceImpl implements HRService {
         HRLoginVO hrLoginVO = new HRLoginVO();
 
         hrLoginVO.setUserName(hrLoginPO.getUserName());
+        hrLoginVO.setOpenID(openID);
         if (hrLoginPO.getUserAvatar() == null) {
             hrLoginVO.setUserAvatar(null);
         } else {

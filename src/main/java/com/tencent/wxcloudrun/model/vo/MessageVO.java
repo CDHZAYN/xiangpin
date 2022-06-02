@@ -1,4 +1,4 @@
-package com.tencent.wxcloudrun.model.po;
+package com.tencent.wxcloudrun.model.vo;
 
 import com.tencent.wxcloudrun.enums.MessageState;
 import com.tencent.wxcloudrun.enums.MessageValue;
@@ -7,13 +7,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class MessagePO {
-    private int state;
+@NoArgsConstructor
+public class MessageVO {
+    // 消息状态枚举类
+    private MessageState state;
 
     // 消息类型枚举类
-    private int messageValue;
+    private MessageValue messageValue;
 
     private String senderID;
 

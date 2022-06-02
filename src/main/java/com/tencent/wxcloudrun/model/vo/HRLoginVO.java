@@ -13,4 +13,5 @@ public class HRLoginVO {
 
     public String userAvatar;
 
+    public String openID;
 }

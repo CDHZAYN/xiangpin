@@ -5,17 +5,17 @@
         <id column="state" property="state"/>
         <result column="messageValue" property="messageValue"/>
         <result column="senderID" property="senderID"/>
-        <result column="accepterID" property="accepterID"/>
+        <result column="accepterID" property="acceptorID"/>
         <result column="message" property="message"/>
         <result column="sendTime" property="sendTime"/>
     </resultMap>
 
     <insert id="addMessage">
-        insert MessageTable values (#{state}, #{messageValue}, #{senderID}, #{accepterID}, #{message}, #{sendTime});
+        insert MessageTable values (#{state}, null, #{messageValue}, #{senderID}, #{acceptorID}, #{message}, #{sendTime});
     </insert>
 
-    <select id="seleteMessageByAccepterID" resultMap="MessagePO">
-        select * from MessageTable where accepterID=#{accepterID};
+    <select id="selectMessageByAccepterID" resultMap="MessagePO">
+        select * from MessageTable where accepterID=#{acceptorID};
     </select>
 
 
