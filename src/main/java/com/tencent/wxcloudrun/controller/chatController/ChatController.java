@@ -65,6 +65,7 @@ public class ChatController {
 
         if (messages.size() != 0) { // 说明有未接收到的消息
             for (MessageVO message : messages) {
+                messageService.setState(message.getId(), MessageState.NotRead);
                 send(message);
             }
         }

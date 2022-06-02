@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tencent.wxcloudrun.dao.MessageDao">
     <resultMap id="MessagePO" type="com.tencent.wxcloudrun.model.po.MessagePO">
-        <id column="state" property="state"/>
+        <id column="id" property="id"/>
+        <result column="state" property="state"/>
         <result column="messageValue" property="messageValue"/>
         <result column="senderID" property="senderID"/>
         <result column="accepterID" property="acceptorID"/>
@@ -14,8 +15,13 @@
         insert MessageTable values (#{state}, null, #{messageValue}, #{senderID}, #{acceptorID}, #{message}, #{sendTime});
     </insert>
 
+    <update id="setMessageStateByID">
+        update MessageTable set state=#{state} where id=#{id};
+    </update>
+
     <select id="selectMessageByAccepterID" resultMap="MessagePO">
-        select * from MessageTable where accepterID=#{acceptorID};
+        select * from MessageTable
+        where accepterID=#{acceptorID} and messageValue=0;
     </select>
 
 

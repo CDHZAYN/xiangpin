@@ -23,6 +23,10 @@ public class MessageImpl implements MessageService {
         this.messageDao = messageDao;
     }
 
+    public void setState(int id, MessageState state) {
+        messageDao.setMessageStateByID(id, state.ordinal());
+    };
+
     @Override
     public void send(MessageVO messageVO) {
 
@@ -32,6 +36,7 @@ public class MessageImpl implements MessageService {
     public void save(MessageVO messageVO) {
         MessagePO messagePO = new MessagePO();
 
+        messagePO.setId(messageVO.getId());
         messagePO.setMessage(messageVO.getMessage());
         messagePO.setSenderID(messageVO.getSenderID());
         messagePO.setAcceptorID(messageVO.getAcceptorID());
@@ -50,6 +55,7 @@ public class MessageImpl implements MessageService {
 
         for (MessagePO messagePO : messagePOS) {
             MessageVO messageVO = new MessageVO();
+            messageVO.setId(messagePO.getId());
             messageVO.setMessage(messagePO.getMessage());
             messageVO.setSenderID(messagePO.getSenderID());
             messageVO.setAcceptorID(messagePO.getAcceptorID());

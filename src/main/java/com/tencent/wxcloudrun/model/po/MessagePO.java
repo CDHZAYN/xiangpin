@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MessagePO {
+    private int id;
+
     private int state;
 
     // 消息类型枚举类
