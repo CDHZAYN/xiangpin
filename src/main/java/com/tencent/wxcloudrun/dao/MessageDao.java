@@ -13,4 +13,6 @@ public interface MessageDao {
     void addMessage(MessagePO messagePO);
 
     List<MessagePO> selectMessageByAccepterID(String accepterID);
+
+    void setMessageStateByID(int id, int state);
 }
