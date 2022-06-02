@@ -14,32 +14,31 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ContextConfiguration(classes = WebSocketServerEndpointConfig.class)
 @ActiveProfiles("pro")
 class HRDaoTest {
-//    @Autowired
-//    HRDao dao;
-//
-//    @Test
-//    void registerTest() {
-//        HRPO hrpo = new HRPO("111", true, "母舰", "120");
-//        if (dao.getByOpenId("111") != null) {
-//            dao.deleteByOpenId("111");
-//        }
-//        dao.setHRInfo(hrpo);
-//        assertEquals(hrpo, dao.getByOpenId("111"));
-//        dao.deleteByOpenId("111");
-//    }
-//
-//    @Test
-//    void registerLoginTest() {
-//        HRLoginPO hrLoginPO = new HRLoginPO("母舰", "111.jpg", "111");
-//        dao.setHRLoginInfo(hrLoginPO);
-//        dao.deleteLoginByOpenId("111");
-//    }
-//
-//    @Test
-//    void getHRTest() {
-//        System.out.println(dao.getByOpenId("111"));
-//    }
+    @Autowired
+    HRDao dao;
+
+    @Test
+    void registerTest() {
+        HRPO hrpo = new HRPO("111", true, "母舰", "120");
+        if (dao.getByOpenId("111") != null) {
+            dao.deleteByOpenId("111");
+        }
+        dao.setHRInfo(hrpo);
+        assertEquals(hrpo, dao.getByOpenId("111"));
+        dao.deleteByOpenId("111");
+    }
+
+    @Test
+    void registerLoginTest() {
+        HRLoginPO hrLoginPO = new HRLoginPO("母舰", "111.jpg", "111");
+        dao.setHRLoginInfo(hrLoginPO);
+        dao.deleteLoginByOpenId("111");
+    }
+
+    @Test
+    void getHRTest() {
+        System.out.println(dao.getByOpenId("111"));
+    }
 }
