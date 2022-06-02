@@ -49,6 +49,7 @@ public class SeekerServiceImpl implements SeekerService {
         else
             loginVO.setUserAvatar(seekerLoginPO.getUserAvatar());
         loginVO.setUserName(seekerLoginPO.getUserName());
+        loginVO.setOpenID(openID);
         return ApiResponse.ok(loginVO);
     }
 
@@ -110,6 +111,7 @@ public class SeekerServiceImpl implements SeekerService {
         LoginVO loginVO = new LoginVO();
         loginVO.setUserName(seekerLoginPO.getUserName());
         loginVO.setUserAvatar(seekerLoginPO.getUserAvatar());
+        loginVO.setOpenID(openID);
         return ApiResponse.ok(loginVO);
     }
 

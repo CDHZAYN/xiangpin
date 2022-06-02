@@ -9,7 +9,8 @@ import java.util.List;
 @Repository
 @Mapper
 public interface MessageDao {
+
     void addMessage(MessagePO messagePO);
 
-    List<MessagePO> seleteMessageByAccepterID(String accepterID);
+    List<MessagePO> selectMessageByAccepterID(String accepterID);
 }

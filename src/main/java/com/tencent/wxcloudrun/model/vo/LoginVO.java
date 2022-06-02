@@ -10,8 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 @AllArgsConstructor
 public class LoginVO {
 
-    public String userName;
+    private String userName;
 
-    public String userAvatar;
+    private String userAvatar;
 
+    private String openID;
 }
