@@ -8,6 +8,7 @@ import com.tencent.wxcloudrun.model.po.HRLoginPO;
 import com.tencent.wxcloudrun.model.po.HRPO;
 import com.tencent.wxcloudrun.model.vo.HRLoginVO;
 import com.tencent.wxcloudrun.service.HRService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,14 +59,13 @@ public class HRServiceImpl implements HRService {
         }
 
         HRLoginVO loginVO = new HRLoginVO();
-        loginVO.setUserAvatar(loginPO.getUserAvatar());
-        loginVO.setUserName(loginPO.getUserName());
+        BeanUtils.copyProperties(loginPO, loginVO);
         return ApiResponse.ok(loginVO);
     }
 
     @Override
     public ApiResponse HRLogin(String openID) {
-        String userOpenId = null;
+        String userOpenId;
 
         try {
             userOpenId = hrDao.getOpenId(openID);
