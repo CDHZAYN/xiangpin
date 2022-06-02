@@ -9,8 +9,8 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 @EnableWebSocket
 public class WebSocketServerEndpointConfig {
     @Bean
-    public chatController reverseWebSocketEndpoint() {
-        return new chatController();
+    public ChatController reverseWebSocketEndpoint() {
+        return new ChatController();
     }
 
     @Bean

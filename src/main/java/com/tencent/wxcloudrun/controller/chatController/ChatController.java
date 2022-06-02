@@ -6,7 +6,7 @@ import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 
 @ServerEndpoint("/chatApi")
-public class chatController {
+public class ChatController {
     @OnMessage
     public void handleMessage(Session session, String message) throws IOException {
         System.out.println("服务器收到的消息：" + message);

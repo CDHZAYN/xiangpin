@@ -11,15 +11,15 @@ import java.util.List;
 
 
 public class WordTest {
-    @Test
-    void wordTry() {
-        String text1 = "母舰妹妹永远滴神";
-        String text2 = "母舰姐姐永远滴神";
-
-
-        TextSimilarity textSimilarity = new CosineTextSimilarity();
-        double score1 = textSimilarity.similarScore(text1, text2);
-
-        System.out.println(score1);
-    }
+//    @Test
+//    void wordTry() {
+//        String text1 = "母舰妹妹永远滴神";
+//        String text2 = "母舰姐姐永远滴神";
+//
+//
+//        TextSimilarity textSimilarity = new CosineTextSimilarity();
+//        double score1 = textSimilarity.similarScore(text1, text2);
+//
+//        System.out.println(score1);
+//    }
 }
