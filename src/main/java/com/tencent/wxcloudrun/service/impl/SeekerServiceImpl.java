@@ -69,7 +69,7 @@ public class SeekerServiceImpl implements SeekerService {
         int birthYear = Integer.parseInt(newSeekerBasic.getYear());
         int birthMonth = Integer.parseInt(newSeekerBasic.getMonth());
         int old = LocalDate.now().getYear() - birthYear;
-        if(LocalDate.now().getMonthValue()<=birthMonth)
+        if (LocalDate.now().getMonthValue() <= birthMonth)
             old++;
         seekerBasicPO.setOld(old);
         seekerBasicPO.setBirth(Date.valueOf(LocalDate.of(birthYear, birthMonth, 1)));
@@ -81,7 +81,7 @@ public class SeekerServiceImpl implements SeekerService {
 
         //execute intention
         List<SeekerIntentionPO> seekerIntentionPOList = new ArrayList<>();
-        for(SeekerIntentionDTO seekerIntentionDTO : seekerIntentionDTOList) {
+        for (SeekerIntentionDTO seekerIntentionDTO : seekerIntentionDTOList) {
             SeekerIntentionPO seekerIntentionPO = new SeekerIntentionPO();
             seekerIntentionPO.setOpenID(openID);
             seekerIntentionPO.setJobType(seekerIntentionDTO.getJobType().toString());
@@ -90,13 +90,8 @@ public class SeekerServiceImpl implements SeekerService {
 
             int minSalary = seekerIntentionDTO.getExpMinSalary();
             int maxSalary = seekerIntentionDTO.getExpMaxSalary();
-            if(minSalary>maxSalary){
-                int tmp=minSalary;
-                minSalary=maxSalary;
-                maxSalary=tmp;
-            }
-            seekerIntentionPO.setExpMaxSalary(maxSalary);
-            seekerIntentionPO.setExpMinSalary(minSalary);
+            seekerIntentionPO.setExpMaxSalary(Math.max(minSalary, maxSalary));
+            seekerIntentionPO.setExpMinSalary(Math.min(minSalary, maxSalary));
 
             seekerIntentionPOList.add(seekerIntentionPO);
         }
