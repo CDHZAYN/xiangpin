@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tencent.wxcloudrun.dao.MessageDao">
+    <resultMap id="MessagePO" type="com.tencent.wxcloudrun.model.po.MessagePO">
+        <id column="state" property="state"/>
+        <result column="messageValue" property="messageValue"/>
+        <result column="senderID" property="senderID"/>
+        <result column="accepterID" property="accepterID"/>
+        <result column="message" property="message"/>
+        <result column="sendTime" property="sendTime"/>
+    </resultMap>
+
+    <insert id="addMessage">
+        insert MessageTable values (#{state}, #{messageValue}, #{senderID}, #{accepterID}, #{message}, #{sendTime});
+    </insert>
+
+    <select id="seleteMessageByAccepterID" resultMap="MessagePO">
+        select * from MessageTable where accepterID=#{accepterID};
+    </select>
+
+
+</mapper>
