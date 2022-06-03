@@ -63,10 +63,12 @@ public class ChatController {
 
         List<MessageVO> messages = messageService.getMessages(senderID);
 
+        System.out.println(messages.size());
+
         if (messages.size() != 0) { // 说明有未接收到的消息
             for (MessageVO message : messages) {
                 messageService.setState(message.getId(), MessageState.NotRead);
-                send(message);
+                send(message, session);
             }
         }
 
@@ -95,7 +97,7 @@ public class ChatController {
 
         ChatController accepterCharController = connectionPool.get(messageVO.getAcceptorID());
         if (accepterCharController != null) { //说明接收者在线
-            send(messageVO);
+            send(messageVO, accepterCharController.session);
             messageVO.setState(MessageState.NotRead);
             // 消息状态变为已发送
         }
@@ -113,10 +115,10 @@ public class ChatController {
 //
 //    }
 
-    public void send(MessageVO messageVO) {
+    public void send(MessageVO messageVO, Session session) {
         try {
             System.out.println(JSON.toJSONString(messageVO));
-            this.session.getBasicRemote().sendText(JSON.toJSONString(messageVO));
+            session.getBasicRemote().sendText(JSON.toJSONString(messageVO));
         } catch (IOException e) {
             e.printStackTrace();
         }
