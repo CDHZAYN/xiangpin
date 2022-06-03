@@ -21,7 +21,7 @@
 
     <select id="selectMessageByAccepterID" resultMap="MessagePO">
         select * from MessageTable
-        where accepterID=#{acceptorID} and messageValue=0;
+        where accepterID=#{acceptorID} and state=0;
     </select>
 
 
