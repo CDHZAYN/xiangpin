@@ -30,7 +30,7 @@ public class SeekerController{
     }
 
     @GetMapping("/profile")
-    public ApiResponse getProfile(@RequestHeader("x-wx-openid")String openID){
+    public ApiResponse getProfile(@RequestBody String openID){
         return seekerService.getSeekerProfile(openID);
     }
 }
