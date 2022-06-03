@@ -27,4 +27,9 @@ public class HRController {
         public ApiResponse login(@RequestHeader("x-wx-openid")String openID) {
         return hrService.HRLogin(openID);
     }
+
+    @GetMapping("/profile")
+    public ApiResponse getProfile(@RequestHeader("x-wx-openid")String openID){
+        return hrService.getHRProfile(openID);
+    }
 }
