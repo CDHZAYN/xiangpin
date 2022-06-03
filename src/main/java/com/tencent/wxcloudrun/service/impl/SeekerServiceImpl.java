@@ -25,7 +25,6 @@ import java.util.List;
 public class SeekerServiceImpl implements SeekerService {
 
     private final SeekerDao seekerDao;
-    private SeekerBasicPO seekerBasicPO;
 
     @Autowired
     public SeekerServiceImpl(SeekerDao seekerDao) {
@@ -81,6 +80,7 @@ public class SeekerServiceImpl implements SeekerService {
             seekerIntentionPO.setJobType(seekerIntentionDTO.getJobType().toString());
             seekerIntentionPO.setExpIndustry(seekerIntentionDTO.getExpIndustry().toString());
             seekerIntentionPO.setJobType(seekerIntentionPO.getJobType());
+            seekerIntentionPO.setSalaryType(seekerIntentionDTO.getSalaryType());
 
             int minSalary = seekerIntentionDTO.getExpMinSalary();
             int maxSalary = seekerIntentionDTO.getExpMaxSalary();
