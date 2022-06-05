@@ -15,7 +15,7 @@ public class JobVO {
     private HRLoginVO hrLoginVO;
 
     // 职位类型
-    private String expIndustry;
+    private String expJob;
 
     // 职位分类
     private String jobType;

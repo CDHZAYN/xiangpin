@@ -48,7 +48,7 @@ public class SeekerServiceImpl implements SeekerService {
     public ApiResponse seekerRegister(String openID, SeekerRegisterDTO seekerRegisterDTO) {
 
         SeekerBasicDTO newSeekerBasic = seekerRegisterDTO.getBasic();
-        List<SeekerIntentionDTO> seekerIntentionDTOList = seekerRegisterDTO.getIntention();
+        SeekerIntentionDTO seekerIntentionDTO = seekerRegisterDTO.getIntention();
 
         //handle basic
         //TODO: need to update old
@@ -74,21 +74,20 @@ public class SeekerServiceImpl implements SeekerService {
 
         //execute intention
         List<SeekerIntentionPO> seekerIntentionPOList = new ArrayList<>();
-        for (SeekerIntentionDTO seekerIntentionDTO : seekerIntentionDTOList) {
-            SeekerIntentionPO seekerIntentionPO = new SeekerIntentionPO();
-            seekerIntentionPO.setOpenID(openID);
-            seekerIntentionPO.setJobType(seekerIntentionDTO.getJobType().toString());
-            seekerIntentionPO.setExpIndustry(seekerIntentionDTO.getExpIndustry().toString());
-            seekerIntentionPO.setJobType(seekerIntentionPO.getJobType());
-            seekerIntentionPO.setSalaryType(seekerIntentionDTO.getSalaryType());
+        SeekerIntentionPO seekerIntentionPO = new SeekerIntentionPO();
+        seekerIntentionPO.setOpenID(openID);
+        seekerIntentionPO.setJobType(seekerIntentionDTO.getJobType().toString());
+        seekerIntentionPO.setExpIndustry(seekerIntentionDTO.getExpIndustry().toString());
+        seekerIntentionPO.setJobType(seekerIntentionPO.getJobType());
+        seekerIntentionPO.setSalaryType(seekerIntentionDTO.getSalaryType());
 
-            int minSalary = seekerIntentionDTO.getExpMinSalary();
-            int maxSalary = seekerIntentionDTO.getExpMaxSalary();
-            seekerIntentionPO.setExpMaxSalary(Math.max(minSalary, maxSalary));
-            seekerIntentionPO.setExpMinSalary(Math.min(minSalary, maxSalary));
+        int minSalary = seekerIntentionDTO.getExpMinSalary();
+        int maxSalary = seekerIntentionDTO.getExpMaxSalary();
+        seekerIntentionPO.setExpMaxSalary(Math.max(minSalary, maxSalary));
+        seekerIntentionPO.setExpMinSalary(Math.min(minSalary, maxSalary));
 
-            seekerIntentionPOList.add(seekerIntentionPO);
-        }
+        seekerIntentionPOList.add(seekerIntentionPO);
+
 
         //execute
         //TODO: asymmetric

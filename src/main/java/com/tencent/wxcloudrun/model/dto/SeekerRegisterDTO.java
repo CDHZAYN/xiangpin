@@ -14,6 +14,6 @@ public class SeekerRegisterDTO {
 
     private SeekerBasicDTO basic;
 
-    private List<SeekerIntentionDTO> intention;
+    private SeekerIntentionDTO intention;
 
 }

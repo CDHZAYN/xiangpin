@@ -11,6 +11,8 @@ public class SeekerIntentionDTO {
 
     Integer expIndustry;
 
+    String expJob;
+
     Integer expMaxSalary;
 
     Integer expMinSalary;
@@ -18,7 +20,5 @@ public class SeekerIntentionDTO {
     Integer SalaryType;
 
     Integer jobType;
-
-    String expJob;
 
 }
