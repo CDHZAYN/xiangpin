@@ -58,8 +58,6 @@ public class ChatController {
 
         List<MessageVO> messages = messageService.getMessages(senderID);
 
-        System.out.println(messages.size());
-
         if (messages.size() != 0) { // 说明有未接收到的消息
             for (MessageVO message : messages) {
                 messageService.setState(message.getId(), MessageState.NotRead);
@@ -67,12 +65,11 @@ public class ChatController {
                     // 遍历连接池中的所有设备并发送
                     chatController.send(message, session);
                 }
-                send(message, session);
             }
         }
 
         System.out.println(senderID + "上线了");
-        System.out.println("当前连接用户数" + connectionPool.getConnections() + "当前连接设备数" + connectionPool.getDevices());
+        System.out.println("当前连接用户数：" + connectionPool.getConnections() + "当前连接设备数：" + connectionPool.getDevices());
     }
 
     @OnMessage
@@ -96,6 +93,8 @@ public class ChatController {
         System.out.println(senderID + "向" + messageVO.getAcceptorID() + "发送了一条消息");
 
         ArrayList<ChatController> accepterCharControllers = connectionPool.getConnection(messageVO.getAcceptorID());
+        System.out.println(messageVO.getAcceptorID() + "的用户设备数：" + accepterCharControllers.size());
+
         if (accepterCharControllers != null) { //说明接收者在线
             for (ChatController chatController : accepterCharControllers) {
                 send(messageVO, chatController.session);
