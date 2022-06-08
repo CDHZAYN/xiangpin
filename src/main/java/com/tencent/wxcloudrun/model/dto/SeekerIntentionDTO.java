@@ -15,6 +15,8 @@ public class SeekerIntentionDTO {
 
     Integer expMinSalary;
 
+    Integer SalaryType;
+
     Integer jobType;
 
     String expJob;

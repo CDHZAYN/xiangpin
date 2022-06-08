@@ -12,6 +12,7 @@ import com.tencent.wxcloudrun.model.po.SeekerBasicPO;
 import com.tencent.wxcloudrun.model.po.SeekerIntentionPO;
 import com.tencent.wxcloudrun.model.vo.LoginVO;
 import com.tencent.wxcloudrun.service.SeekerService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,6 @@ import java.util.List;
 public class SeekerServiceImpl implements SeekerService {
 
     private final SeekerDao seekerDao;
-    private SeekerBasicPO seekerBasicPO;
 
     @Autowired
     public SeekerServiceImpl(SeekerDao seekerDao) {
@@ -42,15 +42,7 @@ public class SeekerServiceImpl implements SeekerService {
         if (userOpenID == null)
             return ApiResponse.error("00002", ErrorList.errorList.get("00002"));
 
-        SeekerLoginPO seekerLoginPO = seekerDao.getLoginInfo(openID);
-        LoginVO loginVO = new LoginVO();
-        if (seekerLoginPO.getUserAvatar() == null)
-            loginVO.setUserAvatar(null);
-        else
-            loginVO.setUserAvatar(seekerLoginPO.getUserAvatar());
-        loginVO.setUserName(seekerLoginPO.getUserName());
-        loginVO.setOpenID(openID);
-        return ApiResponse.ok(loginVO);
+        return getSeekerProfile(openID);
     }
 
     public ApiResponse seekerRegister(String openID, SeekerRegisterDTO seekerRegisterDTO) {
@@ -88,6 +80,7 @@ public class SeekerServiceImpl implements SeekerService {
             seekerIntentionPO.setJobType(seekerIntentionDTO.getJobType().toString());
             seekerIntentionPO.setExpIndustry(seekerIntentionDTO.getExpIndustry().toString());
             seekerIntentionPO.setJobType(seekerIntentionPO.getJobType());
+            seekerIntentionPO.setSalaryType(seekerIntentionDTO.getSalaryType());
 
             int minSalary = seekerIntentionDTO.getExpMinSalary();
             int maxSalary = seekerIntentionDTO.getExpMaxSalary();
@@ -111,6 +104,18 @@ public class SeekerServiceImpl implements SeekerService {
         LoginVO loginVO = new LoginVO();
         loginVO.setUserName(seekerLoginPO.getUserName());
         loginVO.setUserAvatar(seekerLoginPO.getUserAvatar());
+        loginVO.setOpenID(openID);
+        return ApiResponse.ok(loginVO);
+    }
+
+    public ApiResponse getSeekerProfile(String openID) {
+        SeekerLoginPO seekerLoginPO = seekerDao.getLoginInfo(openID);
+        LoginVO loginVO = new LoginVO();
+        if (seekerLoginPO.getUserAvatar() == null)
+            loginVO.setUserAvatar(null);
+        else
+            loginVO.setUserAvatar(seekerLoginPO.getUserAvatar());
+        loginVO.setUserName(seekerLoginPO.getUserName());
         loginVO.setOpenID(openID);
         return ApiResponse.ok(loginVO);
     }

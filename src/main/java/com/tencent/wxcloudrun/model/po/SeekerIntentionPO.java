@@ -18,6 +18,8 @@ public class SeekerIntentionPO {
 
     int expMinSalary;
 
+    Integer SalaryType;
+
     String jobType;
 
     String expJob;

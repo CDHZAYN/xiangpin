@@ -6,7 +6,9 @@ import com.tencent.wxcloudrun.dao.HRDao;
 import com.tencent.wxcloudrun.model.dto.HRRegisterDTO;
 import com.tencent.wxcloudrun.model.po.HRLoginPO;
 import com.tencent.wxcloudrun.model.po.HRPO;
+import com.tencent.wxcloudrun.model.po.SeekerLoginPO;
 import com.tencent.wxcloudrun.model.vo.HRLoginVO;
+import com.tencent.wxcloudrun.model.vo.LoginVO;
 import com.tencent.wxcloudrun.service.HRService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,9 +60,7 @@ public class HRServiceImpl implements HRService {
             return ApiResponse.error("00003", ErrorList.errorList.get("00003"));
         }
 
-        HRLoginVO loginVO = new HRLoginVO();
-        BeanUtils.copyProperties(loginPO, loginVO);
-        return ApiResponse.ok(loginVO);
+        return getHRProfile(openID);
     }
 
     @Override
@@ -90,5 +90,17 @@ public class HRServiceImpl implements HRService {
             hrLoginVO.setUserAvatar(hrLoginPO.getUserAvatar());
         }
         return ApiResponse.ok(hrLoginVO);
+    }
+
+    public ApiResponse getHRProfile(String openID) {
+        HRLoginPO HRLoginPO = hrDao.getLoginByOpenId(openID);
+        LoginVO loginVO = new LoginVO();
+        if (HRLoginPO.getUserAvatar() == null)
+            loginVO.setUserAvatar(null);
+        else
+            loginVO.setUserAvatar(HRLoginPO.getUserAvatar());
+        loginVO.setUserName(HRLoginPO.getUserName());
+        loginVO.setOpenID(openID);
+        return ApiResponse.ok(loginVO);
     }
 }

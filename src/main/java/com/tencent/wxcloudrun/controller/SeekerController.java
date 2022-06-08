@@ -28,4 +28,9 @@ public class SeekerController{
     public ApiResponse login(@RequestHeader("x-wx-openid")String openID){
         return seekerService.seekerLogin(openID);
     }
+
+    @GetMapping("/profile")
+    public ApiResponse getProfile(@RequestBody String openID){
+        return seekerService.getSeekerProfile(openID);
+    }
 }
