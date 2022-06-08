@@ -20,15 +20,15 @@
 
     <insert id="setSeekerInfo" parameterType="com.tencent.wxcloudrun.model.po.SeekerBasicPO">
         insert into seekerBasic value (#{openID}, #{name}, #{phone}, #{old},
-                                        #{education}, #{birth,jdbcType=DATE,javaType=java.sql.Date},
-                                        #{gender});
+                                       #{education}, #{birth,jdbcType=DATE,javaType=java.sql.Date},
+                                       #{gender});
     </insert>
 
     <insert id="setSeekerIntentionInfo" useGeneratedKeys="true" keyColumn="intentionId" keyProperty="intentionID">
-        insert into seekerIntention(openId, expIndustry, expMaxSalary, expMinSalary, jobType, expJob) values
+        insert into seekerIntention(openId, expIndustry, expMaxSalary, expMinSalary, salaryType, jobType, expJob) values
         <foreach collection="list" item="intention" index="index" separator=",">
-        (#{intention.openID}, #{intention.expIndustry}, #{intention.expMaxSalary},
-         #{intention.expMinSalary}, #{intention.jobType}, #{intention.expJob})
+            (#{intention.openID}, #{intention.expIndustry}, #{intention.expMaxSalary},
+            #{intention.expMinSalary}, #{intention.salaryType}, #{intention.jobType}, #{intention.expJob})
         </foreach>;
     </insert>
 
@@ -37,11 +37,15 @@
     </insert>
 
     <select id="getLoginInfo" resultMap="seekerLoginPO">
-        select * from seekerLogin where openId=#{openID};
+        select *
+        from seekerLogin
+        where openId = #{openID};
     </select>
 
     <select id="getOpenID" resultType="string" parameterType="string">
-        select openId from seekerLogin where openId = #{openID};
+        select openId
+        from seekerLogin
+        where openId = #{openID};
     </select>
 
 </mapper>
