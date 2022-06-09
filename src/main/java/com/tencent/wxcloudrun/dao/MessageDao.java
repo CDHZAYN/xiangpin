@@ -4,6 +4,7 @@ import com.tencent.wxcloudrun.model.po.MessagePO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -15,4 +16,7 @@ public interface MessageDao {
     List<MessagePO> selectMessageByAccepterID(String accepterID);
 
     void setMessageStateByID(int id, int state);
+
+    List<MessagePO> selectMessageByAccepterIDAndTime(String accepterID, Date timeStamp);
+
 }

@@ -12,7 +12,6 @@ import com.tencent.wxcloudrun.model.po.SeekerBasicPO;
 import com.tencent.wxcloudrun.model.po.SeekerIntentionPO;
 import com.tencent.wxcloudrun.model.vo.LoginVO;
 import com.tencent.wxcloudrun.service.SeekerService;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
