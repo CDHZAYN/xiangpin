@@ -7,6 +7,7 @@ import com.tencent.wxcloudrun.enums.MessageValue;
 import com.tencent.wxcloudrun.model.vo.MessageVO;
 import com.tencent.wxcloudrun.service.impl.MessageImpl;
 import org.json.JSONObject;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -56,7 +57,11 @@ public class ChatController {
 
         connectionPool.push_back(senderID, this);
 
-        List<MessageVO> messages = messageService.getMessages(senderID);
+        String timeStamp = session.getQueryString().substring(10);
+
+        List<MessageVO> messages = messageService.getMessagesByTime(senderID, timeStamp);
+
+        System.out.println(timeStamp);
 
         if (messages.size() != 0) { // 说明有未接收到的消息
             for (MessageVO message : messages) {
@@ -92,16 +97,21 @@ public class ChatController {
 
         System.out.println(senderID + "向" + messageVO.getAcceptorID() + "发送了一条消息");
 
-        ArrayList<ChatController> accepterCharControllers = connectionPool.getConnection(messageVO.getAcceptorID());
-        System.out.println(messageVO.getAcceptorID() + "的用户设备数：" + accepterCharControllers.size());
 
-        if (accepterCharControllers != null) { //说明接收者在线
-            for (ChatController chatController : accepterCharControllers) {
-                send(messageVO, chatController.session);
+        ArrayList<ChatController> accepterCharControllers = connectionPool.getConnection(messageVO.getAcceptorID());
+
+
+        if (accepterCharControllers != null) {
+            System.out.println(messageVO.getAcceptorID() + "的用户设备数：" + accepterCharControllers.size());
+            for (ChatController accepterChatController : accepterCharControllers) {
+                send(messageVO, accepterChatController.session);
             }
-            messageVO.setState(MessageState.NotRead);
-            // 消息状态变为已发送
         }
+
+        messageVO.setState(MessageState.NotRead);
+
+        System.out.println("广播数：" + broadcast(messageVO));
+
         messageService.save(messageVO);
     }
 
@@ -125,5 +135,22 @@ public class ChatController {
         }
     }
 
+    public int broadcast(MessageVO messageVO) {
+        ArrayList<ChatController> senderChatControllers = connectionPool.getConnection(messageVO.getSenderID());
+        if (senderChatControllers == null) {
+            return 0;
+        }
+        MessageVO messageVO1 = new MessageVO();
+        BeanUtils.copyProperties(messageVO, messageVO1);
+        messageVO1.setMessageValue(MessageValue.Broadcast);
+        int size = 0;
+        for (ChatController chatController : senderChatControllers) {
+            if (chatController != this) {
+                send(messageVO1, chatController.session);
+                ++size;
+            }
+        }
+        return size;
+    }
 
 }
