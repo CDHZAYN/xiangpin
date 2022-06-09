@@ -57,9 +57,11 @@ public class ChatController {
 
         connectionPool.push_back(senderID, this);
 
-        List<MessageVO> messages = messageService.getMessagesByTime(senderID, String.valueOf(System.currentTimeMillis()));
+        String timeStamp = session.getQueryString().substring(10);
 
-        System.out.println(String.valueOf(System.currentTimeMillis()));
+        List<MessageVO> messages = messageService.getMessagesByTime(senderID, timeStamp);
+
+        System.out.println(timeStamp);
 
         if (messages.size() != 0) { // 说明有未接收到的消息
             for (MessageVO message : messages) {
