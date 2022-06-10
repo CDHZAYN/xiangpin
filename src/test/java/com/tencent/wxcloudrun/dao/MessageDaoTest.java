@@ -19,7 +19,7 @@ class MessageDaoTest {
 
     @Test
     void test() {
-        Date temp = new Date(System.currentTimeMillis());
+        Date temp = new Date(1654012800);
         System.out.println(dao.selectMessageByAccepterIDAndTime("124", temp));
     }
 }
