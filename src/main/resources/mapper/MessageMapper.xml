@@ -6,7 +6,7 @@
         <result column="state" property="state"/>
         <result column="messageValue" property="messageValue"/>
         <result column="senderID" property="senderID"/>
-        <result column="accepterID" property="acceptorID"/>
+        <result column="acceptorID" property="acceptorID"/>
         <result column="message" property="message"/>
         <result column="sendTime" property="sendTime"/>
     </resultMap>
@@ -21,12 +21,12 @@
 
     <select id="selectMessageByAccepterID" resultMap="MessagePO">
         select * from MessageTable
-        where accepterID=#{acceptorID} and state=0;
+        where acceptorID=#{acceptorID} and state=0;
     </select>
 
     <select id="selectMessageByAccepterIDAndTime" resultType="com.tencent.wxcloudrun.model.po.MessagePO">
         select * from MessageTable
-        where accepterID=#{accepterID} or senderID=#{accepterID}
+        where acceptorID=#{acceptorID} or senderID=#{acceptorID}
         and sendTime between #{timeStamp} and '9999-9-9 00:00:00'
         limit 50;
     </select>

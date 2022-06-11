@@ -13,10 +13,10 @@ public interface MessageDao {
 
     void addMessage(MessagePO messagePO);
 
-    List<MessagePO> selectMessageByAccepterID(String accepterID);
+    List<MessagePO> selectMessageByAccepterID(String acceptorID);
 
     void setMessageStateByID(int id, int state);
 
-    List<MessagePO> selectMessageByAccepterIDAndTime(String accepterID, Date timeStamp);
+    List<MessagePO> selectMessageByAccepterIDAndTime(String acceptorID, Date timeStamp);
 
 }
