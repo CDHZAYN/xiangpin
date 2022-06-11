@@ -5,6 +5,5 @@ public enum MessageValue {
     File,
     Image,
     HasRead,
-    Broadcast,
-    TimeStamp
+    Broadcast
 }

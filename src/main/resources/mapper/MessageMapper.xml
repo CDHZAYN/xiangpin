@@ -26,7 +26,8 @@
 
     <select id="selectMessageByAccepterIDAndTime" resultType="com.tencent.wxcloudrun.model.po.MessagePO">
         select * from MessageTable
-        where accepterID=#{accepterID} and sendTime between #{timeStamp} and '9999-9-9 00:00:00'
+        where accepterID=#{accepterID} or senderID=#{accepterID}
+        and sendTime between #{timeStamp} and '9999-9-9 00:00:00'
         limit 50;
     </select>
 </mapper>
