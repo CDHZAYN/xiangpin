@@ -95,6 +95,8 @@ public class ChatController {
 
         if (messageVO.getMessageValue() == MessageValue.HasRead) { // 已读
             messageService.setHasRead(messageVO.getAcceptorID(), this.senderID, messageVO.getSendTime());
+            messageVO.setMessageValue(MessageValue.HasRead);
+            hasReadBroadcast(messageVO);
             return;
         }
 
@@ -146,6 +148,23 @@ public class ChatController {
         MessageVO messageVO1 = new MessageVO();
         BeanUtils.copyProperties(messageVO, messageVO1);
         messageVO1.setMessageValue(MessageValue.Broadcast);
+        int size = 0;
+        for (ChatController chatController : senderChatControllers) {
+            if (chatController != this) {
+                send(messageVO1, chatController.session);
+                ++size;
+            }
+        }
+        return size;
+    }
+
+    public int hasReadBroadcast(MessageVO messageVO) {
+        ArrayList<ChatController> senderChatControllers = connectionPool.getConnection(messageVO.getSenderID());
+        if (senderChatControllers == null) {
+            return 0;
+        }
+        MessageVO messageVO1 = new MessageVO();
+        BeanUtils.copyProperties(messageVO, messageVO1);
         int size = 0;
         for (ChatController chatController : senderChatControllers) {
             if (chatController != this) {
