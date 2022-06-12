@@ -20,9 +20,8 @@
     </update>
 
     <update id="updateMessageValue">
-        update MessageTable set state=2 where acceptorID=#{acceptorID} and senderID=#{senderID}
-        and sendTime between '2000-01-01 00:00:00' and #{timeStamp}
-        and state!=2;
+        update MessageTable set state=2 where (acceptorID=#{acceptorID} and senderID=#{senderID})
+        and sendTime between '2000-01-01 00:00:00' and #{timeStamp};
     </update>
 
     <select id="selectMessageByAccepterID" resultMap="MessagePO">

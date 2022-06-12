@@ -15,5 +15,5 @@ public interface MessageService {
 
     List<MessageVO> getMessagesByTime(String acceptorID, String timeStamp);
 
-    void setHasRead(String acceptorID, String senderID, String timeStamp);
+    void setHasRead(String senderID, String acceptorID, String timeStamp);
 }
