@@ -73,8 +73,7 @@ public class MessageImpl implements MessageService {
 
     @Override
     public List<MessageVO> getMessagesByTime(String acceptorID, String timeStamp) {
-        long time = Long.parseLong(timeStamp);
-        Date date = new Date(time);
+        Date date = new Date(Long.parseLong(timeStamp));
 
         System.out.println(date);
 
@@ -100,8 +99,7 @@ public class MessageImpl implements MessageService {
 
     @Override
     public void setHasRead(String acceptorID, String senderID, String timeStamp) {
-        long time = Long.parseLong(timeStamp);
-        Date date = new Date(time);
+        Date date = new Date(Long.parseLong(timeStamp));
         messageDao.updateMessageValue(senderID, acceptorID, date);
     }
 }
