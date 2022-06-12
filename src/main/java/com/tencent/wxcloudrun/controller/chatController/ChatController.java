@@ -94,8 +94,7 @@ public class ChatController {
         messageVO.setSendTime(jsonObject.getString("sendTime"));
 
         if (messageVO.getMessageValue() == MessageValue.HasRead) { // 已读
-            messageService.setHasRead(messageVO.getAcceptorID(), this.senderID, messageVO.getSendTime());
-            messageVO.setMessageValue(MessageValue.HasRead);
+            messageService.setHasRead(this.senderID, messageVO.getAcceptorID(), messageVO.getSendTime());
             hasReadBroadcast(messageVO);
             return;
         }
@@ -163,16 +162,13 @@ public class ChatController {
         if (senderChatControllers == null) {
             return 0;
         }
-        MessageVO messageVO1 = new MessageVO();
-        BeanUtils.copyProperties(messageVO, messageVO1);
         int size = 0;
         for (ChatController chatController : senderChatControllers) {
             if (chatController != this) {
-                send(messageVO1, chatController.session);
+                send(messageVO, chatController.session);
                 ++size;
             }
         }
         return size;
     }
-
 }

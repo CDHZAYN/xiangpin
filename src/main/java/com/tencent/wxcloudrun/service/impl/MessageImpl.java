@@ -98,7 +98,7 @@ public class MessageImpl implements MessageService {
     }
 
     @Override
-    public void setHasRead(String acceptorID, String senderID, String timeStamp) {
+    public void setHasRead(String senderID, String acceptorID, String timeStamp) {
         Date date = new Date(Long.parseLong(timeStamp));
         messageDao.updateMessageValue(senderID, acceptorID, date);
     }

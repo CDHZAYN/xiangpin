@@ -27,9 +27,9 @@ class MessageDaoTest {
 
     @Test
     void test2() {
-        String time = "1655020757595";
+        String time = "1655021831895";
         Date temp = new Date(Long.parseLong(time));
         System.out.println(temp);
-        //dao.updateMessageValue("123", "124", temp);
+        dao.updateMessageValue("123", "125", temp);
     }
 }
