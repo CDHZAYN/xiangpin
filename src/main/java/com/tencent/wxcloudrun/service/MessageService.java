@@ -14,4 +14,6 @@ public interface MessageService {
     List<MessageVO> getMessages(String acceptorID);
 
     List<MessageVO> getMessagesByTime(String acceptorID, String timeStamp);
+
+    void setHasRead(String acceptorID, String senderID, String timeStamp);
 }

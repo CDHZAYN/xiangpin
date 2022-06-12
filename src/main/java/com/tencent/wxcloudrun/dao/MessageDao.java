@@ -19,4 +19,5 @@ public interface MessageDao {
 
     List<MessagePO> selectMessageByAccepterIDAndTime(String acceptorID, Date timeStamp);
 
+    void updateMessageValue(String senderID, String acceptorID, Date timeStamp);
 }

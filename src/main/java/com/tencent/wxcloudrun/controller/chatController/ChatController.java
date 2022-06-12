@@ -65,11 +65,8 @@ public class ChatController {
 
         if (messages.size() != 0) { // 说明有未接收到的消息
             for (MessageVO message : messages) {
-                messageService.setState(message.getId(), MessageState.NotRead);
-                for (ChatController chatController : connectionPool.getConnection(senderID)) {
-                    // 遍历连接池中的所有设备并发送
-                    chatController.send(message, session);
-                }
+                //messageService.setState(message.getId(), MessageState.NotRead);
+                send(message, session);
             }
         }
 
@@ -85,6 +82,7 @@ public class ChatController {
             return;
         } // 为空消息则跳过处理
 
+
         MessageVO messageVO = new MessageVO();
         messageVO.setState(MessageState.values()[0]);
         // 初始化为未读
@@ -94,6 +92,11 @@ public class ChatController {
         messageVO.setAcceptorID(jsonObject.getString("acceptorID"));
         messageVO.setMessage(jsonObject.getString("message"));
         messageVO.setSendTime(jsonObject.getString("sendTime"));
+
+        if (messageVO.getMessageValue() == MessageValue.HasRead) { // 已读
+            messageService.setHasRead(messageVO.getAcceptorID(), this.senderID, messageVO.getSendTime());
+            return;
+        }
 
         System.out.println(senderID + "向" + messageVO.getAcceptorID() + "发送了一条消息");
 
