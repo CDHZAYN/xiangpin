@@ -76,6 +76,8 @@ public class ChatController {
 
     @OnMessage
     public void handleMessage(String message, Session session) throws IOException {
+        System.out.println("收到消息：" + message);
+
         JSONObject jsonObject = new JSONObject(message);
 
         if (Objects.equals(jsonObject.getString("message"), "")) {
