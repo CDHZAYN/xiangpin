@@ -24,4 +24,12 @@ class MessageDaoTest {
         System.out.println(temp);
         System.out.println(dao.selectMessageByAccepterIDAndTime("124", temp));
     }
+
+    @Test
+    void test2() {
+        long time = 1654017000;
+        Date temp = new Date(time * 1000L);
+        System.out.println(temp);
+        dao.updateMessageValue("123", "124", temp);
+    }
 }
