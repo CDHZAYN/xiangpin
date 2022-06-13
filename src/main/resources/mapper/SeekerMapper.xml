@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tencent.wxcloudrun.dao.SeekerDao">
 
-    <resultMap id="seekerBasicPO" type="com.tencent.wxcloudrun.model.po.SeekerBasicPO">
+    <resultMap id="seekerBasicPO" type="com.tencent.wxcloudrun.model.po.seeker.SeekerBasicPO">
         <id column="seekerId" property="openID"/>
         <result column="seekerName" property="name"/>
         <result column="seekerPhone" property="phone"/>
@@ -12,13 +12,13 @@
         <result column="seekerGender" property="gender"/>
     </resultMap>
 
-    <resultMap id="seekerLoginPO" type="com.tencent.wxcloudrun.model.po.SeekerLoginPO">
+    <resultMap id="seekerLoginPO" type="com.tencent.wxcloudrun.model.po.seeker.SeekerLoginPO">
         <id column="openId" property="openID"/>
         <result column="userName" property="userName"/>
         <result column="userAvatar" property="userAvatar"/>
     </resultMap>
 
-    <insert id="setSeekerInfo" parameterType="com.tencent.wxcloudrun.model.po.SeekerBasicPO">
+    <insert id="setSeekerInfo" parameterType="com.tencent.wxcloudrun.model.po.seeker.SeekerBasicPO">
         insert into seekerBasic value (#{openID}, #{name}, #{phone}, #{old},
                                        #{education}, #{birth,jdbcType=DATE,javaType=java.sql.Date},
                                        #{gender});
@@ -32,7 +32,7 @@
         </foreach>;
     </insert>
 
-    <insert id="setSeekerLoginInfo" parameterType="com.tencent.wxcloudrun.model.po.SeekerLoginPO">
+    <insert id="setSeekerLoginInfo" parameterType="com.tencent.wxcloudrun.model.po.seeker.SeekerLoginPO">
         insert into seekerLogin value (#{userName}, #{userAvatar}, #{openID});
     </insert>
 

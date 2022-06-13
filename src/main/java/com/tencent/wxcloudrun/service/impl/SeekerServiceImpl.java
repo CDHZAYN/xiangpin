@@ -4,15 +4,14 @@ package com.tencent.wxcloudrun.service.impl;
 import com.tencent.wxcloudrun.config.ApiResponse;
 import com.tencent.wxcloudrun.config.ErrorList;
 import com.tencent.wxcloudrun.dao.SeekerDao;
-import com.tencent.wxcloudrun.model.dto.SeekerBasicDTO;
-import com.tencent.wxcloudrun.model.dto.SeekerIntentionDTO;
-import com.tencent.wxcloudrun.model.dto.SeekerRegisterDTO;
-import com.tencent.wxcloudrun.model.po.SeekerLoginPO;
-import com.tencent.wxcloudrun.model.po.SeekerBasicPO;
-import com.tencent.wxcloudrun.model.po.SeekerIntentionPO;
-import com.tencent.wxcloudrun.model.vo.LoginVO;
+import com.tencent.wxcloudrun.model.dto.seeker.SeekerBasicDTO;
+import com.tencent.wxcloudrun.model.dto.seeker.SeekerIntentionDTO;
+import com.tencent.wxcloudrun.model.dto.seeker.SeekerRegisterDTO;
+import com.tencent.wxcloudrun.model.po.seeker.SeekerLoginPO;
+import com.tencent.wxcloudrun.model.po.seeker.SeekerBasicPO;
+import com.tencent.wxcloudrun.model.po.seeker.SeekerIntentionPO;
+import com.tencent.wxcloudrun.model.vo.SeekerLoginVO;
 import com.tencent.wxcloudrun.service.SeekerService;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +31,7 @@ public class SeekerServiceImpl implements SeekerService {
     }
 
     public ApiResponse seekerLogin(String openID) {
+        //TODO: need to update old
         String userOpenID;
         try {
             userOpenID = seekerDao.getOpenID(openID);
@@ -51,7 +51,6 @@ public class SeekerServiceImpl implements SeekerService {
         SeekerIntentionDTO seekerIntentionDTO = seekerRegisterDTO.getIntention();
 
         //handle basic
-        //TODO: need to update old
         SeekerBasicPO seekerBasicPO = new SeekerBasicPO();
         seekerBasicPO.setOpenID(openID);
         seekerBasicPO.setEducation(newSeekerBasic.getAcaBg());
@@ -100,23 +99,23 @@ public class SeekerServiceImpl implements SeekerService {
             return ApiResponse.error("00003", ErrorList.errorList.get("00003"));
         }
 
-        LoginVO loginVO = new LoginVO();
-        loginVO.setUserName(seekerLoginPO.getUserName());
-        loginVO.setUserAvatar(seekerLoginPO.getUserAvatar());
-        loginVO.setOpenID(openID);
-        return ApiResponse.ok(loginVO);
+        SeekerLoginVO seekerLoginVO = new SeekerLoginVO();
+        seekerLoginVO.setUserName(seekerLoginPO.getUserName());
+        seekerLoginVO.setUserAvatar(seekerLoginPO.getUserAvatar());
+        seekerLoginVO.setOpenID(openID);
+        return ApiResponse.ok(seekerLoginVO);
     }
 
     public ApiResponse getSeekerProfile(String openID) {
         SeekerLoginPO seekerLoginPO = seekerDao.getLoginInfo(openID);
-        LoginVO loginVO = new LoginVO();
+        SeekerLoginVO seekerLoginVO = new SeekerLoginVO();
         if (seekerLoginPO.getUserAvatar() == null)
-            loginVO.setUserAvatar(null);
+            seekerLoginVO.setUserAvatar(null);
         else
-            loginVO.setUserAvatar(seekerLoginPO.getUserAvatar());
-        loginVO.setUserName(seekerLoginPO.getUserName());
-        loginVO.setOpenID(openID);
-        return ApiResponse.ok(loginVO);
+            seekerLoginVO.setUserAvatar(seekerLoginPO.getUserAvatar());
+        seekerLoginVO.setUserName(seekerLoginPO.getUserName());
+        seekerLoginVO.setOpenID(openID);
+        return ApiResponse.ok(seekerLoginVO);
     }
 
 }

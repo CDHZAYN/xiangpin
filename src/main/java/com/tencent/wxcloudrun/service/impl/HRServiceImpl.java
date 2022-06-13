@@ -6,11 +6,9 @@ import com.tencent.wxcloudrun.dao.HRDao;
 import com.tencent.wxcloudrun.model.dto.HRRegisterDTO;
 import com.tencent.wxcloudrun.model.po.HRLoginPO;
 import com.tencent.wxcloudrun.model.po.HRPO;
-import com.tencent.wxcloudrun.model.po.SeekerLoginPO;
 import com.tencent.wxcloudrun.model.vo.HRLoginVO;
-import com.tencent.wxcloudrun.model.vo.LoginVO;
+import com.tencent.wxcloudrun.model.vo.SeekerLoginVO;
 import com.tencent.wxcloudrun.service.HRService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -94,13 +92,18 @@ public class HRServiceImpl implements HRService {
 
     public ApiResponse getHRProfile(String openID) {
         HRLoginPO HRLoginPO = hrDao.getLoginByOpenId(openID);
-        LoginVO loginVO = new LoginVO();
+        SeekerLoginVO seekerLoginVO = new SeekerLoginVO();
         if (HRLoginPO.getUserAvatar() == null)
-            loginVO.setUserAvatar(null);
+            seekerLoginVO.setUserAvatar(null);
         else
-            loginVO.setUserAvatar(HRLoginPO.getUserAvatar());
-        loginVO.setUserName(HRLoginPO.getUserName());
-        loginVO.setOpenID(openID);
-        return ApiResponse.ok(loginVO);
+            seekerLoginVO.setUserAvatar(HRLoginPO.getUserAvatar());
+        seekerLoginVO.setUserName(HRLoginPO.getUserName());
+        seekerLoginVO.setOpenID(openID);
+        return ApiResponse.ok(seekerLoginVO);
+    }
+
+    public ApiResponse addRecruit(){
+        //TODO
+        return ApiResponse.ok();
     }
 }

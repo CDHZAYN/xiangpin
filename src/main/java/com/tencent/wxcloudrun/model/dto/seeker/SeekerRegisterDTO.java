@@ -1,11 +1,9 @@
-package com.tencent.wxcloudrun.model.dto;
+package com.tencent.wxcloudrun.model.dto.seeker;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @NoArgsConstructor

@@ -35,6 +35,6 @@ public class HRController {
 
     @GetMapping("/recruit")
     public ApiResponse addRecruit(@RequestHeader("x-wx-openid")String openID){
-        return hrService.addRecruit
+        return hrService.addRecruit();
     }
 }

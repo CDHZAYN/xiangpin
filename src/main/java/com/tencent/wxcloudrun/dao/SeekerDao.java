@@ -1,8 +1,8 @@
 package com.tencent.wxcloudrun.dao;
 
-import com.tencent.wxcloudrun.model.po.SeekerBasicPO;
-import com.tencent.wxcloudrun.model.po.SeekerIntentionPO;
-import com.tencent.wxcloudrun.model.po.SeekerLoginPO;
+import com.tencent.wxcloudrun.model.po.seeker.SeekerBasicPO;
+import com.tencent.wxcloudrun.model.po.seeker.SeekerIntentionPO;
+import com.tencent.wxcloudrun.model.po.seeker.SeekerLoginPO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;

@@ -1,16 +1,15 @@
-package com.tencent.wxcloudrun.model.dto;
-
+package com.tencent.wxcloudrun.model.po;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompanyDTO {
+public class CompanyPO {
+
+    private Integer id;
 
     private String fullName;
 
@@ -35,6 +34,6 @@ public class CompanyDTO {
 
     private String position;
 
-    private List<String> keywords;
+    private String keywords;
 
 }
