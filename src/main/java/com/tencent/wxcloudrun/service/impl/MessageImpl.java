@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -40,7 +41,8 @@ public class MessageImpl implements MessageService {
         messagePO.setMessage(messageVO.getMessage());
         messagePO.setSenderID(messageVO.getSenderID());
         messagePO.setAcceptorID(messageVO.getAcceptorID());
-        messagePO.setSendTime(messageVO.getSendTime());
+        Date temp = new Date(Long.parseLong(messageVO.getSendTime()));
+        messagePO.setSendTime(temp);
 
         messagePO.setMessageValue(messageVO.getMessageValue().ordinal());
         messagePO.setState(messageVO.getState().ordinal());
@@ -59,7 +61,7 @@ public class MessageImpl implements MessageService {
             messageVO.setMessage(messagePO.getMessage());
             messageVO.setSenderID(messagePO.getSenderID());
             messageVO.setAcceptorID(messagePO.getAcceptorID());
-            messageVO.setSendTime(messagePO.getSendTime());
+            messageVO.setSendTime(String.valueOf(messagePO.getSendTime().getTime()));
 
             messageVO.setMessageValue(MessageValue.values()[messagePO.getMessageValue()]);
             messageVO.setState(MessageState.values()[messagePO.getState()]);
@@ -67,5 +69,37 @@ public class MessageImpl implements MessageService {
         }
 
         return messageVOS;
+    }
+
+    @Override
+    public List<MessageVO> getMessagesByTime(String acceptorID, String timeStamp) {
+        Date date = new Date(Long.parseLong(timeStamp));
+
+        System.out.println(date);
+
+        List<MessagePO> messagePOS = messageDao.selectMessageByAccepterIDAndTime(acceptorID, date);
+        List<MessageVO> messageVOS = new ArrayList<>();
+
+        for (MessagePO messagePO : messagePOS) {
+            MessageVO messageVO = new MessageVO();
+            messageVO.setId(messagePO.getId());
+            messageVO.setMessage(messagePO.getMessage());
+            messageVO.setSenderID(messagePO.getSenderID());
+            messageVO.setAcceptorID(messagePO.getAcceptorID());
+
+            messageVO.setSendTime(String.valueOf(messagePO.getSendTime().getTime()));
+
+            messageVO.setMessageValue(MessageValue.values()[messagePO.getMessageValue()]);
+            messageVO.setState(MessageState.values()[messagePO.getState()]);
+            messageVOS.add(messageVO);
+        }
+
+        return messageVOS;
+    }
+
+    @Override
+    public void setHasRead(String senderID, String acceptorID, String timeStamp) {
+        Date date = new Date(Long.parseLong(timeStamp));
+        messageDao.updateMessageValue(senderID, acceptorID, date);
     }
 }

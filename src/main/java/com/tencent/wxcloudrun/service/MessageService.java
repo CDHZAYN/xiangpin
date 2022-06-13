@@ -3,6 +3,7 @@ package com.tencent.wxcloudrun.service;
 import com.tencent.wxcloudrun.model.po.MessagePO;
 import com.tencent.wxcloudrun.model.vo.MessageVO;
 
+import java.util.Date;
 import java.util.List;
 
 public interface MessageService {
@@ -11,4 +12,8 @@ public interface MessageService {
     void save(MessageVO messageVO);
 
     List<MessageVO> getMessages(String acceptorID);
+
+    List<MessageVO> getMessagesByTime(String acceptorID, String timeStamp);
+
+    void setHasRead(String senderID, String acceptorID, String timeStamp);
 }

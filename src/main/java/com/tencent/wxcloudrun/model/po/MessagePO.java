@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,5 +26,5 @@ public class MessagePO {
     // 消息内容（根据messageValue而定，可能是url可能是文本）
     private String message;
 
-    private String sendTime;
+    private Date sendTime;
 }

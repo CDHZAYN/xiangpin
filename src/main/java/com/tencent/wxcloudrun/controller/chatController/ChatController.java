@@ -6,8 +6,8 @@ import com.tencent.wxcloudrun.enums.MessageState;
 import com.tencent.wxcloudrun.enums.MessageValue;
 import com.tencent.wxcloudrun.model.vo.MessageVO;
 import com.tencent.wxcloudrun.service.impl.MessageImpl;
-import lombok.Setter;
 import org.json.JSONObject;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -15,18 +15,15 @@ import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Controller
 @ServerEndpoint("/chatApi/{param}")
 public class ChatController {
 
-    private static Map<String, ChatController> connectionPool = new ConcurrentHashMap<>();
-
-    private static int onLineCount = 0; // 记录在线人数
+    private static final ConnectionPool connectionPool = new ConnectionPool();
 
     private String senderID;
 
@@ -56,32 +53,37 @@ public class ChatController {
 
         this.session = session;
 
-        connectionID = onLineCount;
-        ++onLineCount;
+        connectionID = connectionPool.getDevices();
 
-        connectionPool.put(senderID, this);
+        connectionPool.push_back(senderID, this);
 
-        List<MessageVO> messages = messageService.getMessages(senderID);
+        String timeStamp = session.getQueryString().substring(10);
 
-        System.out.println(messages.size());
+        List<MessageVO> messages = messageService.getMessagesByTime(senderID, timeStamp);
+
+        System.out.println(timeStamp);
 
         if (messages.size() != 0) { // 说明有未接收到的消息
             for (MessageVO message : messages) {
-                messageService.setState(message.getId(), MessageState.NotRead);
+                //messageService.setState(message.getId(), MessageState.NotRead);
                 send(message, session);
             }
         }
 
         System.out.println(senderID + "上线了");
+        System.out.println("当前连接用户数：" + connectionPool.getConnections() + "当前连接设备数：" + connectionPool.getDevices());
     }
 
     @OnMessage
     public void handleMessage(String message, Session session) throws IOException {
+        System.out.println("收到消息：" + message);
+
         JSONObject jsonObject = new JSONObject(message);
 
         if (Objects.equals(jsonObject.getString("message"), "")) {
             return;
         } // 为空消息则跳过处理
+
 
         MessageVO messageVO = new MessageVO();
         messageVO.setState(MessageState.values()[0]);
@@ -93,21 +95,36 @@ public class ChatController {
         messageVO.setMessage(jsonObject.getString("message"));
         messageVO.setSendTime(jsonObject.getString("sendTime"));
 
+        if (messageVO.getMessageValue() == MessageValue.HasRead) { // 已读
+            messageService.setHasRead(this.senderID, messageVO.getAcceptorID(), messageVO.getSendTime());
+            hasReadBroadcast(messageVO);
+            return;
+        }
+
         System.out.println(senderID + "向" + messageVO.getAcceptorID() + "发送了一条消息");
 
-        ChatController accepterCharController = connectionPool.get(messageVO.getAcceptorID());
-        if (accepterCharController != null) { //说明接收者在线
-            send(messageVO, accepterCharController.session);
-            messageVO.setState(MessageState.NotRead);
-            // 消息状态变为已发送
+
+        ArrayList<ChatController> accepterCharControllers = connectionPool.getConnection(messageVO.getAcceptorID());
+
+
+        if (accepterCharControllers != null) {
+            System.out.println(messageVO.getAcceptorID() + "的用户设备数：" + accepterCharControllers.size());
+            for (ChatController accepterChatController : accepterCharControllers) {
+                send(messageVO, accepterChatController.session);
+            }
         }
+
+        messageVO.setState(MessageState.NotRead);
+
+        System.out.println("广播数：" + broadcast(messageVO));
+
         messageService.save(messageVO);
     }
 
     @OnClose
     public void onClose() {
-        --onLineCount;
-        connectionPool.remove(senderID);
+        connectionPool.delete(senderID, this);
+        System.out.println(senderID + "下线了");
     }
 
 //    @OnError
@@ -124,19 +141,36 @@ public class ChatController {
         }
     }
 
-//    public void newConnectionSend(MessageVO messageVO) {
-//        if (Objects.equals(messageVO.getSenderID(), senderID)) { // 如果发送方是自己，直接发送
-//            try {
-//                this.session.getBasicRemote().sendText(JSON.toJSONString(messageVO));
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        } else if (connectionPool.get(messageVO.getSenderID()) != null) { // 发送方不是自己且在线
-//            ChatController accepterCharController = connectionPool.get(messageVO.getAcceptorID());
-//            accepterCharController.send(messageVO);
-//        } else { // 发送方不是自己且不在线
-//            connectionPool.put(messageVO.getSenderID(), new ChatController());
-//
-//        }
-//    }
+    public int broadcast(MessageVO messageVO) {
+        ArrayList<ChatController> senderChatControllers = connectionPool.getConnection(messageVO.getSenderID());
+        if (senderChatControllers == null) {
+            return 0;
+        }
+        MessageVO messageVO1 = new MessageVO();
+        BeanUtils.copyProperties(messageVO, messageVO1);
+        messageVO1.setMessageValue(MessageValue.Broadcast);
+        int size = 0;
+        for (ChatController chatController : senderChatControllers) {
+            if (chatController != this) {
+                send(messageVO1, chatController.session);
+                ++size;
+            }
+        }
+        return size;
+    }
+
+    public int hasReadBroadcast(MessageVO messageVO) {
+        ArrayList<ChatController> senderChatControllers = connectionPool.getConnection(messageVO.getSenderID());
+        if (senderChatControllers == null) {
+            return 0;
+        }
+        int size = 0;
+        for (ChatController chatController : senderChatControllers) {
+            if (chatController != this) {
+                send(messageVO, chatController.session);
+                ++size;
+            }
+        }
+        return size;
+    }
 }
