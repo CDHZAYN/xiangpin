@@ -1,19 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.tencent.wxcloudrun.dao.HRDao">
+<mapper namespace="com.tencent.wxcloudrun.dao.CompanyDao">
     <insert id="register" parameterType="com.tencent.wxcloudrun.model.po.CompanyPO" useGeneratedKeys="true"
             keyProperty="id">
         insert into company(full_name, short_name, industry, avatar, license, scale, finance, intro, pos_id, website,
-                            position)
+                            position, keywords)
             value (#{fullName}, #{shortName}, #{industry}, #{avatar}, #{license}, #{scale}, #{finance}, #{intro},
-                   #{posID}, #{website}, #{position});
+                   #{posID}, #{website}, #{position}, #{keywords});
     </insert>
 
-    <select id="getProfile" resultMap="CompanyPO">
-        select full_name, avatar, industry, finance, keywords
+    <select id="getById" resultMap="CompanyPO">
+        select *
         from company
-        where keywords = #{id};
+        where id = #{id};
     </select>
+
+    <update id="modify" parameterType="com.tencent.wxcloudrun.model.po.CompanyPO">
+        update company
+        <set>
+            <if test="fullName != null">full_name = #{fullName},</if>
+            <if test="shortName != null">short_name = #{shortName},</if>
+            <if test="industry != null">industry = #{industry},</if>
+            <if test="avatar != null">avatar = #{avatar},</if>
+            <if test="license != null">license = #{license},</if>
+            <if test="scale != null">scale = #{scale},</if>
+            <if test="finance != null">finance = #{finance},</if>
+            <if test="intro != null">intro = #{intro},</if>
+            <if test="posID != null">pos_id = #{posID},</if>
+            <if test="website != null">website = #{website},</if>
+            <if test="position != null">position = #{position},</if>
+            <if test="keywords != null">keywords = #{keywords},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete
+        from company
+        where id = #{id}
+    </delete>
 
     <resultMap id="CompanyPO" type="com.tencent.wxcloudrun.model.po.CompanyPO">
         <id column="id" property="id"/>

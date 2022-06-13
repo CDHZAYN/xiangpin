@@ -10,6 +10,10 @@ public interface CompanyDao {
 
     Integer register(CompanyPO companyPO);
 
-    CompanyPO getProfile(Integer id);
+    CompanyPO getById(Integer id);
+
+    void modify(CompanyPO companyPO);
+
+    void delete(Integer id);
 
 }

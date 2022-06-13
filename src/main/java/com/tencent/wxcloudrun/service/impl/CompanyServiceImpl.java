@@ -5,6 +5,7 @@ import com.tencent.wxcloudrun.dao.CompanyDao;
 import com.tencent.wxcloudrun.model.dto.CompanyDTO;
 import com.tencent.wxcloudrun.model.po.CompanyPO;
 import com.tencent.wxcloudrun.model.vo.CompanyProfileVO;
+import com.tencent.wxcloudrun.model.vo.CompanyVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,31 +19,69 @@ public class CompanyServiceImpl {
     private final CompanyDao companyDao;
 
     @Autowired
-    public CompanyServiceImpl(CompanyDao companyDao){
+    public CompanyServiceImpl(CompanyDao companyDao) {
         this.companyDao = companyDao;
     }
 
-    public ApiResponse register(CompanyDTO companyDTO){
+    public ApiResponse register(CompanyDTO companyDTO) {
         CompanyPO companyPO = new CompanyPO();
         BeanUtils.copyProperties(companyDTO, companyPO);
-        List<String> keywords = companyDTO.getKeywords();
-        StringBuffer keywordStr = new StringBuffer();
-        for(String k : keywords){
-            keywordStr.append(k);
-            keywordStr.append("&");
+        if (companyDTO.getKeywords() != null) {
+            List<String> keywords = companyDTO.getKeywords();
+            StringBuffer keywordStr = new StringBuffer();
+            for (String k : keywords) {
+                keywordStr.append("`!W~");
+                keywordStr.append(k);
+            }
+            keywordStr.delete(0,4);
+            companyPO.setKeywords(keywordStr.toString());
         }
-        companyPO.setKeywords(keywordStr.toString());
-        Integer id = companyDao.register(companyPO);
+        companyDao.register(companyPO);
+        Integer id = companyPO.getId();
         return getProfile(id);
     }
 
-    public ApiResponse getProfile(Integer id){
-        CompanyPO companyPO = companyDao.getProfile(id);
+    public ApiResponse getProfile(Integer id) {
+        CompanyPO companyPO = companyDao.getById(id);
         CompanyProfileVO companyProfileVO = new CompanyProfileVO();
         BeanUtils.copyProperties(companyPO, companyProfileVO);
-        List<String> keywords = Arrays.asList(companyPO.getKeywords().split("&"));
-        companyProfileVO.setKeywords(keywords);
+        if (companyPO.getKeywords() != null) {
+            List<String> keywords = Arrays.asList(companyPO.getKeywords().split("`!W~"));
+            companyProfileVO.setKeywords(keywords);
+        }
         return ApiResponse.ok(companyProfileVO);
+    }
+
+    public ApiResponse getFullInfo(Integer id) {
+        CompanyPO companyPO = companyDao.getById(id);
+        CompanyVO companyVO = new CompanyVO();
+        BeanUtils.copyProperties(companyPO, companyVO);
+        if (companyPO.getKeywords() != null) {
+            List<String> keywords = Arrays.asList(companyPO.getKeywords().split("`!W~"));
+            companyVO.setKeywords(keywords);
+        }
+        return ApiResponse.ok(companyVO);
+    }
+
+    public ApiResponse modify(CompanyDTO companyDTO) {
+        CompanyPO companyPO = new CompanyPO();
+        BeanUtils.copyProperties(companyDTO, companyPO);
+        if (companyDTO.getKeywords() != null) {
+            List<String> keywords = companyDTO.getKeywords();
+            StringBuffer keywordStr = new StringBuffer();
+            for (String k : keywords) {
+                keywordStr.append(k);
+                keywordStr.append("`!W~");
+            }
+            companyPO.setKeywords(keywordStr.toString());
+        }
+        companyDao.modify(companyPO);
+        return ApiResponse.ok();
+    }
+
+    public ApiResponse delete(Integer id){
+        companyDao.delete(id);
+        return ApiResponse.ok();
     }
 
 }

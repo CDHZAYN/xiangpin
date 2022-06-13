@@ -14,6 +14,7 @@ import com.tencent.wxcloudrun.model.vo.SeekerLoginVO;
 import com.tencent.wxcloudrun.service.SeekerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -45,6 +46,7 @@ public class SeekerServiceImpl implements SeekerService {
         return getSeekerProfile(openID);
     }
 
+    @Transactional
     public ApiResponse seekerRegister(String openID, SeekerRegisterDTO seekerRegisterDTO) {
 
         SeekerBasicDTO newSeekerBasic = seekerRegisterDTO.getBasic();
