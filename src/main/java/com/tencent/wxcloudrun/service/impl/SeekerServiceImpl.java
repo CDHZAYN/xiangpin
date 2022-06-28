@@ -10,7 +10,7 @@ import com.tencent.wxcloudrun.model.dto.seeker.SeekerRegisterDTO;
 import com.tencent.wxcloudrun.model.po.seeker.SeekerLoginPO;
 import com.tencent.wxcloudrun.model.po.seeker.SeekerBasicPO;
 import com.tencent.wxcloudrun.model.po.seeker.SeekerIntentionPO;
-import com.tencent.wxcloudrun.model.vo.SeekerLoginVO;
+import com.tencent.wxcloudrun.model.vo.seeker.SeekerLoginVO;
 import com.tencent.wxcloudrun.service.SeekerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

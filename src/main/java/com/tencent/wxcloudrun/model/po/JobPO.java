@@ -1,33 +1,31 @@
-package com.tencent.wxcloudrun.model.vo;
+package com.tencent.wxcloudrun.model.po;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class JobVO {
+public class JobPO {
 
-    private CompanyProfileVO company;
+    private String companyID;
 
-    private HRLoginVO hrLoginVO;
+    private String HROpenID;
 
     private String jobName;
 
     // 职位类型
-    private String expIndustry;
+    private Integer expIndustry;
 
-    private String expJob;
+    private Integer expJob;
 
     private Integer expEducation;
 
     private String expExperience;
 
     // 职位分类
-    private String jobType;
+    private Integer jobType;
 
     // 工作地点
     private String position;
@@ -40,9 +38,12 @@ public class JobVO {
 
     private Integer salaryType;
 
-    private ArrayList<String> keywords;
+    private String keywords;
 
     private String descContent;
 
     private String requestContent;
+
+
+
 }

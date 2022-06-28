@@ -7,7 +7,7 @@ import com.tencent.wxcloudrun.model.dto.HRRegisterDTO;
 import com.tencent.wxcloudrun.model.po.HRLoginPO;
 import com.tencent.wxcloudrun.model.po.HRPO;
 import com.tencent.wxcloudrun.model.vo.HRLoginVO;
-import com.tencent.wxcloudrun.model.vo.SeekerLoginVO;
+import com.tencent.wxcloudrun.model.vo.seeker.SeekerLoginVO;
 import com.tencent.wxcloudrun.service.HRService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,5 @@
 package com.tencent.wxcloudrun.model.dto;
 
-import com.tencent.wxcloudrun.model.vo.CompanyVO;
-import com.tencent.wxcloudrun.model.vo.HRLoginVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +21,10 @@ public class JobDTO {
     private Integer expIndustry;
 
     private Integer expJob;
+
+    private Integer expEducation;
+
+    private String expExperience;
 
     // 职位分类
     private Integer jobType;

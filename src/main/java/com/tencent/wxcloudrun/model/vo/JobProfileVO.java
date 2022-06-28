@@ -7,32 +7,26 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class JobVO {
+@AllArgsConstructor
+public class JobProfileVO {
 
-    private CompanyProfileVO company;
+    private String companyShortName;
 
-    private HRLoginVO hrLoginVO;
+    private String HRName;
 
     private String jobName;
 
     // 职位类型
-    private String expIndustry;
+    private Integer expIndustry;
 
-    private String expJob;
-
-    private Integer expEducation;
-
-    private String expExperience;
+    private Integer expJob;
 
     // 职位分类
-    private String jobType;
+    private Integer jobType;
 
     // 工作地点
     private String position;
-
-    private Integer posID;
 
     private Integer maxSalary;
 
@@ -41,8 +35,4 @@ public class JobVO {
     private Integer salaryType;
 
     private ArrayList<String> keywords;
-
-    private String descContent;
-
-    private String requestContent;
 }
