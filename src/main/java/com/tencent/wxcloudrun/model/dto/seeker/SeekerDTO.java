@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SeekerBasicDTO {
+public class SeekerDTO {
 
     private String acaBg;
 

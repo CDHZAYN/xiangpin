@@ -9,11 +9,13 @@ import java.sql.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SeekerBasicPO {
+public class SeekerPO {
 
     private String openID;
 
     private String name;
+
+    private String avatar;
 
     private String phone;
 

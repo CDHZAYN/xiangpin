@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SeekerRegisterDTO {
 
-    private SeekerBasicDTO basic;
+    private SeekerDTO seeker;
 
     private SeekerIntentionDTO intention;
 

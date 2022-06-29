@@ -104,11 +104,11 @@ public class JobServiceImpl {
         return ApiResponse.ok(jobProfileVO);
     }
 
-    public ApiResponse getRecommend(String openId, Integer cityId) {
+    public ApiResponse getRecommend(String openId, Integer city) {
         SeekerIntentionPO seekerIntentionPO = seekerDao.getIntentionById(openId);
         SearchPO searchPO = new SearchPO();
         BeanUtils.copyProperties(seekerIntentionPO, searchPO);
-        searchPO.setCity(cityId);
+        searchPO.setCity(city);
         List<JobProfileVO> jobProfileVOList = getRecommend(searchPO);
         return ApiResponse.ok(jobProfileVOList);
     }
@@ -130,6 +130,7 @@ public class JobServiceImpl {
         jobProfileVOList.sort(new Comparator<JobProfileVO>() {
             @Override
             public int compare(JobProfileVO o1, JobProfileVO o2) {
+                //TODO
                 TextSimilarity textSimilarity = new CosineTextSimilarity();
                 double score1 = textSimilarity.similarScore(o1.getTags(), searchPO.getKeywords());
                 double score2 = textSimilarity.similarScore(o2.getTags(), searchPO.getKeywords());

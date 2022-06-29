@@ -4,11 +4,10 @@ package com.tencent.wxcloudrun.service.impl;
 import com.tencent.wxcloudrun.config.ApiResponse;
 import com.tencent.wxcloudrun.config.ErrorList;
 import com.tencent.wxcloudrun.dao.SeekerDao;
-import com.tencent.wxcloudrun.model.dto.seeker.SeekerBasicDTO;
+import com.tencent.wxcloudrun.model.dto.seeker.SeekerDTO;
 import com.tencent.wxcloudrun.model.dto.seeker.SeekerIntentionDTO;
 import com.tencent.wxcloudrun.model.dto.seeker.SeekerRegisterDTO;
-import com.tencent.wxcloudrun.model.po.seeker.SeekerLoginPO;
-import com.tencent.wxcloudrun.model.po.seeker.SeekerBasicPO;
+import com.tencent.wxcloudrun.model.po.seeker.SeekerPO;
 import com.tencent.wxcloudrun.model.po.seeker.SeekerIntentionPO;
 import com.tencent.wxcloudrun.model.vo.seeker.SeekerLoginVO;
 import com.tencent.wxcloudrun.service.SeekerService;
@@ -35,7 +34,7 @@ public class SeekerServiceImpl implements SeekerService {
         //TODO: need to update old
         String userOpenID;
         try {
-            userOpenID = seekerDao.getOpenID(openID);
+            userOpenID = seekerDao.getOpenId(openID);
         } catch (Exception e) {
             e.printStackTrace();
             return ApiResponse.error("00001", ErrorList.errorList.get("00001"));
@@ -49,29 +48,25 @@ public class SeekerServiceImpl implements SeekerService {
     @Transactional
     public ApiResponse seekerRegister(String openID, SeekerRegisterDTO seekerRegisterDTO) {
 
-        SeekerBasicDTO newSeekerBasic = seekerRegisterDTO.getBasic();
+        SeekerDTO newSeekerBasic = seekerRegisterDTO.getSeeker();
         SeekerIntentionDTO seekerIntentionDTO = seekerRegisterDTO.getIntention();
 
         //handle basic
-        SeekerBasicPO seekerBasicPO = new SeekerBasicPO();
-        seekerBasicPO.setOpenID(openID);
-        seekerBasicPO.setEducation(newSeekerBasic.getAcaBg());
-        seekerBasicPO.setGender(newSeekerBasic.getGender().equals("male"));
-        seekerBasicPO.setName(newSeekerBasic.getName());
-        seekerBasicPO.setPhone(newSeekerBasic.getPhoneNum());
+        SeekerPO seekerPO = new SeekerPO();
+        seekerPO.setOpenID(openID);
+        seekerPO.setEducation(newSeekerBasic.getAcaBg());
+        seekerPO.setGender(newSeekerBasic.getGender().equals("male"));
+        seekerPO.setName(newSeekerBasic.getName());
+        seekerPO.setPhone(newSeekerBasic.getPhoneNum());
+        seekerPO.setAvatar(newSeekerBasic.getAvatarUrl());
 
         int birthYear = Integer.parseInt(newSeekerBasic.getYear());
         int birthMonth = Integer.parseInt(newSeekerBasic.getMonth());
         int old = LocalDate.now().getYear() - birthYear;
         if (LocalDate.now().getMonthValue() <= birthMonth)
             old++;
-        seekerBasicPO.setOld(old);
-        seekerBasicPO.setBirth(Date.valueOf(LocalDate.of(birthYear, birthMonth, 1)));
-
-        SeekerLoginPO seekerLoginPO = new SeekerLoginPO();
-        seekerLoginPO.setOpenID(openID);
-        seekerLoginPO.setUserName(newSeekerBasic.getName());
-        seekerLoginPO.setUserAvatar(newSeekerBasic.getAvatarUrl());
+        seekerPO.setOld(old);
+        seekerPO.setBirth(Date.valueOf(LocalDate.of(birthYear, birthMonth, 1)));
 
         //execute intention
         List<SeekerIntentionPO> seekerIntentionPOList = new ArrayList<>();
@@ -93,29 +88,28 @@ public class SeekerServiceImpl implements SeekerService {
         //execute
         //TODO: asymmetric
         try {
-            seekerDao.setSeekerInfo(seekerBasicPO);
-            seekerDao.setSeekerLoginInfo(seekerLoginPO);
-            seekerDao.setSeekerIntentionInfo(seekerIntentionPOList);
+            seekerDao.setSeeker(seekerPO);
+            seekerDao.setSeekerIntention(seekerIntentionPOList);
         } catch (Exception e) {
             e.printStackTrace();
             return ApiResponse.error("00003", ErrorList.errorList.get("00003"));
         }
 
         SeekerLoginVO seekerLoginVO = new SeekerLoginVO();
-        seekerLoginVO.setUserName(seekerLoginPO.getUserName());
-        seekerLoginVO.setUserAvatar(seekerLoginPO.getUserAvatar());
+        seekerLoginVO.setUserName(seekerPO.getName());
+        seekerLoginVO.setUserAvatar(seekerPO.getAvatar());
         seekerLoginVO.setOpenID(openID);
         return ApiResponse.ok(seekerLoginVO);
     }
 
     public ApiResponse getSeekerProfile(String openID) {
-        SeekerLoginPO seekerLoginPO = seekerDao.getLoginInfo(openID);
+        SeekerPO seekerPO = seekerDao.getSeeker(openID);
         SeekerLoginVO seekerLoginVO = new SeekerLoginVO();
-        if (seekerLoginPO.getUserAvatar() == null)
+        if (seekerPO.getAvatar() == null)
             seekerLoginVO.setUserAvatar(null);
         else
-            seekerLoginVO.setUserAvatar(seekerLoginPO.getUserAvatar());
-        seekerLoginVO.setUserName(seekerLoginPO.getUserName());
+            seekerLoginVO.setUserAvatar(seekerPO.getAvatar());
+        seekerLoginVO.setUserName(seekerPO.getName());
         seekerLoginVO.setOpenID(openID);
         return ApiResponse.ok(seekerLoginVO);
     }

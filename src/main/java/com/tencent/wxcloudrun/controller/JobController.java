@@ -25,7 +25,7 @@ public class JobController {
     }
 
     @PostMapping("/modify")
-    public ApiResponse modify(@RequestHeader JobDTO jobDTO){return jobService.modify(jobDTO);}
+    public ApiResponse modify(@RequestBody JobDTO jobDTO){return jobService.modify(jobDTO);}
 
     @DeleteMapping("/delete")
     public ApiResponse delete(@RequestHeader Integer jobId){return jobService.delete(jobId);}
@@ -41,8 +41,8 @@ public class JobController {
     }
 
     @GetMapping("/getRecommend")
-    public ApiResponse getProfile(@RequestHeader("x-wx-openid") String openId, @RequestHeader("cityId") Integer cityId){
-        return jobService.getRecommend(openId, cityId);
+    public ApiResponse getRecommend(@RequestHeader("x-wx-openid") String openId, @RequestHeader Integer city){
+        return jobService.getRecommend(openId, city);
     }
 
     @GetMapping("/getResponsible")
@@ -50,8 +50,8 @@ public class JobController {
         return jobService.getResponsible(openId);
     }
 
-    @GetMapping("/search")
-    public ApiResponse search(SearchPO searchPO){
+    @PostMapping("/search")
+    public ApiResponse search(@RequestBody SearchPO searchPO){
         return jobService.search(searchPO);
     }
 }
