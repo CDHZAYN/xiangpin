@@ -3,6 +3,7 @@ package com.tencent.wxcloudrun.controller;
 import com.tencent.wxcloudrun.config.ApiResponse;
 import com.tencent.wxcloudrun.model.dto.JobDTO;
 import com.tencent.wxcloudrun.model.po.SearchPO;
+import com.tencent.wxcloudrun.service.JobService;
 import com.tencent.wxcloudrun.service.impl.JobServiceImpl;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/job")
 public class JobController {
 
-    private final JobServiceImpl jobService;
+    private final JobService jobService;
 
     @Autowired
-    public JobController(JobServiceImpl jobService){
+    public JobController(JobService jobService){
         this.jobService = jobService;
     }
 

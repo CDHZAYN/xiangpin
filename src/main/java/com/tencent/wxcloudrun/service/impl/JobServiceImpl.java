@@ -15,6 +15,7 @@ import com.tencent.wxcloudrun.model.vo.CompanyProfileVO;
 import com.tencent.wxcloudrun.model.vo.LoginVO;
 import com.tencent.wxcloudrun.model.vo.JobProfileVO;
 import com.tencent.wxcloudrun.model.vo.JobVO;
+import com.tencent.wxcloudrun.service.JobService;
 import org.apdplat.word.analysis.CosineTextSimilarity;
 import org.apdplat.word.analysis.TextSimilarity;
 import org.springframework.beans.BeanUtils;
@@ -28,7 +29,7 @@ import java.util.Comparator;
 import java.util.List;
 
 @Service
-public class JobServiceImpl {
+public class JobServiceImpl implements JobService {
 
     private final JobDao jobDao;
 

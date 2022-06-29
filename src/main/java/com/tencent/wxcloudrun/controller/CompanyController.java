@@ -2,6 +2,7 @@ package com.tencent.wxcloudrun.controller;
 
 import com.tencent.wxcloudrun.config.ApiResponse;
 import com.tencent.wxcloudrun.model.dto.CompanyDTO;
+import com.tencent.wxcloudrun.service.CompanyService;
 import com.tencent.wxcloudrun.service.impl.CompanyServiceImpl;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/company")
 public class CompanyController {
 
-    private final CompanyServiceImpl companyService;
+    private final CompanyService companyService;
 
     @Autowired
-    public CompanyController(CompanyServiceImpl companyService){
+    public CompanyController(CompanyService companyService){
         this.companyService = companyService;
     }
 

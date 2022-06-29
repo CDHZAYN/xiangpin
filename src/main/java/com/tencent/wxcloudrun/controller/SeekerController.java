@@ -16,7 +16,7 @@ public class SeekerController{
     private final SeekerService seekerService;
 
     @Autowired
-    public SeekerController(SeekerServiceImpl seekerService) {
+    public SeekerController(SeekerService seekerService) {
         this.seekerService = seekerService;
     }
 

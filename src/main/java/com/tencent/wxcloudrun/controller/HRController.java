@@ -2,6 +2,7 @@ package com.tencent.wxcloudrun.controller;
 
 import com.tencent.wxcloudrun.config.ApiResponse;
 import com.tencent.wxcloudrun.model.dto.HRDTO;
+import com.tencent.wxcloudrun.service.HRService;
 import com.tencent.wxcloudrun.service.impl.HRServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,10 +10,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/hr")
 public class HRController {
-    private final HRServiceImpl hrService;
+    private final HRService hrService;
 
     @Autowired
-    public HRController(HRServiceImpl hrService) {
+    public HRController(HRService hrService) {
         this.hrService = hrService;
     }
 

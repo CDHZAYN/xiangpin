@@ -6,6 +6,7 @@ import com.tencent.wxcloudrun.model.dto.CompanyDTO;
 import com.tencent.wxcloudrun.model.po.CompanyPO;
 import com.tencent.wxcloudrun.model.vo.CompanyProfileVO;
 import com.tencent.wxcloudrun.model.vo.CompanyVO;
+import com.tencent.wxcloudrun.service.CompanyService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class CompanyServiceImpl {
+public class CompanyServiceImpl implements CompanyService {
 
     private final CompanyDao companyDao;
 
