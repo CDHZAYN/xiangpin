@@ -1,20 +1,19 @@
 package com.tencent.wxcloudrun.dao;
 
-import com.tencent.wxcloudrun.controller.chatController.WebSocketServerEndpointConfig;
 import com.tencent.wxcloudrun.model.po.HRLoginPO;
 import com.tencent.wxcloudrun.model.po.HRPO;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("pro")
+@Rollback
 class HRDaoTest {
     @Autowired
     HRDao dao;

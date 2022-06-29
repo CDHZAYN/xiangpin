@@ -95,5 +95,16 @@
             </resource>
         </resources>
     </build>
-
+    <profiles>
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <sonar.host.url>http://127.0.0.1:9000</sonar.host.url>
+                <sonar.login>sqp_ed89535ac9ae110d1ba59e301ca4b406d7af883f</sonar.login>
+            </properties>
+        </profile>
+    </profiles>
 </project>

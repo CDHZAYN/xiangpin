@@ -6,7 +6,9 @@ import com.tencent.wxcloudrun.enums.MessageState;
 import com.tencent.wxcloudrun.enums.MessageValue;
 import com.tencent.wxcloudrun.model.vo.MessageVO;
 import com.tencent.wxcloudrun.service.impl.MessageImpl;
+import lombok.NoArgsConstructor;
 import org.json.JSONObject;
+import org.slf4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,15 +21,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @author 11731
+ */
 @Controller
 @ServerEndpoint("/chatApi/{param}")
+@NoArgsConstructor
 public class ChatController {
 
     private static final ConnectionPool connectionPool = new ConnectionPool();
 
     private String senderID;
-
-    private int connectionID;
 
     private Session session;
 
@@ -38,9 +42,6 @@ public class ChatController {
         messageService = service;
     }
 
-    public ChatController() {
-
-    };
 
     /**
      * 初始化连接对象
@@ -53,8 +54,6 @@ public class ChatController {
 
         this.session = session;
 
-        connectionID = connectionPool.getDevices();
-
         connectionPool.push_back(senderID, this);
 
         String timeStamp = session.getQueryString().substring(10);
@@ -63,19 +62,19 @@ public class ChatController {
 
         System.out.println(timeStamp);
 
-        if (messages.size() != 0) { // 说明有未接收到的消息
+        if (!messages.isEmpty()) {
+            // 说明有未接收到的消息
             for (MessageVO message : messages) {
-                //messageService.setState(message.getId(), MessageState.NotRead);
                 send(message, session);
             }
         }
 
-        System.out.println(senderID + "上线了");
+        System.out.println((senderID + "上线了"));
         System.out.println("当前连接用户数：" + connectionPool.getConnections() + "当前连接设备数：" + connectionPool.getDevices());
     }
 
     @OnMessage
-    public void handleMessage(String message, Session session) throws IOException {
+    public void handleMessage(String message, Session session) {
         System.out.println("收到消息：" + message);
 
         JSONObject jsonObject = new JSONObject(message);
