@@ -11,7 +11,7 @@
         delete from hr where open_id=#{openId};
     </delete>
 
-    <select id="getByOpenId" resultMap="HRTable">
+    <select id="getByOpenId" resultType="com.tencent.wxcloudrun.model.po.HRPO">
         select * from hr where open_id=#{openId};
     </select>
 
