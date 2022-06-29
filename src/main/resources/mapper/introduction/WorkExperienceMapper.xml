@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tencent.wxcloudrun.dao.introduction.WorkExperienceDao">
+    <resultMap id="EducationExperienceMap" type="com.tencent.wxcloudrun.model.po.introduction.WorkExperiencePO">
+        <id column="company" property="company" javaType="string"/>
+        <result property="jobName" column="jobName" javaType="string"/>
+        <result property="supplement" column="supplement" javaType="string"/>
+        <result property="timeStart" column="timeStart"/>
+        <result property="timeEnd" column="timeEnd"/>
+    </resultMap>
+
+    <insert id="insertWorkExperience" parameterType="com.tencent.wxcloudrun.model.po.introduction.WorkExperiencePO">
+        insert introduction_work_experience(openId, company, jobName, supplement, timeStart, timeEnd) VALUES
+        (#{openId}, #{company}, #{jobName}, #{supplement}, #{timeStart}, #{timeEnd})
+    </insert>
+
+    <delete id="deleteWorkExperiencesByOpenId">
+        delete from introduction_work_experience where openId = #{openId};
+    </delete>
+
+    <select id="queryEducationalExperiencesByOpenId" resultMap="EducationExperienceMap">
+        select jobName, supplement, timeStart, timeEnd from introduction_work_experience where openId = #{openId};
+    </select>
+
+
+</mapper>
