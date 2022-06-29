@@ -1,4 +1,4 @@
-package com.tencent.wxcloudrun.model.po;
+package com.tencent.wxcloudrun.model.po.seeker;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,9 +10,11 @@ import lombok.NoArgsConstructor;
 public class SeekerIntentionPO {
     String openID;
 
-    int intentionID;
+    Integer intentionID;
 
     String expIndustry;
+
+    String expJob;
 
     int expMaxSalary;
 
@@ -22,5 +24,4 @@ public class SeekerIntentionPO {
 
     String jobType;
 
-    String expJob;
 }

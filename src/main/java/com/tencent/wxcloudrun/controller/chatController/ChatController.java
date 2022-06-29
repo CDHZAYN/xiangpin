@@ -18,6 +18,7 @@ import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -42,11 +43,11 @@ public class ChatController {
         messageService = service;
     }
 
-
     /**
      * 初始化连接对象
-     * @param param     包含发送者openID和接收者openID
-     * @param session   可选参数
+     *
+     * @param param   包含发送者openID和接收者openID
+     * @param session 可选参数
      */
     @OnOpen
     public void initConnection(@PathParam("param") String param, Session session) {
@@ -171,5 +172,24 @@ public class ChatController {
             }
         }
         return size;
+    }
+
+    public void notifyUser(String openId, String message) {
+        ArrayList<ChatController> senderChatControllers = connectionPool.getConnection(openId);
+        try {
+            for (ChatController chatController : senderChatControllers) {
+                chatController.session.getBasicRemote().sendText(message);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        MessageVO messageVO = new MessageVO();
+        messageVO.setState(MessageState.values()[0]);
+        messageVO.setMessageValue(MessageValue.Text);
+        messageVO.setSenderID("ADMIN");
+        messageVO.setAcceptorID(openId);
+        messageVO.setMessage(message);
+        messageVO.setSendTime(String.valueOf(new Date()));
+        messageService.save(messageVO);
     }
 }

@@ -32,4 +32,9 @@ public class HRController {
     public ApiResponse getProfile(@RequestHeader("x-wx-openid")String openID){
         return hrService.getHRProfile(openID);
     }
+
+    @GetMapping("/recruit")
+    public ApiResponse addRecruit(@RequestHeader("x-wx-openid")String openID){
+        return hrService.addRecruit();
+    }
 }

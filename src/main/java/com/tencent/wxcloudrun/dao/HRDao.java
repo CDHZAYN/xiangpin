@@ -1,7 +1,9 @@
 package com.tencent.wxcloudrun.dao;
 
+import com.tencent.wxcloudrun.model.po.CompanyPO;
 import com.tencent.wxcloudrun.model.po.HRLoginPO;
 import com.tencent.wxcloudrun.model.po.HRPO;
+import com.tencent.wxcloudrun.model.vo.CompanyProfileVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

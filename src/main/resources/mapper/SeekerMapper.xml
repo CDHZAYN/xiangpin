@@ -2,50 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tencent.wxcloudrun.dao.SeekerDao">
 
-    <resultMap id="seekerBasicPO" type="com.tencent.wxcloudrun.model.po.SeekerBasicPO">
-        <id column="seekerId" property="openID"/>
-        <result column="seekerName" property="name"/>
-        <result column="seekerPhone" property="phone"/>
-        <result column="seekerOld" property="old"/>
-        <result column="seekerEducation" property="education"/>
-        <result column="seekerBirth" jdbcType="DATE" property="birth" javaType="java.sql.Date"/>
-        <result column="seekerGender" property="gender"/>
-    </resultMap>
-
-    <resultMap id="seekerLoginPO" type="com.tencent.wxcloudrun.model.po.SeekerLoginPO">
-        <id column="openId" property="openID"/>
-        <result column="userName" property="userName"/>
-        <result column="userAvatar" property="userAvatar"/>
-    </resultMap>
-
-    <insert id="setSeekerInfo" parameterType="com.tencent.wxcloudrun.model.po.SeekerBasicPO">
-        insert into seekerBasic value (#{openID}, #{name}, #{phone}, #{old},
-                                       #{education}, #{birth,jdbcType=DATE,javaType=java.sql.Date},
-                                       #{gender});
+    <insert id="setSeeker" parameterType="com.tencent.wxcloudrun.model.po.seeker.SeekerPO">
+        insert into seeker(open_id, `name`, avatar, phone, `old`, education, birth,
+                           gender)
+            value (#{openId}, #{name}, #{avatar} ,#{phone}, #{old},
+                   #{education}, #{birth,jdbcType=DATE,javaType=java.sql.Date},
+                   #{gender});
     </insert>
 
-    <insert id="setSeekerIntentionInfo" useGeneratedKeys="true" keyColumn="intentionId" keyProperty="intentionID">
-        insert into seekerIntention(openId, expIndustry, expMaxSalary, expMinSalary, salaryType, jobType, expJob) values
+    <insert id="setSeekerIntention" useGeneratedKeys="true" keyColumn="intentionId" keyProperty="intentionId">
+        insert into seeker_intention(open_id, exp_industry, exp_max_salary, exp_min_salary, salary_type, job_type,
+        exp_job) values
         <foreach collection="list" item="intention" index="index" separator=",">
-            (#{intention.openID}, #{intention.expIndustry}, #{intention.expMaxSalary},
+            (#{intention.openId}, #{intention.expIndustry}, #{intention.expMaxSalary},
             #{intention.expMinSalary}, #{intention.salaryType}, #{intention.jobType}, #{intention.expJob})
         </foreach>;
     </insert>
 
-    <insert id="setSeekerLoginInfo" parameterType="com.tencent.wxcloudrun.model.po.SeekerLoginPO">
-        insert into seekerLogin value (#{userName}, #{userAvatar}, #{openID});
-    </insert>
-
-    <select id="getLoginInfo" resultMap="seekerLoginPO">
+    <select id="getSeeker">
         select *
-        from seekerLogin
-        where openId = #{openID};
+        from seeker
+        where open_id = #{openId};
     </select>
 
-    <select id="getOpenID" resultType="string" parameterType="string">
-        select openId
-        from seekerLogin
-        where openId = #{openID};
+    <select id="getOpenId">
+        select open_id
+        from seeker
+        where open_id = #{openId};
+    </select>
+
+    <select id="getIntentionById">
+        select *
+        from seeker_intention
+        where open_id = #{openId};
     </select>
 
 </mapper>

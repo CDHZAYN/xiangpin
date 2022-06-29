@@ -1,22 +1,22 @@
-package com.tencent.wxcloudrun.model.vo;
+package com.tencent.wxcloudrun.model.dto;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompanyVO {
-
-    private Integer id;
+public class CompanyDTO {
 
     private String fullName;
 
     private String shortName;
+
+    private String id;
 
     private Integer industry;
 
@@ -38,4 +38,5 @@ public class CompanyVO {
     private String position;
 
     private List<String> keywords;
+
 }

@@ -1,10 +1,8 @@
 package com.tencent.wxcloudrun.dao;
 
-import com.tencent.wxcloudrun.model.po.SeekerBasicPO;
-import com.tencent.wxcloudrun.model.po.SeekerIntentionPO;
-import com.tencent.wxcloudrun.model.po.SeekerLoginPO;
+import com.tencent.wxcloudrun.model.po.seeker.SeekerPO;
+import com.tencent.wxcloudrun.model.po.seeker.SeekerIntentionPO;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,14 +11,14 @@ import java.util.List;
 @Mapper
 public interface SeekerDao {
 
-    void setSeekerInfo(SeekerBasicPO seekerPO);
+    void setSeeker(SeekerPO seekerPO);
 
-    void setSeekerLoginInfo(SeekerLoginPO seekerLoginPO);
+    void setSeekerIntention(List<SeekerIntentionPO> seekerIntentionPOList);
 
-    void setSeekerIntentionInfo(List<SeekerIntentionPO> seekerIntentionPOList);
+    SeekerPO getSeeker(String openId);
 
-    SeekerLoginPO getLoginInfo(@Param("openID") String openID);
+    String getOpenId(String openId);
 
-    String getOpenID(@Param("openID") String openID);
+    SeekerIntentionPO getIntentionById(String openId);
 
 }

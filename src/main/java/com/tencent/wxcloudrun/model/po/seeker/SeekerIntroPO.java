@@ -1,4 +1,4 @@
-package com.tencent.wxcloudrun.model.vo;
+package com.tencent.wxcloudrun.model.po.seeker;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SeekerIntroVO {
+public class SeekerIntroPO {
 
     private String openID;
 

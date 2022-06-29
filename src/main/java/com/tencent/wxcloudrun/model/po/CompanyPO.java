@@ -1,16 +1,13 @@
-package com.tencent.wxcloudrun.model.vo;
+package com.tencent.wxcloudrun.model.po;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompanyVO {
+public class CompanyPO {
 
     private Integer id;
 
@@ -37,5 +34,6 @@ public class CompanyVO {
 
     private String position;
 
-    private List<String> keywords;
+    private String keywords;
+
 }

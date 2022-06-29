@@ -4,16 +4,16 @@ package com.tencent.wxcloudrun.service.impl;
 import com.tencent.wxcloudrun.config.ApiResponse;
 import com.tencent.wxcloudrun.config.ErrorList;
 import com.tencent.wxcloudrun.dao.SeekerDao;
-import com.tencent.wxcloudrun.model.dto.SeekerBasicDTO;
-import com.tencent.wxcloudrun.model.dto.SeekerIntentionDTO;
-import com.tencent.wxcloudrun.model.dto.SeekerRegisterDTO;
-import com.tencent.wxcloudrun.model.po.SeekerLoginPO;
-import com.tencent.wxcloudrun.model.po.SeekerBasicPO;
-import com.tencent.wxcloudrun.model.po.SeekerIntentionPO;
-import com.tencent.wxcloudrun.model.vo.LoginVO;
+import com.tencent.wxcloudrun.model.dto.seeker.SeekerDTO;
+import com.tencent.wxcloudrun.model.dto.seeker.SeekerIntentionDTO;
+import com.tencent.wxcloudrun.model.dto.seeker.SeekerRegisterDTO;
+import com.tencent.wxcloudrun.model.po.seeker.SeekerPO;
+import com.tencent.wxcloudrun.model.po.seeker.SeekerIntentionPO;
+import com.tencent.wxcloudrun.model.vo.seeker.SeekerLoginVO;
 import com.tencent.wxcloudrun.service.SeekerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -31,9 +31,10 @@ public class SeekerServiceImpl implements SeekerService {
     }
 
     public ApiResponse seekerLogin(String openID) {
+        //TODO: need to update old
         String userOpenID;
         try {
-            userOpenID = seekerDao.getOpenID(openID);
+            userOpenID = seekerDao.getOpenId(openID);
         } catch (Exception e) {
             e.printStackTrace();
             return ApiResponse.error("00001", ErrorList.errorList.get("00001"));
@@ -44,79 +45,73 @@ public class SeekerServiceImpl implements SeekerService {
         return getSeekerProfile(openID);
     }
 
+    @Transactional
     public ApiResponse seekerRegister(String openID, SeekerRegisterDTO seekerRegisterDTO) {
 
-        SeekerBasicDTO newSeekerBasic = seekerRegisterDTO.getBasic();
-        List<SeekerIntentionDTO> seekerIntentionDTOList = seekerRegisterDTO.getIntention();
+        SeekerDTO newSeekerBasic = seekerRegisterDTO.getSeeker();
+        SeekerIntentionDTO seekerIntentionDTO = seekerRegisterDTO.getIntention();
 
         //handle basic
-        //TODO: need to update old
-        SeekerBasicPO seekerBasicPO = new SeekerBasicPO();
-        seekerBasicPO.setOpenID(openID);
-        seekerBasicPO.setEducation(newSeekerBasic.getAcaBg());
-        seekerBasicPO.setGender(newSeekerBasic.getGender().equals("male"));
-        seekerBasicPO.setName(newSeekerBasic.getName());
-        seekerBasicPO.setPhone(newSeekerBasic.getPhoneNum());
+        SeekerPO seekerPO = new SeekerPO();
+        seekerPO.setOpenID(openID);
+        seekerPO.setEducation(newSeekerBasic.getAcaBg());
+        seekerPO.setGender(newSeekerBasic.getGender().equals("male"));
+        seekerPO.setName(newSeekerBasic.getName());
+        seekerPO.setPhone(newSeekerBasic.getPhoneNum());
+        seekerPO.setAvatar(newSeekerBasic.getAvatarUrl());
 
         int birthYear = Integer.parseInt(newSeekerBasic.getYear());
         int birthMonth = Integer.parseInt(newSeekerBasic.getMonth());
         int old = LocalDate.now().getYear() - birthYear;
         if (LocalDate.now().getMonthValue() <= birthMonth)
             old++;
-        seekerBasicPO.setOld(old);
-        seekerBasicPO.setBirth(Date.valueOf(LocalDate.of(birthYear, birthMonth, 1)));
-
-        SeekerLoginPO seekerLoginPO = new SeekerLoginPO();
-        seekerLoginPO.setOpenID(openID);
-        seekerLoginPO.setUserName(newSeekerBasic.getName());
-        seekerLoginPO.setUserAvatar(newSeekerBasic.getAvatarUrl());
+        seekerPO.setOld(old);
+        seekerPO.setBirth(Date.valueOf(LocalDate.of(birthYear, birthMonth, 1)));
 
         //execute intention
         List<SeekerIntentionPO> seekerIntentionPOList = new ArrayList<>();
-        for (SeekerIntentionDTO seekerIntentionDTO : seekerIntentionDTOList) {
-            SeekerIntentionPO seekerIntentionPO = new SeekerIntentionPO();
-            seekerIntentionPO.setOpenID(openID);
-            seekerIntentionPO.setJobType(seekerIntentionDTO.getJobType().toString());
-            seekerIntentionPO.setExpIndustry(seekerIntentionDTO.getExpIndustry().toString());
-            seekerIntentionPO.setJobType(seekerIntentionPO.getJobType());
-            seekerIntentionPO.setSalaryType(seekerIntentionDTO.getSalaryType());
+        SeekerIntentionPO seekerIntentionPO = new SeekerIntentionPO();
+        seekerIntentionPO.setOpenID(openID);
+        seekerIntentionPO.setJobType(seekerIntentionDTO.getJobType().toString());
+        seekerIntentionPO.setExpIndustry(seekerIntentionDTO.getExpIndustry().toString());
+        seekerIntentionPO.setJobType(seekerIntentionPO.getJobType());
+        seekerIntentionPO.setSalaryType(seekerIntentionDTO.getSalaryType());
 
-            int minSalary = seekerIntentionDTO.getExpMinSalary();
-            int maxSalary = seekerIntentionDTO.getExpMaxSalary();
-            seekerIntentionPO.setExpMaxSalary(Math.max(minSalary, maxSalary));
-            seekerIntentionPO.setExpMinSalary(Math.min(minSalary, maxSalary));
+        int minSalary = seekerIntentionDTO.getExpMinSalary();
+        int maxSalary = seekerIntentionDTO.getExpMaxSalary();
+        seekerIntentionPO.setExpMaxSalary(Math.max(minSalary, maxSalary));
+        seekerIntentionPO.setExpMinSalary(Math.min(minSalary, maxSalary));
 
-            seekerIntentionPOList.add(seekerIntentionPO);
-        }
+        seekerIntentionPOList.add(seekerIntentionPO);
+
 
         //execute
         //TODO: asymmetric
         try {
-            seekerDao.setSeekerInfo(seekerBasicPO);
-            seekerDao.setSeekerLoginInfo(seekerLoginPO);
-            seekerDao.setSeekerIntentionInfo(seekerIntentionPOList);
+            seekerDao.setSeeker(seekerPO);
+            seekerDao.setSeekerIntention(seekerIntentionPOList);
         } catch (Exception e) {
             e.printStackTrace();
             return ApiResponse.error("00003", ErrorList.errorList.get("00003"));
         }
 
-        LoginVO loginVO = new LoginVO();
-        loginVO.setUserName(seekerLoginPO.getUserName());
-        loginVO.setUserAvatar(seekerLoginPO.getUserAvatar());
-        loginVO.setOpenID(openID);
-        return ApiResponse.ok(loginVO);
+        SeekerLoginVO seekerLoginVO = new SeekerLoginVO();
+        seekerLoginVO.setUserName(seekerPO.getName());
+        seekerLoginVO.setUserAvatar(seekerPO.getAvatar());
+        seekerLoginVO.setOpenID(openID);
+        return ApiResponse.ok(seekerLoginVO);
     }
 
     public ApiResponse getSeekerProfile(String openID) {
-        SeekerLoginPO seekerLoginPO = seekerDao.getLoginInfo(openID);
-        LoginVO loginVO = new LoginVO();
-        if (seekerLoginPO.getUserAvatar() == null)
-            loginVO.setUserAvatar(null);
+        SeekerPO seekerPO = seekerDao.getSeeker(openID);
+        SeekerLoginVO seekerLoginVO = new SeekerLoginVO();
+        if (seekerPO.getAvatar() == null)
+            seekerLoginVO.setUserAvatar(null);
         else
-            loginVO.setUserAvatar(seekerLoginPO.getUserAvatar());
-        loginVO.setUserName(seekerLoginPO.getUserName());
-        loginVO.setOpenID(openID);
-        return ApiResponse.ok(loginVO);
+            seekerLoginVO.setUserAvatar(seekerPO.getAvatar());
+        seekerLoginVO.setUserName(seekerPO.getName());
+        seekerLoginVO.setOpenID(openID);
+        return ApiResponse.ok(seekerLoginVO);
     }
 
 }

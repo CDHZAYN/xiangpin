@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="mjmm">
-  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.23">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.39">
     <root id="1">
-      <ServerVersion>8.0.29</ServerVersion>
+      <DefaultCasing>exact</DefaultCasing>
+      <DefaultEngine>InnoDB</DefaultEngine>
+      <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
       <Grants>|root||debian-sys-maint|localhost|ALTER|G
 |root||gjc||ALTER|G
 |root||littleb||ALTER|G
@@ -277,9 +279,7 @@
 |root||root|localhost|grant option|G
 performance_schema|schema||mysql.session|localhost|SELECT|G
 sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
-      <DefaultEngine>InnoDB</DefaultEngine>
-      <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
-      <DefaultCasing>exact</DefaultCasing>
+      <ServerVersion>8.0.29</ServerVersion>
     </root>
     <schema id="2" parent="1" name="information_schema">
       <Collation>utf8_general_ci</Collation>
@@ -315,10 +315,11 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Charset>big5</Charset>
     </collation>
     <collation id="12" parent="1" name="big5_chinese_ci">
+
       <Charset>big5</Charset>
       <DefaultForCharset>1</DefaultForCharset>
     </collation>
-    <collation id="13" parent="1" name="binary">
+    <collation id="8" parent="1" name="binary">
       <Charset>binary</Charset>
       <DefaultForCharset>1</DefaultForCharset>
     </collation>
@@ -335,7 +336,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Charset>cp1250</Charset>
       <DefaultForCharset>1</DefaultForCharset>
     </collation>
-    <collation id="18" parent="1" name="cp1250_polish_ci">
+    <collation id="13" parent="1" name="cp1250_polish_ci">
       <Charset>cp1250</Charset>
     </collation>
     <collation id="19" parent="1" name="cp1251_bin">
@@ -427,7 +428,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Charset>gb18030</Charset>
       <DefaultForCharset>1</DefaultForCharset>
     </collation>
-    <collation id="45" parent="1" name="gb18030_unicode_520_ci">
+    <collation id="40" parent="1" name="gb18030_unicode_520_ci">
       <Charset>gb18030</Charset>
     </collation>
     <collation id="46" parent="1" name="gb2312_bin">
@@ -662,7 +663,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <collation id="116" parent="1" name="ucs2_turkish_ci">
       <Charset>ucs2</Charset>
     </collation>
-    <collation id="117" parent="1" name="ucs2_unicode_520_ci">
+    <collation id="112" parent="1" name="ucs2_unicode_520_ci">
       <Charset>ucs2</Charset>
     </collation>
     <collation id="118" parent="1" name="ucs2_unicode_ci">
@@ -754,7 +755,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <collation id="146" parent="1" name="utf16_unicode_ci">
       <Charset>utf16</Charset>
     </collation>
-    <collation id="147" parent="1" name="utf16_vietnamese_ci">
+    <collation id="142" parent="1" name="utf16_vietnamese_ci">
       <Charset>utf16</Charset>
     </collation>
     <collation id="148" parent="1" name="utf16le_bin">
@@ -840,7 +841,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <collation id="174" parent="1" name="utf32_unicode_ci">
       <Charset>utf32</Charset>
     </collation>
-    <collation id="175" parent="1" name="utf32_vietnamese_ci">
+    <collation id="170" parent="1" name="utf32_vietnamese_ci">
       <Charset>utf32</Charset>
     </collation>
     <collation id="176" parent="1" name="utf8_bin">
@@ -919,7 +920,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <collation id="200" parent="1" name="utf8_turkish_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="201" parent="1" name="utf8_unicode_520_ci">
+    <collation id="196" parent="1" name="utf8_unicode_520_ci">
       <Charset>utf8mb3</Charset>
     </collation>
     <collation id="202" parent="1" name="utf8_unicode_ci">
@@ -1165,14 +1166,17 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Plugin>caching_sha2_password</Plugin>
     </user>
     <user id="282" parent="1" name="mysql.infoschema">
+      <CanLogin>0</CanLogin>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
     <user id="283" parent="1" name="mysql.session">
+      <CanLogin>0</CanLogin>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
     <user id="284" parent="1" name="mysql.sys">
+      <CanLogin>0</CanLogin>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
@@ -1182,6 +1186,8 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </user>
     <table id="286" parent="6" name="HR">
       <Comment>招聘者表</Comment>
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
     <table id="287" parent="6" name="HR_job"/>
     <table id="288" parent="6" name="company"/>
@@ -1200,6 +1206,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Position>2</Position>
       <DataType>varchar(10)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>2</Position>
     </column>
     <column id="297" parent="286" name="avatar">
       <Position>3</Position>
@@ -1214,8 +1221,15 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Position>5</Position>
       <DataType>varchar(11)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <column id="299" parent="286" name="phone">
+      <DataType>varchar(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
     </column>
     <key id="300" parent="286" name="PRIMARY">
+      <ColNames>open_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ColNames>open_id</ColNames>
       <Primary>1</Primary>
@@ -1229,6 +1243,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Position>2</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>2</Position>
     </column>
     <key id="303" parent="287" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
@@ -1246,21 +1261,25 @@ jid</ColNames>
       <Position>2</Position>
       <DataType>varchar(64)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>2</Position>
     </column>
     <column id="306" parent="288" name="short_name">
       <Position>3</Position>
       <DataType>varchar(16)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>3</Position>
     </column>
     <column id="307" parent="288" name="industry">
       <Position>4</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>5</Position>
     </column>
     <column id="308" parent="288" name="avatar">
       <Position>5</Position>
       <DataType>varchar(300)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>6</Position>
     </column>
     <column id="309" parent="288" name="license">
       <Position>6</Position>
@@ -1271,16 +1290,19 @@ jid</ColNames>
       <Position>7</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>8</Position>
     </column>
     <column id="311" parent="288" name="finance">
       <Position>8</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>9</Position>
     </column>
     <column id="312" parent="288" name="intro">
       <Position>9</Position>
       <DataType>varchar(256)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>10</Position>
     </column>
     <column id="313" parent="288" name="pos_id">
       <Position>10</Position>
@@ -1301,7 +1323,6 @@ jid</ColNames>
     </column>
     <key id="317" parent="288" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
     <column id="318" parent="289" name="cid">
@@ -1324,32 +1345,37 @@ hr_id</ColNames>
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
-      <SequenceIdentity>null</SequenceIdentity>
+      <Position>1</Position>
     </column>
     <column id="322" parent="290" name="job_name">
       <Position>2</Position>
       <DataType>varchar(16)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>1</Position>
     </column>
     <column id="323" parent="290" name="job_cate">
       <Position>3</Position>
       <DataType>varchar(10)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>2</Position>
     </column>
     <column id="324" parent="290" name="academic_requirement">
       <Position>4</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>4</Position>
     </column>
     <column id="325" parent="290" name="experience_requirement">
-      <Position>5</Position>
+    <Position>5</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>5</Position>
     </column>
     <column id="326" parent="290" name="job_type">
       <Position>6</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>6</Position>
     </column>
     <column id="327" parent="290" name="detail_pos">
       <Position>7</Position>
@@ -1357,6 +1383,8 @@ hr_id</ColNames>
     </column>
     <column id="328" parent="290" name="city">
       <Position>8</Position>
+    </column>
+    <column id="329" parent="290" name="salary_roof">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
@@ -1369,6 +1397,7 @@ hr_id</ColNames>
       <Position>10</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>10</Position>
     </column>
     <column id="331" parent="290" name="salary_type">
       <Position>11</Position>
@@ -1390,12 +1419,14 @@ hr_id</ColNames>
     <key id="335" parent="290" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
     <column id="336" parent="291" name="state">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>1</Position>
     </column>
     <column id="337" parent="291" name="id">
       <Position>2</Position>
@@ -1407,31 +1438,35 @@ hr_id</ColNames>
       <Position>3</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>3</Position>
     </column>
     <column id="339" parent="291" name="sender_id">
       <Position>4</Position>
       <DataType>varchar(130)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>4</Position>
     </column>
     <column id="340" parent="291" name="acceptor_id">
       <Position>5</Position>
       <DataType>varchar(130)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>5</Position>
     </column>
     <column id="341" parent="291" name="message">
       <Position>6</Position>
       <DataType>varchar(999)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>6</Position>
     </column>
     <column id="342" parent="291" name="send_time">
       <Position>7</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>7</Position>
     </column>
     <index id="343" parent="291" name="MessageTable_id_uindex">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
-      <Type>btree</Type>
     </index>
     <key id="344" parent="291" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
@@ -1446,6 +1481,7 @@ hr_id</ColNames>
       <Position>1</Position>
       <DataType>varchar(130)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>1</Position>
     </column>
     <column id="347" parent="292" name="name">
       <Position>2</Position>
@@ -1485,29 +1521,35 @@ hr_id</ColNames>
       <Position>2</Position>
       <DataType>varchar(10)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>2</Position>
     </column>
     <column id="355" parent="293" name="exp_max_salary">
       <Position>3</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>3</Position>
     </column>
     <column id="356" parent="293" name="exp_min_salary">
       <Position>4</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>4</Position>
     </column>
     <column id="357" parent="293" name="job_type">
       <Position>5</Position>
       <DataType>varchar(10)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>5</Position>
     </column>
     <column id="358" parent="293" name="exp_job">
       <Position>6</Position>
       <DataType>varchar(10)|0s</DataType>
+      <Position>6</Position>
     </column>
     <column id="359" parent="293" name="salary_type">
       <Position>7</Position>
       <DataType>int|0s</DataType>
+      <Position>7</Position>
     </column>
     <key id="360" parent="293" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
@@ -1518,66 +1560,79 @@ hr_id</ColNames>
       <Position>1</Position>
       <DataType>varchar(130)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>1</Position>
     </column>
     <column id="362" parent="294" name="education_school">
       <Position>2</Position>
       <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>2</Position>
     </column>
     <column id="363" parent="294" name="education_subject">
       <Position>3</Position>
       <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>3</Position>
     </column>
     <column id="364" parent="294" name="education_degree">
       <Position>4</Position>
       <DataType>varchar(10)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>4</Position>
     </column>
     <column id="365" parent="294" name="in_school_time">
       <Position>5</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>5</Position>
     </column>
     <column id="366" parent="294" name="graduate_time">
       <Position>6</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>6</Position>
     </column>
     <column id="367" parent="294" name="main_experience">
       <Position>7</Position>
       <DataType>varchar(300)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>7</Position>
     </column>
     <column id="368" parent="294" name="skill">
       <Position>8</Position>
       <DataType>varchar(300)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>8</Position>
     </column>
     <column id="369" parent="294" name="specialties">
       <Position>9</Position>
       <DataType>varchar(300)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>9</Position>
     </column>
     <column id="370" parent="294" name="works">
       <Position>10</Position>
       <DataType>varchar(300)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>10</Position>
     </column>
     <column id="371" parent="294" name="direction">
       <Position>11</Position>
       <DataType>varchar(300)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>11</Position>
     </column>
     <column id="372" parent="294" name="personal">
       <Position>12</Position>
       <DataType>varchar(300)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>12</Position>
     </column>
     <column id="373" parent="294" name="jobs">
       <Position>13</Position>
       <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>13</Position>
     </column>
     <index id="374" parent="294" name="seekerIntroduction_seekerOpenIId_uindex">
       <ColNames>open_id</ColNames>
