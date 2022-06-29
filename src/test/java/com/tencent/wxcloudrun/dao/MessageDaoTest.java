@@ -1,5 +1,6 @@
 package com.tencent.wxcloudrun.dao;
 
+import com.tencent.wxcloudrun.model.po.MessagePO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,5 +32,14 @@ class MessageDaoTest {
         Date temp = new Date(Long.parseLong(time));
         System.out.println(temp);
         dao.updateMessageValue("123", "125", temp);
+    }
+
+    @Test
+    void test3() {
+        String time = "1655042677000";
+        Date temp = new Date(Long.parseLong(time));
+        System.out.println(temp);
+        MessagePO messagePO = new MessagePO(0, 0, 0, "123", "125", "离谱谱", temp);
+        dao.addMessage(messagePO);
     }
 }
