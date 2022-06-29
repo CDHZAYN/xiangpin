@@ -1,9 +1,7 @@
 package com.tencent.wxcloudrun.controller;
 
 import com.tencent.wxcloudrun.config.ApiResponse;
-import com.tencent.wxcloudrun.model.dto.HRRegisterDTO;
-import com.tencent.wxcloudrun.model.dto.HRRegisterDTO;
-import com.tencent.wxcloudrun.model.vo.HRLoginVO;
+import com.tencent.wxcloudrun.model.dto.HRDTO;
 import com.tencent.wxcloudrun.service.impl.HRServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +17,7 @@ public class HRController {
     }
 
     @PostMapping("/register")
-    public ApiResponse register(@RequestHeader("x-wx-openid")String openID, @RequestBody HRRegisterDTO registerDTO){
+    public ApiResponse register(@RequestHeader("x-wx-openid")String openID, @RequestBody HRDTO registerDTO){
         return hrService.HRRegister(openID, registerDTO);
     }
 
@@ -29,12 +27,17 @@ public class HRController {
     }
 
     @GetMapping("/profile")
-    public ApiResponse getProfile(@RequestHeader("x-wx-openid")String openID){
-        return hrService.getHRProfile(openID);
+    public ApiResponse getProfile(@RequestHeader String openId){
+        return hrService.getHRProfile(openId);
+    }
+
+    @GetMapping("/full")
+    public ApiResponse getFullInfo(@RequestHeader String openId){
+        return hrService.getFullInfo(openId);
     }
 
     @GetMapping("/recruit")
-    public ApiResponse addRecruit(@RequestHeader("x-wx-openid")String openID){
-        return hrService.addRecruit();
+    public ApiResponse addRecruit(@RequestHeader("x-wx-openid")String openId, @RequestHeader String seekerId){
+        return hrService.addRecruit(openId, seekerId);
     }
 }

@@ -9,17 +9,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SeekerDTO {
 
-    private String acaBg;
+    private String name;
 
-    private String avatarUrl;
+    private String avatar;
 
-    private String gender;
+    private String phone;
 
     private String month;
 
-    private String name;
-
-    private String phoneNum;
-
     private String year;
+
+    private String gender;
 }

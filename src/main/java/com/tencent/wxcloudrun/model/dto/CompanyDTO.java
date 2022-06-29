@@ -37,6 +37,4 @@ public class CompanyDTO {
 
     private String position;
 
-    private List<String> keywords;
-
 }

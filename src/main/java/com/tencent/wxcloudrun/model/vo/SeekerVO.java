@@ -1,4 +1,4 @@
-package com.tencent.wxcloudrun.model.vo.seeker;
+package com.tencent.wxcloudrun.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,13 +13,13 @@ public class SeekerVO {
 
     private String name;
 
+    private String avatar;
+
     private String phone;
 
-    private Integer old;
+    private String month;
 
-    private String Education;
-
-    private String birth;
+    private String year;
 
     private Boolean gender;
 

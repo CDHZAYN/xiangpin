@@ -8,20 +8,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SeekerIntentionPO {
-    String openID;
+    String openId;
 
-    Integer intentionID;
+    private Integer industry;
 
-    String expIndustry;
+    private String job;
 
-    String expJob;
+    private Integer jobType;
 
-    int expMaxSalary;
+    private Integer maxSalary;
 
-    int expMinSalary;
+    private Integer minSalary;
 
-    Integer SalaryType;
-
-    String jobType;
+    private Integer salaryType;
 
 }

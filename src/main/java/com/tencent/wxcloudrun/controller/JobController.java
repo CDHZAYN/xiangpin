@@ -41,8 +41,8 @@ public class JobController {
     }
 
     @GetMapping("/getRecommend")
-    public ApiResponse getRecommend(@RequestHeader("x-wx-openid") String openId, @RequestHeader Integer city){
-        return jobService.getRecommend(openId, city);
+    public ApiResponse getRecommend(@RequestHeader("x-wx-openid") String openId, @RequestHeader Integer posId){
+        return jobService.getRecommend(openId, posId);
     }
 
     @GetMapping("/getResponsible")

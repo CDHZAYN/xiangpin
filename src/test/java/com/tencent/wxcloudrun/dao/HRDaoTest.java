@@ -1,15 +1,11 @@
 package com.tencent.wxcloudrun.dao;
 
-import com.tencent.wxcloudrun.controller.chatController.WebSocketServerEndpointConfig;
-import com.tencent.wxcloudrun.model.po.HRLoginPO;
 import com.tencent.wxcloudrun.model.po.HRPO;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,8 +16,9 @@ class HRDaoTest {
     HRDao dao;
 
     @Test
+    @Rollback
     void registerTest() {
-        HRPO hrpo = new HRPO("111", true, "母舰", "120");
+        HRPO hrpo = new HRPO("111","母舰","19968298043","male", "120");
         if (dao.getByOpenId("111") != null) {
             dao.deleteByOpenId("111");
         }
@@ -31,13 +28,15 @@ class HRDaoTest {
     }
 
     @Test
+    @Rollback
     void registerLoginTest() {
-        HRLoginPO hrLoginPO = new HRLoginPO("母舰", "111.jpg", "111");
-        dao.setHRLoginInfo(hrLoginPO);
+        HRPO hrPO = new HRPO("111","母舰","19968298043","male", "120");
+        dao.setHRInfo(hrPO);
         dao.deleteLoginByOpenId("111");
     }
 
     @Test
+    @Rollback
     void getHRTest() {
         System.out.println(dao.getByOpenId("111"));
     }

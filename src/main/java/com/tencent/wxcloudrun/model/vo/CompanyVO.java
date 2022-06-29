@@ -36,6 +36,4 @@ public class CompanyVO {
     private String website;
 
     private String position;
-
-    private List<String> keywords;
 }

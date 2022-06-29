@@ -24,12 +24,12 @@ public class CompanyController {
     }
 
     @GetMapping("/profile")
-    public ApiResponse getProfile(@RequestHeader("id") Integer id){
+    public ApiResponse getProfile(@RequestHeader Integer id){
         return companyService.getProfile(id);
     }
 
     @GetMapping("/full")
-    public ApiResponse getFullInfo(@RequestHeader("id") Integer id){
+    public ApiResponse getFullInfo(@RequestHeader Integer id){
         return companyService.getFullInfo(id);
     }
 
@@ -39,7 +39,7 @@ public class CompanyController {
     }
 
     @DeleteMapping("/delete")
-    public ApiResponse delete(@RequestHeader("id") Integer id){
+    public ApiResponse delete(@RequestHeader Integer id){
         return companyService.delete(id);
     }
 }

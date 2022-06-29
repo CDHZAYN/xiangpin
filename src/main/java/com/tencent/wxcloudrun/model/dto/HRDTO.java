@@ -7,14 +7,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class HRRegisterDTO {
-    private String identity;
+public class HRDTO {
 
     private String name;
 
-    private String phoneNum;
+    private String phone;
 
-    private String gender;
+    private Boolean gender;
 
-    private String avatarUrl;
+    private String avatar;
+
 }

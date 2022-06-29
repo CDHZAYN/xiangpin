@@ -1,39 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tencent.wxcloudrun.dao.HRDao">
-    <resultMap id="HRTable" type="com.tencent.wxcloudrun.model.po.HRPO">
-        <id column="openId" property="openId"/>
-        <result column="gender" property="gender"/>
-        <result column="name" property="name"/>
-        <result column="phoneNum" property="phoneNum"/>
-    </resultMap>
 
     <update id="setHRInfo">
-        insert HRTable values (#{openId}, #{gender}, #{name}, #{phoneNum});
-    </update>
-
-    <update id="setHRLoginInfo">
-        insert HRLoginTable values (#{userName}, #{userAvatar}, #{openID});
+        insert hr(open_id, `name`, avatar, gender, phone)
+        values (#{openId}, #{name}, #{avatar}, #{gender}, #{phone});
     </update>
 
     <delete id="deleteByOpenId">
-        delete from HRTable where openId=#{openID};
-    </delete>
-
-    <delete id="deleteLoginByOpenId">
-        delete from HRLoginTable where openId=#{openID};
+        delete from hr where open_id=#{openId};
     </delete>
 
     <select id="getByOpenId" resultMap="HRTable">
-        select * from HRTable where openId=#{openID};
-    </select>
-
-    <select id="getLoginByOpenId" resultType="com.tencent.wxcloudrun.model.po.HRLoginPO">
-        select * from HRLoginTable where openId=#{openID};
+        select * from hr where open_id=#{openId};
     </select>
 
     <select id="getOpenId" resultType="java.lang.String">
-        select openId from HRLoginTable where openId=#{openID};
+        select open_id from hr where open_id=#{openID};
     </select>
 
 

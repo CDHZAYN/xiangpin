@@ -9,16 +9,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SeekerIntentionDTO {
 
-    Integer expIndustry;
+    private Integer industry;
 
-    String expJob;
+    private String job;
 
-    Integer expMaxSalary;
+    private Integer jobType;
 
-    Integer expMinSalary;
+    private Integer maxSalary;
 
-    Integer SalaryType;
+    private Integer minSalary;
 
-    Integer jobType;
+    private Integer salaryType;
 
 }

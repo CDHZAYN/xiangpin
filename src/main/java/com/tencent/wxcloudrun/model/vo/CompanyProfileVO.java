@@ -23,6 +23,4 @@ public class CompanyProfileVO {
 
     private Integer scale;
 
-    private List<String> keywords;
-
 }

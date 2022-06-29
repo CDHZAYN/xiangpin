@@ -17,15 +17,17 @@ public class JobProfileVO {
 
     private Integer id;
 
-    private String jobName;
+    private String name;
 
-    private Integer city;
+    private Integer posId;
 
-    private Integer salaryFloor;
+    private Integer minSalary;
 
-    private Integer salaryRoof;
+    private Integer maxSalary;
 
     private Integer salaryType;
 
     private String tags;
+
+
 }

@@ -10,20 +10,20 @@ import org.springframework.format.annotation.DateTimeFormat;
 @NoArgsConstructor
 public class SearchPO {
 
-    Integer expIndustry;
+    Integer industry;
 
-    String expJob;
+    String job;
 
-    Integer expMaxSalary;
+    Integer maxSalary;
 
-    Integer expMinSalary;
+    Integer minSalary;
 
     Integer SalaryType;
 
     Integer jobType;
 
-    Integer city;
+    Integer posId;
 
-    String keywords;
+    String tags;
 
 }

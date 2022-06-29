@@ -1,4 +1,4 @@
-package com.tencent.wxcloudrun.model.vo.seeker;
+package com.tencent.wxcloudrun.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

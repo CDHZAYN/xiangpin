@@ -26,16 +26,6 @@ public class CompanyServiceImpl {
     public ApiResponse register(CompanyDTO companyDTO) {
         CompanyPO companyPO = new CompanyPO();
         BeanUtils.copyProperties(companyDTO, companyPO);
-        if (companyDTO.getKeywords() != null) {
-            List<String> keywords = companyDTO.getKeywords();
-            StringBuffer keywordStr = new StringBuffer();
-            for (String k : keywords) {
-                keywordStr.append("`!W~");
-                keywordStr.append(k);
-            }
-            keywordStr.delete(0,4);
-            companyPO.setKeywords(keywordStr.toString());
-        }
         companyDao.register(companyPO);
         Integer id = companyPO.getId();
         return getProfile(id);
@@ -45,10 +35,6 @@ public class CompanyServiceImpl {
         CompanyPO companyPO = companyDao.getById(id);
         CompanyProfileVO companyProfileVO = new CompanyProfileVO();
         BeanUtils.copyProperties(companyPO, companyProfileVO);
-        if (companyPO.getKeywords() != null) {
-            List<String> keywords = Arrays.asList(companyPO.getKeywords().split("`!W~"));
-            companyProfileVO.setKeywords(keywords);
-        }
         return ApiResponse.ok(companyProfileVO);
     }
 
@@ -56,25 +42,12 @@ public class CompanyServiceImpl {
         CompanyPO companyPO = companyDao.getById(id);
         CompanyVO companyVO = new CompanyVO();
         BeanUtils.copyProperties(companyPO, companyVO);
-        if (companyPO.getKeywords() != null) {
-            List<String> keywords = Arrays.asList(companyPO.getKeywords().split("`!W~"));
-            companyVO.setKeywords(keywords);
-        }
         return ApiResponse.ok(companyVO);
     }
 
     public ApiResponse modify(CompanyDTO companyDTO) {
         CompanyPO companyPO = new CompanyPO();
         BeanUtils.copyProperties(companyDTO, companyPO);
-        if (companyDTO.getKeywords() != null) {
-            List<String> keywords = companyDTO.getKeywords();
-            StringBuffer keywordStr = new StringBuffer();
-            for (String k : keywords) {
-                keywordStr.append(k);
-                keywordStr.append("`!W~");
-            }
-            companyPO.setKeywords(keywordStr.toString());
-        }
         companyDao.modify(companyPO);
         return ApiResponse.ok();
     }

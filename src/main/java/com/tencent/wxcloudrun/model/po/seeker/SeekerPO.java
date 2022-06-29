@@ -11,7 +11,7 @@ import java.sql.Date;
 @AllArgsConstructor
 public class SeekerPO {
 
-    private String openID;
+    private String openId;
 
     private String name;
 
@@ -19,12 +19,10 @@ public class SeekerPO {
 
     private String phone;
 
-    private Integer old;
+    private String month;
 
-    private String education;
+    private String year;
 
-    private Date birth;
-
-    private Boolean gender;
+    private String gender;
 
 }
