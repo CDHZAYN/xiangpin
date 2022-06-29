@@ -41,4 +41,9 @@ public class HRController {
     public ApiResponse addRecruit(@RequestHeader("x-wx-openid")String openId, @RequestHeader String seekerId){
         return hrService.addRecruit(openId, seekerId);
     }
+
+    @GetMapping("/join")
+    public ApiResponse joinCompany(@RequestHeader("x-wx-openid")String openId, @RequestHeader String companyId){
+        return hrService.joinCompany(openId, companyId);
+    }
 }

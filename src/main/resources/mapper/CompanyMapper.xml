@@ -3,9 +3,9 @@
 <mapper namespace="com.tencent.wxcloudrun.dao.CompanyDao">
     <insert id="register" parameterType="com.tencent.wxcloudrun.model.po.CompanyPO" useGeneratedKeys="true"
             keyProperty="id">
-        insert into company(full_name, short_name, industry, avatar, license, scale, finance, intro, pos_id, website,
+        insert into company(id, full_name, short_name, industry, avatar, license, scale, finance, intro, pos_id, website,
                             position, keywords)
-            value (#{fullName}, #{shortName}, #{industry}, #{avatar}, #{license}, #{scale}, #{finance}, #{intro},
+            value (#{id}, #{fullName}, #{shortName}, #{industry}, #{avatar}, #{license}, #{scale}, #{finance}, #{intro},
                    #{posID}, #{website}, #{position}, #{keywords});
     </insert>
 

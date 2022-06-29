@@ -28,7 +28,7 @@
         where open_id = #{openId};
     </select>
 
-    <select id="getIntentionById">
+    <select id="getIntentionById" resultType="com.tencent.wxcloudrun.model.po.seeker.SeekerIntentionPO">
         select *
         from seeker_intention
         where open_id = #{openId};

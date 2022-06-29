@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 public class CompanyProfileVO {
 
-    private Integer id;
+    private String id;
 
     private String shortName;
 

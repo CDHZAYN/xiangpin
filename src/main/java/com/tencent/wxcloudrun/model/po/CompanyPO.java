@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CompanyPO {
 
-    private Integer id;
+    private String id;
 
     private String fullName;
 

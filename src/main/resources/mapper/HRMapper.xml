@@ -8,16 +8,27 @@
     </update>
 
     <delete id="deleteByOpenId">
-        delete from hr where open_id=#{openId};
+        delete
+        from hr
+        where open_id = #{openId};
     </delete>
 
     <select id="getByOpenId" resultType="com.tencent.wxcloudrun.model.po.HRPO">
-        select * from hr where open_id=#{openId};
+        select *
+        from hr
+        where open_id = #{openId};
     </select>
 
     <select id="getOpenId" resultType="java.lang.String">
-        select open_id from hr where open_id=#{openID};
+        select open_id
+        from hr
+        where open_id = #{openID};
     </select>
+
+    <insert id="connectCompany">
+        insert into company_hr(cid, hr_id)
+            value (#{companyId}, #{openId})
+    </insert>
 
 
 </mapper>

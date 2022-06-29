@@ -11,13 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public interface HRService {
 
-    public ApiResponse HRRegister(String openID, HRDTO hrDTO);
+    ApiResponse HRRegister(String openID, HRDTO hrDTO);
 
-    public ApiResponse HRLogin(String openId);
+    ApiResponse HRLogin(String openId);
 
-    public ApiResponse getHRProfile(String openID);
+    ApiResponse getHRProfile(String openID);
 
-    public ApiResponse getFullInfo(String openId);
+    ApiResponse getFullInfo(String openId);
 
-    public ApiResponse addRecruit(String openId, String seekerId);
+    ApiResponse addRecruit(String openId, String seekerId);
+
+    ApiResponse joinCompany(String openId, String companyId);
 }

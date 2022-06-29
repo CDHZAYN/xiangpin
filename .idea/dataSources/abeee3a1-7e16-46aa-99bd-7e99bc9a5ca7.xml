@@ -1165,14 +1165,17 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Plugin>caching_sha2_password</Plugin>
     </user>
     <user id="282" parent="1" name="mysql.infoschema">
+      <CanLogin>0</CanLogin>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
     <user id="283" parent="1" name="mysql.session">
+      <CanLogin>0</CanLogin>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
     <user id="284" parent="1" name="mysql.sys">
+      <CanLogin>0</CanLogin>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
@@ -1180,23 +1183,57 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Host>localhost</Host>
       <Plugin>auth_socket</Plugin>
     </user>
-    <table id="286" parent="278" name="company"/>
-    <table id="287" parent="278" name="company_hr"/>
+    <table id="286" parent="278" name="company">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="287" parent="278" name="company_hr">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
     <table id="288" parent="278" name="hr">
       <Comment>招聘者表</Comment>
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="289" parent="278" name="hr_job"/>
-    <table id="290" parent="278" name="introduction_education_experience"/>
-    <table id="291" parent="278" name="introduction_supplementary_information"/>
-    <table id="292" parent="278" name="introduction_work_experience"/>
-    <table id="293" parent="278" name="job"/>
-    <table id="294" parent="278" name="message"/>
-    <table id="295" parent="278" name="seeker"/>
-    <table id="296" parent="278" name="seeker_intention"/>
-    <table id="297" parent="278" name="seeker_introduction"/>
+    <table id="289" parent="278" name="hr_job">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="290" parent="278" name="introduction_education_experience">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="291" parent="278" name="introduction_supplementary_information">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="292" parent="278" name="introduction_work_experience">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="293" parent="278" name="job">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="294" parent="278" name="message">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="295" parent="278" name="seeker">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="296" parent="278" name="seeker_intention">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="297" parent="278" name="seeker_introduction">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
     <column id="298" parent="286" name="id">
-      <AutoIncrement>1</AutoIncrement>
-      <DataType>int|0s</DataType>
+      <DataType>varchar(32)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
@@ -1263,7 +1300,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Primary>1</Primary>
     </key>
     <column id="312" parent="287" name="cid">
-      <DataType>int|0s</DataType>
+      <DataType>varchar(32)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
@@ -1293,7 +1330,7 @@ hr_id</ColNames>
       <Position>3</Position>
     </column>
     <column id="318" parent="288" name="gender">
-      <DataType>tinyint(1)|0s</DataType>
+      <DataType>varchar(16)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
@@ -1464,7 +1501,7 @@ jid</ColNames>
       <UnderlyingIndexName>introduction_work_experience_openId_uindex</UnderlyingIndexName>
     </key>
     <column id="353" parent="293" name="id">
-      <AutoIncrement>1</AutoIncrement>
+      <AutoIncrement>6</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -1541,7 +1578,7 @@ jid</ColNames>
       <Position>1</Position>
     </column>
     <column id="369" parent="294" name="id">
-      <AutoIncrement>1</AutoIncrement>
+      <AutoIncrement>389</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
@@ -1613,7 +1650,7 @@ jid</ColNames>
       <Position>6</Position>
     </column>
     <column id="384" parent="295" name="gender">
-      <DataType>tinyint(1)|0s</DataType>
+      <DataType>varchar(16)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>

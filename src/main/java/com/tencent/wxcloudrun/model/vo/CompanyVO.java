@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class CompanyVO {
 
-    private Integer id;
+    private String id;
 
     private String fullName;
 

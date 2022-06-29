@@ -23,9 +23,10 @@ public class HRServiceImpl implements HRService {
 
     /**
      * 注册功能
+     *
      * @param openID
      * @param hrDTO
-     * @return  返回ApiResponse
+     * @return 返回ApiResponse
      */
     @Override
     public ApiResponse HRRegister(String openID, HRDTO hrDTO) {
@@ -70,13 +71,18 @@ public class HRServiceImpl implements HRService {
         return ApiResponse.ok(loginVO);
     }
 
-    public ApiResponse getFullInfo(String openId){
+    public ApiResponse getFullInfo(String openId) {
         //TODO
         return ApiResponse.ok();
     }
 
-    public ApiResponse addRecruit(String openId, String seekerId){
+    public ApiResponse addRecruit(String openId, String seekerId) {
         //TODO
+        return ApiResponse.ok();
+    }
+
+    public ApiResponse joinCompany(String openId, String companyId) {
+        hrDao.connectCompany(openId, companyId);
         return ApiResponse.ok();
     }
 }

@@ -17,5 +17,5 @@ public interface HRDao {
 
     void deleteByOpenId(String openID);
 
-    void deleteLoginByOpenId(String openID);
+    void connectCompany(String openId, String companyId);
 }

@@ -10,6 +10,7 @@ import com.tencent.wxcloudrun.service.CompanyService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,19 +28,19 @@ public class CompanyServiceImpl implements CompanyService {
     public ApiResponse register(CompanyDTO companyDTO) {
         CompanyPO companyPO = new CompanyPO();
         BeanUtils.copyProperties(companyDTO, companyPO);
+        companyPO.setId(generateId(companyPO.getShortName()));
         companyDao.register(companyPO);
-        Integer id = companyPO.getId();
-        return getProfile(id);
+        return getProfile(companyPO.getId());
     }
 
-    public ApiResponse getProfile(Integer id) {
+    public ApiResponse getProfile(String id) {
         CompanyPO companyPO = companyDao.getById(id);
         CompanyProfileVO companyProfileVO = new CompanyProfileVO();
         BeanUtils.copyProperties(companyPO, companyProfileVO);
         return ApiResponse.ok(companyProfileVO);
     }
 
-    public ApiResponse getFullInfo(Integer id) {
+    public ApiResponse getFullInfo(String id) {
         CompanyPO companyPO = companyDao.getById(id);
         CompanyVO companyVO = new CompanyVO();
         BeanUtils.copyProperties(companyPO, companyVO);
@@ -53,9 +54,15 @@ public class CompanyServiceImpl implements CompanyService {
         return ApiResponse.ok();
     }
 
-    public ApiResponse delete(Integer id){
+    public ApiResponse delete(String id){
         companyDao.delete(id);
         return ApiResponse.ok();
+    }
+
+    private String generateId(String name){
+        String md5 = null;
+        md5 = DigestUtils.md5DigestAsHex((String.valueOf(System.currentTimeMillis())+name).getBytes());
+        return md5;
     }
 
 }
