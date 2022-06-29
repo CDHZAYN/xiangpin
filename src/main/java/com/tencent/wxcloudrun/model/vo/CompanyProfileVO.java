@@ -21,6 +21,8 @@ public class CompanyProfileVO {
 
     private Integer finance;
 
+    private Integer scale;
+
     private List<String> keywords;
 
 }

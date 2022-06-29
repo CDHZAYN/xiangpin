@@ -23,4 +23,6 @@ public interface SeekerDao {
 
     String getOpenID(@Param("openID") String openID);
 
+    SeekerIntentionPO getIntentionById(String openId);
+
 }

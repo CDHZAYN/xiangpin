@@ -11,28 +11,21 @@ import java.util.ArrayList;
 @AllArgsConstructor
 public class JobProfileVO {
 
-    private String companyShortName;
+    private CompanyProfileVO company;
 
     private String HRName;
 
+    private Integer id;
+
     private String jobName;
 
-    // 职位类型
-    private Integer expIndustry;
+    private Integer city;
 
-    private Integer expJob;
+    private Integer salaryFloor;
 
-    // 职位分类
-    private Integer jobType;
-
-    // 工作地点
-    private String position;
-
-    private Integer maxSalary;
-
-    private Integer minSalary;
+    private Integer salaryRoof;
 
     private Integer salaryType;
 
-    private ArrayList<String> keywords;
+    private String tags;
 }

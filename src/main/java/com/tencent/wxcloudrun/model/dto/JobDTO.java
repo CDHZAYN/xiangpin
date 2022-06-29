@@ -11,39 +11,34 @@ import java.util.ArrayList;
 @NoArgsConstructor
 public class JobDTO {
 
-    private String companyID;
-
-    private String HROpenID;
+    private String id;
 
     private String jobName;
 
-    // 职位类型
-    private Integer expIndustry;
+    private String jobCate;
 
-    private Integer expJob;
+    private Integer academicRequirement;
 
-    private Integer expEducation;
-
-    private String expExperience;
+    private Integer ExperienceRequirement;
 
     // 职位分类
     private Integer jobType;
 
     // 工作地点
-    private String position;
+    private String detailPos;
 
-    private Integer posID;
+    private Integer city;
 
-    private Integer maxSalary;
+    private Integer salaryFloor;
 
-    private Integer minSalary;
+    private Integer salaryRoof;
 
-    private Integer salaryType;
+    private Integer salaryType;//?
 
-    private ArrayList<String> keywords;
+    private String tags;
 
-    private String descContent;
+    private String describe;
 
-    private String requestContent;
+    private String requirement;
 
 }

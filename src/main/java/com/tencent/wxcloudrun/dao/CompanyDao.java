@@ -16,4 +16,5 @@ public interface CompanyDao {
 
     void delete(Integer id);
 
+    CompanyPO getCompanyByHRId(String openId);
 }

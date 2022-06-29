@@ -48,4 +48,9 @@
         where openId = #{openID};
     </select>
 
+    <select id="getIntentionById">
+        select * from seekerIntention
+        where openId = #{openId};
+    </select>
+
 </mapper>

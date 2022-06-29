@@ -12,11 +12,11 @@ import java.util.List;
 @NoArgsConstructor
 public class CompanyDTO {
 
-    private Integer id;
-
     private String fullName;
 
     private String shortName;
+
+    private String id;
 
     private Integer industry;
 
