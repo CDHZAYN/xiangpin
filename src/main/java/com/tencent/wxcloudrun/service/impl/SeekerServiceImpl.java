@@ -39,8 +39,9 @@ public class SeekerServiceImpl implements SeekerService {
             e.printStackTrace();
             return ApiResponse.error("00001", ErrorList.errorList.get("00001"));
         }
-        if (userOpenID == null)
+        if (userOpenID == null) {
             return ApiResponse.error("00002", ErrorList.errorList.get("00002"));
+        }
 
         return getSeekerProfile(openID);
     }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tencent.wxcloudrun.dao.introduction.SupplementaryInformationDao">
+    <resultMap id="SupplementaryInformation" type="com.tencent.wxcloudrun.model.po.introduction.SupplementaryInformationPO">
+        <id column="otherExperiences" property="otherExperiences" javaType="string"/>
+        <result column="skills" property="skills" javaType="string"/>
+    </resultMap>
+
+    <insert id="insertSupplementaryInformation" parameterType="com.tencent.wxcloudrun.model.po.introduction.SupplementaryInformationPO">
+        insert introduction_supplementary_information(openid, otherExperiences, skills) VALUES (#{openId}, #{otherExperiences}, #{skills});
+    </insert>
+
+    <delete id="deleteSupplementaryInformationByOpenId">
+        delete from introduction_supplementary_information where openid=#{openId};
+    </delete>
+
+    <select id="querySupplementaryInformationByOpenId" resultMap="SupplementaryInformation">
+        select otherExperiences, skills from introduction_supplementary_information where openid=#{openId};
+    </select>
+</mapper>
