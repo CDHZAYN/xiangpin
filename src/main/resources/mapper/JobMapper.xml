@@ -73,7 +73,8 @@
           and id = jid;
     </select>
 
-    <select id="getRecommend" parameterType="com.tencent.wxcloudrun.model.po.SearchPO" resultType="com.tencent.wxcloudrun.model.po.JobPO">
+    <select id="getRecommend" parameterType="com.tencent.wxcloudrun.model.po.SearchPO"
+            resultType="com.tencent.wxcloudrun.model.po.JobPO">
         select job.id,
         `name`,
         job_cate,
@@ -98,9 +99,18 @@
         </if>
         <if test="maxSalary!=null">job.max_salary &gt;= #{maxSalary} and</if>
         <if test="minSalary!=null">job.min_salary &lt;= #{minSalary} and</if>
-        <if test="SalaryType!=null">job.salary_type = #{salaryType} and</if>
+        <if test="salaryType!=null">job.salary_type = #{salaryType} and</if>
         <if test="jobType!=null">job.job_type = #{jobType} and</if>
         <if test="posId!=null">job.pos_id = #{posId}</if>
+    </select>
+
+    <select id="getJobListByIds" resultType="com.tencent.wxcloudrun.model.po.JobPO">
+        select *
+        from job
+        where
+        <foreach collection="list" item="item" index="index" separator="or">
+            id = #{item}
+        </foreach>;
     </select>
 
 </mapper>

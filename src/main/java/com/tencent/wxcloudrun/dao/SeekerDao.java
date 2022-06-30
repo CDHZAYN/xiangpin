@@ -21,4 +21,12 @@ public interface SeekerDao {
 
     SeekerIntentionPO getIntentionById(String openId);
 
+    void collectByJobId(String openId, Integer jobId);
+
+    List<Integer> getCollection(String openId);
+
+    void deleteByIds(String openId, Integer jobId);
+
+
+
 }

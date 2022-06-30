@@ -34,4 +34,22 @@
         where open_id = #{openId};
     </select>
 
+    <insert id="collectByJobId">
+        insert into seeker_collect(open_id, job_id)
+            value (#{openId}, #{jobId});
+    </insert>
+
+    <insert id="getCollection">
+        select job_id
+        from seeker_collect
+        where open_id = #{openId};
+    </insert>
+
+    <delete id="deleteByIds">
+        delete
+        from seeker_collect
+        where open_id = #{openId}
+          and job_id = #{jobId};
+    </delete>
+
 </mapper>

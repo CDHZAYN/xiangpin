@@ -26,4 +26,6 @@ public interface JobDao {
 
     List<JobPO> getRecommend(SearchPO searchPO);
 
+    List<JobPO> getJobListByIds(List<Integer> JobIdList);
+
 }
