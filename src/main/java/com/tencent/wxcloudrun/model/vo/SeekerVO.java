@@ -12,7 +12,6 @@ import org.springframework.beans.BeanUtils;
 public class SeekerVO {
     public SeekerVO(SeekerPO seekerPO) {
         BeanUtils.copyProperties(seekerPO, this);
-        this.birth = String.valueOf(seekerPO.getBirth().getTime());
     }
 
     private String openID;

@@ -1158,6 +1158,12 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
+    <user id="280" parent="1" name="gjc">
+      <Plugin>caching_sha2_password</Plugin>
+    </user>
+    <user id="281" parent="1" name="littleb">
+      <Plugin>caching_sha2_password</Plugin>
+    </user>
     <user id="282" parent="1" name="mysql.infoschema">
       <CanLogin>0</CanLogin>
       <Host>localhost</Host>

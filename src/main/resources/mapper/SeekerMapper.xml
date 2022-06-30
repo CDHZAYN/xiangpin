@@ -39,11 +39,11 @@
             value (#{openId}, #{jobId});
     </insert>
 
-    <insert id="getCollection">
+    <select id="getCollection" resultType="int">
         select job_id
         from seeker_collect
         where open_id = #{openId};
-    </insert>
+    </select>
 
     <delete id="deleteByIds">
         delete

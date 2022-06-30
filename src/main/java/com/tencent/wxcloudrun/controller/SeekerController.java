@@ -29,22 +29,22 @@ public class SeekerController{
         return seekerService.seekerLogin(openId);
     }
 
-    @GetMapping("/profile")
+    @GetMapping("/profiles")
     public ApiResponse getProfile(@RequestHeader String openId){
         return seekerService.getSeekerProfile(openId);
     }
 
-    @GetMapping("/collect")
+    @GetMapping("/collect/add")
     public ApiResponse collectJob(@RequestHeader("x-wx-openid")String openId, @RequestHeader Integer jobId){
         return seekerService.collectJob(openId, jobId);
     }
 
-    @GetMapping("/collectList")
+    @GetMapping("/collect/list")
     public ApiResponse getCollectList(@RequestHeader("x-wx-openid")String openId){
         return seekerService.getCollectList(openId);
     }
 
-    @DeleteMapping("/collectDelete")
+    @DeleteMapping("/collect/delete")
     public ApiResponse deleteCollect(@RequestHeader("x-wx-openid")String openId, @RequestHeader Integer jobId){
         return seekerService.deleteCollect(openId, jobId);
     }
