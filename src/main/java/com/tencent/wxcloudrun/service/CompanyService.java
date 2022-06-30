@@ -5,7 +5,7 @@ import com.tencent.wxcloudrun.model.dto.CompanyDTO;
 
 public interface CompanyService {
 
-    ApiResponse register(CompanyDTO companyDTO);
+    ApiResponse register(String openId, CompanyDTO companyDTO);
 
     ApiResponse getProfile(String id);
 

@@ -20,8 +20,8 @@ public class CompanyController {
     }
 
     @PostMapping("/register")
-    public ApiResponse register(@RequestBody CompanyDTO companyDTO){
-        return companyService.register(companyDTO);
+    public ApiResponse register(@RequestHeader("x-wx-openid")String openId, @RequestBody CompanyDTO companyDTO){
+        return companyService.register(openId, companyDTO);
     }
 
     @GetMapping("/profile")
