@@ -90,7 +90,7 @@
         `describe`,
         requirement
         from job, company, hr_job, company_hr
-        where
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
         <if test="job!=null">job.job_cate = #{job} and</if>
         <if test="industry!=null">
             company.industry = #{industry} and
@@ -101,7 +101,8 @@
         <if test="minSalary!=null">job.min_salary &lt;= #{minSalary} and</if>
         <if test="salaryType!=null">job.salary_type = #{salaryType} and</if>
         <if test="jobType!=null">job.job_type = #{jobType} and</if>
-        <if test="posId!=null">job.pos_id = #{posId}</if>
+        <if test="posId!=null">job.pos_id = #{posId} and</if>
+        </trim>
     </select>
 
     <select id="getJobListByIds" resultType="com.tencent.wxcloudrun.model.po.JobPO">
