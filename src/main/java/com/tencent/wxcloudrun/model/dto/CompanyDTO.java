@@ -18,7 +18,7 @@ public class CompanyDTO {
 
     private String id;
 
-    private Integer industry;
+    private String industry;
 
     private String avatar;
 

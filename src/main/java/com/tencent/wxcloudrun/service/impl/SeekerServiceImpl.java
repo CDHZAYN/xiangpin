@@ -60,6 +60,7 @@ public class SeekerServiceImpl implements SeekerService {
 
         SeekerDTO seekerDTO = seekerRegisterDTO.getSeeker();
         SeekerIntentionDTO seekerIntentionDTO = seekerRegisterDTO.getIntention();
+        System.err.println(seekerIntentionDTO);
 
         //handle basic
         SeekerPO seekerPO = new SeekerPO();
@@ -67,17 +68,15 @@ public class SeekerServiceImpl implements SeekerService {
         BeanUtils.copyProperties(seekerDTO, seekerPO);
 
         //execute intention
-        List<SeekerIntentionPO> seekerIntentionPOList = new ArrayList<>();
         SeekerIntentionPO seekerIntentionPO = new SeekerIntentionPO();
         BeanUtils.copyProperties(seekerIntentionDTO, seekerIntentionPO);
-
-        seekerIntentionPOList.add(seekerIntentionPO);
+        seekerIntentionPO.setOpenId(openId);
 
 
         //execute
         try {
             seekerDao.setSeeker(seekerPO);
-            seekerDao.setSeekerIntention(seekerIntentionPOList);
+            seekerDao.setSeekerIntention(seekerIntentionPO);
         } catch (Exception e) {
             e.printStackTrace();
             return ApiResponse.error("00003", ErrorList.errorList.get("00003"));

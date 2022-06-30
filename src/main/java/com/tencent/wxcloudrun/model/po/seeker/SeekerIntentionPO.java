@@ -8,9 +8,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SeekerIntentionPO {
-    String openId;
 
-    private Integer industry;
+    private String openId;
+
+    private String industry;
 
     private String job;
 

@@ -15,7 +15,7 @@ public class SeekerIntentionDTO {
         BeanUtils.copyProperties(seekerIntentionPO, this);
     }
 
-    private Integer industry;
+    private String industry;
 
     private String job;
 

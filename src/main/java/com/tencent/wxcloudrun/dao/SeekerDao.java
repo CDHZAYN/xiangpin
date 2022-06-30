@@ -13,7 +13,7 @@ public interface SeekerDao {
 
     void setSeeker(SeekerPO seekerPO);
 
-    void setSeekerIntention(List<SeekerIntentionPO> seekerIntentionPOList);
+    void setSeekerIntention(SeekerIntentionPO seekerIntentionPO);
 
     SeekerPO getSeeker(String openId);
 

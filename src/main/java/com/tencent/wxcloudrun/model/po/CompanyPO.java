@@ -15,7 +15,7 @@ public class CompanyPO {
 
     private String shortName;
 
-    private Integer industry;
+    private String industry;
 
     private String avatar;
 

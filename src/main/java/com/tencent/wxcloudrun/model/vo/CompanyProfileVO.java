@@ -17,7 +17,7 @@ public class CompanyProfileVO {
 
     private String avatar;
 
-    private Integer industry;
+    private String industry;
 
     private Integer finance;
 

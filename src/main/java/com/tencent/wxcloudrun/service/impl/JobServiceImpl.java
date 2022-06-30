@@ -80,22 +80,15 @@ public class JobServiceImpl implements JobService {
         CompanyProfileVO companyProfileVO = new CompanyProfileVO();
         BeanUtils.copyProperties(companyPO, companyProfileVO);
         jobVO.setCompany(companyProfileVO);
-        jobVO.setLoginVO(loginVO);
+        jobVO.setHrVO(loginVO);
         return ApiResponse.ok(jobVO);
     }
 
     public ApiResponse getProfile(Integer jobId) {
         JobPO jobPO = jobDao.selectJobById(jobId);
-        JobProfileVO jobProfileVO = new JobProfileVO();
-        BeanUtils.copyProperties(jobPO, jobProfileVO);
-        HRPO hrLoginPO = jobDao.getHRByJobId(jobId);
-        LoginVO loginVO = new LoginVO();
-        BeanUtils.copyProperties(hrLoginPO, loginVO);
-        CompanyPO companyPO = companyDao.getCompanyByHRId(loginVO.getOpenId());
-        CompanyProfileVO companyProfileVO = new CompanyProfileVO();
-        BeanUtils.copyProperties(companyPO, companyProfileVO);
-        jobProfileVO.setCompany(companyProfileVO);
-        jobProfileVO.setHRName(loginVO.getName());
+        List<JobPO> jobPOList = new ArrayList<>();
+        jobPOList.add(jobPO);
+        JobProfileVO jobProfileVO = POToProfileVO(jobPOList).get(0);
         return ApiResponse.ok(jobProfileVO);
     }
 
@@ -163,7 +156,7 @@ public class JobServiceImpl implements JobService {
             CompanyProfileVO companyProfileVO = new CompanyProfileVO();
             BeanUtils.copyProperties(companyPO, companyProfileVO);
             jobProfileVO.setCompany(companyProfileVO);
-            jobProfileVO.setHRName(loginVO.getName());
+            jobProfileVO.setHrVO(loginVO);
             jobProfileVOList.add(jobProfileVO);
         }
         return jobProfileVOList;
