@@ -34,7 +34,7 @@ public class SeekerController{
         return seekerService.getSeekerProfile(openId);
     }
 
-    @PostMapping("/collectAdd")
+    @GetMapping("/collect")
     public ApiResponse collectJob(@RequestHeader("x-wx-openid")String openId, @RequestHeader Integer jobId){
         return seekerService.collectJob(openId, jobId);
     }
