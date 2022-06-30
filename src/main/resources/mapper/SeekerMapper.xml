@@ -3,35 +3,32 @@
 <mapper namespace="com.tencent.wxcloudrun.dao.SeekerDao">
 
     <insert id="setSeeker" parameterType="com.tencent.wxcloudrun.model.po.seeker.SeekerPO">
-        insert into seeker(open_id, `name`, avatar, phone, `old`, education, birth,
-                           gender)
-            value (#{openId}, #{name}, #{avatar} ,#{phone}, #{old},
-                   #{education}, #{birth,jdbcType=DATE,javaType=java.sql.Date},
-                   #{gender});
+        insert into seeker(open_id, `name`, avatar, phone, `month`, `year`, gender)
+            value (#{openId}, #{name}, #{avatar}, #{phone},
+                   #{month}, #{year}, #{gender});
     </insert>
 
-    <insert id="setSeekerIntention" useGeneratedKeys="true" keyColumn="intentionId" keyProperty="intentionId">
-        insert into seeker_intention(open_id, exp_industry, exp_max_salary, exp_min_salary, salary_type, job_type,
-        exp_job) values
-        <foreach collection="list" item="intention" index="index" separator=",">
-            (#{intention.openId}, #{intention.expIndustry}, #{intention.expMaxSalary},
-            #{intention.expMinSalary}, #{intention.salaryType}, #{intention.jobType}, #{intention.expJob})
+    <insert id="setSeekerIntention">
+        insert into seeker_intention(open_id, industry, job, job_type, max_salary, min_salary, salary_type) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.openId}, #{item.industry}, #{item.job},
+            #{item.jobType}, #{item.maxSalary}, #{item.minSalary}, #{item.salaryType})
         </foreach>;
     </insert>
 
-    <select id="getSeeker">
+    <select id="getSeeker" resultType="com.tencent.wxcloudrun.model.po.seeker.SeekerPO">
         select *
         from seeker
         where open_id = #{openId};
     </select>
 
-    <select id="getOpenId">
+    <select id="getOpenId" resultType="java.lang.String">
         select open_id
         from seeker
         where open_id = #{openId};
     </select>
 
-    <select id="getIntentionById">
+    <select id="getIntentionById" resultType="com.tencent.wxcloudrun.model.po.seeker.SeekerIntentionPO">
         select *
         from seeker_intention
         where open_id = #{openId};

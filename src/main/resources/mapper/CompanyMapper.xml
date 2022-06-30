@@ -3,13 +3,13 @@
 <mapper namespace="com.tencent.wxcloudrun.dao.CompanyDao">
     <insert id="register" parameterType="com.tencent.wxcloudrun.model.po.CompanyPO" useGeneratedKeys="true"
             keyProperty="id">
-        insert into company(full_name, short_name, industry, avatar, license, scale, finance, intro, pos_id, website,
+        insert into company(id, full_name, short_name, industry, avatar, license, scale, finance, intro, pos_id, website,
                             position, keywords)
-            value (#{fullName}, #{shortName}, #{industry}, #{avatar}, #{license}, #{scale}, #{finance}, #{intro},
+            value (#{id}, #{fullName}, #{shortName}, #{industry}, #{avatar}, #{license}, #{scale}, #{finance}, #{intro},
                    #{posID}, #{website}, #{position}, #{keywords});
     </insert>
 
-    <select id="getById" resultMap="CompanyPO">
+    <select id="getById" resultType="com.tencent.wxcloudrun.model.po.CompanyPO">
         select *
         from company
         where id = #{id};
@@ -39,21 +39,5 @@
         from company
         where id = #{id}
     </delete>
-
-    <resultMap id="CompanyPO" type="com.tencent.wxcloudrun.model.po.CompanyPO">
-        <id column="id" property="id"/>
-        <result column="full_name" property="fullName"/>
-        <result column="short_name" property="shortName"/>
-        <result column="industry" property="industry"/>
-        <result column="avatar" property="avatar"/>
-        <result column="license" property="license"/>
-        <result column="scale" property="scale"/>
-        <result column="finance" property="finance"/>
-        <result column="intro" property="intro"/>
-        <result column="pos_id" property="posID"/>
-        <result column="website" property="website"/>
-        <result column="position" property="position"/>
-        <result column="keywords" property="keywords"/>
-    </resultMap>
 
 </mapper>

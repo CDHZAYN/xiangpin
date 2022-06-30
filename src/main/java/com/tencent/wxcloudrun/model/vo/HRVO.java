@@ -5,13 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class HRLoginVO {
+@NoArgsConstructor
+public class HRVO {
+    private String name;
 
-    public String userName;
+    private String phone;
 
-    public String userAvatar;
+    private String gender;
 
-    public String openID;
+    private String avatar;
+
 }

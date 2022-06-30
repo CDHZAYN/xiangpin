@@ -13,13 +13,13 @@ public class JobDTO {
 
     private String id;
 
-    private String jobName;
+    private String name;
 
     private String jobCate;
 
-    private Integer academicRequirement;
+    private Integer education;
 
-    private Integer ExperienceRequirement;
+    private Integer experience;
 
     // 职位分类
     private Integer jobType;
@@ -27,13 +27,13 @@ public class JobDTO {
     // 工作地点
     private String detailPos;
 
-    private Integer city;
+    private Integer posId;
 
-    private Integer salaryFloor;
+    private Integer minSalary;
 
-    private Integer salaryRoof;
+    private Integer maxSalary;
 
-    private Integer salaryType;//?
+    private Integer salaryType;
 
     private String tags;
 

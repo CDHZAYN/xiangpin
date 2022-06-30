@@ -11,7 +11,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class SeekerIntroPO {
 
-    private String openID;
+    private String openId;
 
     private String educationSchool;
 

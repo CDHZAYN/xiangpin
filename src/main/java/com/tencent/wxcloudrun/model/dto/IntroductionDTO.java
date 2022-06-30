@@ -4,7 +4,7 @@ import com.tencent.wxcloudrun.model.dto.seeker.SeekerIntentionDTO;
 import com.tencent.wxcloudrun.model.vo.introduction.EducationalExperienceVO;
 import com.tencent.wxcloudrun.model.vo.introduction.SupplementaryInformationVO;
 import com.tencent.wxcloudrun.model.vo.introduction.WorkExperienceVO;
-import com.tencent.wxcloudrun.model.vo.seeker.SeekerVO;
+import com.tencent.wxcloudrun.model.vo.SeekerVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class CompanyVO {
 
-    private Integer id;
+    private String id;
 
     private String fullName;
 
@@ -36,6 +36,4 @@ public class CompanyVO {
     private String website;
 
     private String position;
-
-    private List<String> keywords;
 }

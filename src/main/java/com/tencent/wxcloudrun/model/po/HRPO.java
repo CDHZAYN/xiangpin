@@ -10,9 +10,11 @@ import lombok.NoArgsConstructor;
 public class HRPO {
     private String openId;
 
-    private boolean gender;
-
     private String name;
 
-    private String phoneNum;
+    private String phone;
+
+    private String gender;
+
+    private String avatar;
 }

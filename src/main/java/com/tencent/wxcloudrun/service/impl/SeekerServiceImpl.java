@@ -9,8 +9,9 @@ import com.tencent.wxcloudrun.model.dto.seeker.SeekerIntentionDTO;
 import com.tencent.wxcloudrun.model.dto.seeker.SeekerRegisterDTO;
 import com.tencent.wxcloudrun.model.po.seeker.SeekerPO;
 import com.tencent.wxcloudrun.model.po.seeker.SeekerIntentionPO;
-import com.tencent.wxcloudrun.model.vo.seeker.SeekerLoginVO;
+import com.tencent.wxcloudrun.model.vo.LoginVO;
 import com.tencent.wxcloudrun.service.SeekerService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,41 +48,20 @@ public class SeekerServiceImpl implements SeekerService {
     }
 
     @Transactional
-    public ApiResponse seekerRegister(String openID, SeekerRegisterDTO seekerRegisterDTO) {
+    public ApiResponse seekerRegister(String openId, SeekerRegisterDTO seekerRegisterDTO) {
 
-        SeekerDTO newSeekerBasic = seekerRegisterDTO.getSeeker();
+        SeekerDTO seekerDTO = seekerRegisterDTO.getSeeker();
         SeekerIntentionDTO seekerIntentionDTO = seekerRegisterDTO.getIntention();
 
         //handle basic
         SeekerPO seekerPO = new SeekerPO();
-        seekerPO.setOpenID(openID);
-        seekerPO.setEducation(newSeekerBasic.getAcaBg());
-        seekerPO.setGender(newSeekerBasic.getGender().equals("male"));
-        seekerPO.setName(newSeekerBasic.getName());
-        seekerPO.setPhone(newSeekerBasic.getPhoneNum());
-        seekerPO.setAvatar(newSeekerBasic.getAvatarUrl());
-
-        int birthYear = Integer.parseInt(newSeekerBasic.getYear());
-        int birthMonth = Integer.parseInt(newSeekerBasic.getMonth());
-        int old = LocalDate.now().getYear() - birthYear;
-        if (LocalDate.now().getMonthValue() <= birthMonth)
-            old++;
-        seekerPO.setOld(old);
-        seekerPO.setBirth(Date.valueOf(LocalDate.of(birthYear, birthMonth, 1)));
+        seekerPO.setOpenId(openId);
+        BeanUtils.copyProperties(seekerDTO, seekerPO);
 
         //execute intention
         List<SeekerIntentionPO> seekerIntentionPOList = new ArrayList<>();
         SeekerIntentionPO seekerIntentionPO = new SeekerIntentionPO();
-        seekerIntentionPO.setOpenID(openID);
-        seekerIntentionPO.setJobType(seekerIntentionDTO.getJobType().toString());
-        seekerIntentionPO.setExpIndustry(seekerIntentionDTO.getExpIndustry().toString());
-        seekerIntentionPO.setJobType(seekerIntentionPO.getJobType());
-        seekerIntentionPO.setSalaryType(seekerIntentionDTO.getSalaryType());
-
-        int minSalary = seekerIntentionDTO.getExpMinSalary();
-        int maxSalary = seekerIntentionDTO.getExpMaxSalary();
-        seekerIntentionPO.setExpMaxSalary(Math.max(minSalary, maxSalary));
-        seekerIntentionPO.setExpMinSalary(Math.min(minSalary, maxSalary));
+        BeanUtils.copyProperties(seekerIntentionDTO, seekerIntentionPO);
 
         seekerIntentionPOList.add(seekerIntentionPO);
 
@@ -96,23 +76,16 @@ public class SeekerServiceImpl implements SeekerService {
             return ApiResponse.error("00003", ErrorList.errorList.get("00003"));
         }
 
-        SeekerLoginVO seekerLoginVO = new SeekerLoginVO();
-        seekerLoginVO.setUserName(seekerPO.getName());
-        seekerLoginVO.setUserAvatar(seekerPO.getAvatar());
-        seekerLoginVO.setOpenID(openID);
-        return ApiResponse.ok(seekerLoginVO);
+        LoginVO loginVO = new LoginVO();
+        BeanUtils.copyProperties(seekerPO, loginVO);
+        return ApiResponse.ok(loginVO);
     }
 
     public ApiResponse getSeekerProfile(String openID) {
         SeekerPO seekerPO = seekerDao.getSeeker(openID);
-        SeekerLoginVO seekerLoginVO = new SeekerLoginVO();
-        if (seekerPO.getAvatar() == null)
-            seekerLoginVO.setUserAvatar(null);
-        else
-            seekerLoginVO.setUserAvatar(seekerPO.getAvatar());
-        seekerLoginVO.setUserName(seekerPO.getName());
-        seekerLoginVO.setOpenID(openID);
-        return ApiResponse.ok(seekerLoginVO);
+        LoginVO loginVO = new LoginVO();
+        BeanUtils.copyProperties(seekerPO, loginVO);
+        return ApiResponse.ok(loginVO);
     }
 
 }

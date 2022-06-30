@@ -10,11 +10,11 @@ public interface CompanyDao {
 
     Integer register(CompanyPO companyPO);
 
-    CompanyPO getById(Integer id);
+    CompanyPO getById(String id);
 
     void modify(CompanyPO companyPO);
 
-    void delete(Integer id);
+    void delete(String id);
 
     CompanyPO getCompanyByHRId(String openId);
 }

@@ -16,6 +16,6 @@ class MessageServiceTest {
 
     @Test
     void test() {
-        messageService.setHasRead("123", "125", "1655021984670");
+//        messageService.setHasRead("123", "125", "1655021984670");
     }
 }

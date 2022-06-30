@@ -3,23 +3,24 @@
 <mapper namespace="com.tencent.wxcloudrun.dao.JobDao">
 
     <insert id="insertJob" useGeneratedKeys="true" keyProperty="id">
-        insert into job(job_name, job_cate, academic_requirement, experience_requirement, job_type, detail_pos, city,
-                        salary_roof, salary_floor, salary_type, tags, `describe`, requirement)
-            value (#{jobName}, #{jobCate}, #{academicRequirement}, #{experienceRequirement}, #{jobType}, #{detailPos},
-                   #{city}, #{salaryRoof}, #{salaryFloor}, #{salaryType}, #{tags}, #{describe}, #{requirement})
+        insert into job(`name`, job_cate, education, experience, job_type, detail_pos, pos_id, max_salary, min_salary,
+                        salary_type, tags, `describe`, requirement)
+            value (#{name}, #{jobCate}, #{education}, #{experience}, #{jobType}, #{detailPos},
+                   #{posId}, #{maxSalary}, #{minSalary}, #{salaryType}, #{tags}, #{describe}, #{requirement})
     </insert>
 
     <update id="updateJob">
         update job set
-        <if test="jobName!=null">job_name = #{jobName},</if>
+        <if test="name!=null">`name` = #{name},</if>
         <if test="jobCate!=null">job_cate = #{jobCate},</if>
-        <if test="academicRequirement">academic_requirement = #{academicRequirement},</if>
-        <if test="experienceRequirement!=null">experience_requirement = #{experienceRequirement},</if>
+        <if test="education">education = #{education},</if>
+        <if test="experience!=null">experience = #{experience},</if>
         <if test="jobType!=null">job_type = #{jobType},</if>
         <if test="detailPos!=null">detail_pos = #{detailPos},</if>
-        <if test="city!=null">city = #{city},</if>
-        <if test="salaryRoof!=null">salary_roof = #{salaryRoof},</if>
-        <if test="salaryFloor!=null">salary_floor = #{salaryFloor},</if>
+        <if test="posId!=null">pos_id = #{posId},</if>
+        <if test="maxSalary!=null">max_salary = #{maxSalary},</if>
+        <if test="minSalary!=null">min_salary = #{minSalary},</if>
+        <if test="salaryType!=null">salary_type = #{salaryType},</if>
         <if test="tags!=null">tags = #{tags},</if>
         <if test="describe!=null">`describe` = #{describe},</if>
         <if test="requirement!=null">requirement = #{requirement},</if>
@@ -37,31 +38,31 @@
         where id = #{id};
     </delete>
 
-    <select id="selectJobById">
+    <select id="selectJobById" resultType="com.tencent.wxcloudrun.model.po.JobPO">
         select *
         from job
         where id = #{jobId};
     </select>
 
-    <select id="getHRByJobId">
-        select HRLoginTable.userName, userAvatar, openId
-        from HRLoginTable,
+    <select id="getHRByJobId" resultType="com.tencent.wxcloudrun.model.po.HRPO">
+        select hr.`name`, avatar, open_id
+        from hr,
              hr_job
         where jid = #{jobId}
-          and HRLoginTable.openId = hr_job.hr_id;
+          and hr.open_id = hr_job.hr_id;
     </select>
 
-    <select id="getByHRId">
+    <select id="getByHRId" resultType="com.tencent.wxcloudrun.model.po.JobPO">
         select job.id,
-               job_name,
+               `name`,
                job_cate,
-               academic_requirement,
-               experience_requirement,
+               education,
+               experience,
                job_type,
                detail_pos,
-               city,
-               salary_roof,
-               salary_floor,
+               pos_id,
+               max_salary,
+               min_salary,
                salary_type,
                tags,
                `describe`,
@@ -72,34 +73,34 @@
           and id = jid;
     </select>
 
-    <select id="getRecommend" parameterType="com.tencent.wxcloudrun.model.po.SearchPO">
+    <select id="getRecommend" parameterType="com.tencent.wxcloudrun.model.po.SearchPO" resultType="com.tencent.wxcloudrun.model.po.JobPO">
         select job.id,
-        job_name,
+        `name`,
         job_cate,
-        academic_requirement,
-        experience_requirement,
+        education,
+        experience,
         job_type,
         detail_pos,
-        city,
-        salary_roof,
-        salary_floor,
+        job.pos_id,
+        max_salary,
+        min_salary,
         salary_type,
         tags,
         `describe`,
         requirement
         from job, company, hr_job, company_hr
         where
-        <if test="expJob!=null">job_cate = #{expJob} and</if>
-        <if test="expIndustry!=null">
-            company.industry = #{expIndustry} and
+        <if test="job!=null">job.job_cate = #{job} and</if>
+        <if test="industry!=null">
+            company.industry = #{industry} and
             job.id = jid and hr_job.hr_id = company_hr.hr_id and
             company_hr.cid = company.id and
         </if>
-        <if test="expMaxSalary!=null">salary_roof &gt;= #{expMaxSalary} and</if>
-        <if test="expMinSalary!=null">salary_floor &lt;= #{expMinSalary} and</if>
-        <if test="SalaryType!=null">salary_type = #{SalaryType} and</if>
-        <if test="jobType!=null">job_type = #{jobType} and</if>
-        <if test="city!=null">job.city = #{city} and</if>
+        <if test="maxSalary!=null">job.max_salary &gt;= #{maxSalary} and</if>
+        <if test="minSalary!=null">job.min_salary &lt;= #{minSalary} and</if>
+        <if test="SalaryType!=null">job.salary_type = #{salaryType} and</if>
+        <if test="jobType!=null">job.job_type = #{jobType} and</if>
+        <if test="posId!=null">job.pos_id = #{posId}</if>
     </select>
 
 </mapper>

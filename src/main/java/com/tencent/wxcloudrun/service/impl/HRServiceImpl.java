@@ -3,12 +3,12 @@ package com.tencent.wxcloudrun.service.impl;
 import com.tencent.wxcloudrun.config.ApiResponse;
 import com.tencent.wxcloudrun.config.ErrorList;
 import com.tencent.wxcloudrun.dao.HRDao;
-import com.tencent.wxcloudrun.model.dto.HRRegisterDTO;
-import com.tencent.wxcloudrun.model.po.HRLoginPO;
+import com.tencent.wxcloudrun.model.dto.HRDTO;
 import com.tencent.wxcloudrun.model.po.HRPO;
-import com.tencent.wxcloudrun.model.vo.HRLoginVO;
-import com.tencent.wxcloudrun.model.vo.seeker.SeekerLoginVO;
+import com.tencent.wxcloudrun.model.vo.HRVO;
+import com.tencent.wxcloudrun.model.vo.LoginVO;
 import com.tencent.wxcloudrun.service.HRService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,86 +24,70 @@ public class HRServiceImpl implements HRService {
 
     /**
      * 注册功能
+     *
      * @param openID
-     * @param hrRegister
-     * @return  返回ApiResponse
+     * @param hrDTO
+     * @return 返回ApiResponse
      */
     @Override
-    public ApiResponse HRRegister(String openID, HRRegisterDTO hrRegister) {
+    public ApiResponse HRRegister(String openID, HRDTO hrDTO) {
         if (hrDao.getByOpenId(openID) != null) {
             return ApiResponse.error("00004", ErrorList.errorList.get("00004"));
         }
-
-
-        HRPO hrpo = new HRPO();
-        hrpo.setGender(hrRegister.getGender().equals("male"));
-        hrpo.setName(hrRegister.getName());
-        hrpo.setOpenId(openID);
-        hrpo.setPhoneNum(hrRegister.getPhoneNum());
-
-        HRLoginPO loginPO = new HRLoginPO();
-        loginPO.setUserAvatar(hrRegister.getAvatarUrl());
-        loginPO.setUserName(hrRegister.getName());
-        loginPO.setOpenID(openID);
-
-        if (loginPO.getUserAvatar() == null) {
-            loginPO.setUserAvatar("null");
-        }
-
+        HRPO hrPO = new HRPO();
+        BeanUtils.copyProperties(hrDTO, hrPO);
+        hrPO.setOpenId(openID);
         try {
-            hrDao.setHRInfo(hrpo);
-            hrDao.setHRLoginInfo(loginPO);
+            hrDao.setHRInfo(hrPO);
         } catch (Exception e) {
             e.printStackTrace();
             return ApiResponse.error("00003", ErrorList.errorList.get("00003"));
         }
-
         return getHRProfile(openID);
     }
 
     @Override
-    public ApiResponse HRLogin(String openID) {
-        String userOpenId;
-
+    public ApiResponse HRLogin(String openId) {
+        //examine whether hr has existed
         try {
-            userOpenId = hrDao.getOpenId(openID);
-
+            String userOpenId;
+            userOpenId = hrDao.getOpenId(openId);
+            if (userOpenId == null) {
+                return ApiResponse.error("00002", ErrorList.errorList.get("00002"));
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return ApiResponse.error("00001", ErrorList.errorList.get("00001"));
         }
-
-        if (userOpenId == null) {
-            return ApiResponse.error("00002", ErrorList.errorList.get("00002"));
-        }
-
-        HRLoginPO hrLoginPO = hrDao.getLoginByOpenId(openID);
-        HRLoginVO hrLoginVO = new HRLoginVO();
-
-        hrLoginVO.setUserName(hrLoginPO.getUserName());
-        hrLoginVO.setOpenID(openID);
-        if (hrLoginPO.getUserAvatar() == null) {
-            hrLoginVO.setUserAvatar(null);
-        } else {
-            hrLoginVO.setUserAvatar(hrLoginPO.getUserAvatar());
-        }
-        return ApiResponse.ok(hrLoginVO);
+        HRPO hrPO = hrDao.getByOpenId(openId);
+        LoginVO loginVO = new LoginVO();
+        BeanUtils.copyProperties(hrPO, loginVO);
+        return ApiResponse.ok(loginVO);
     }
 
-    public ApiResponse getHRProfile(String openID) {
-        HRLoginPO HRLoginPO = hrDao.getLoginByOpenId(openID);
-        SeekerLoginVO seekerLoginVO = new SeekerLoginVO();
-        if (HRLoginPO.getUserAvatar() == null)
-            seekerLoginVO.setUserAvatar(null);
-        else
-            seekerLoginVO.setUserAvatar(HRLoginPO.getUserAvatar());
-        seekerLoginVO.setUserName(HRLoginPO.getUserName());
-        seekerLoginVO.setOpenID(openID);
-        return ApiResponse.ok(seekerLoginVO);
+    public ApiResponse getHRProfile(String openId) {
+        HRPO hrPO = hrDao.getByOpenId(openId);
+        LoginVO loginVO = new LoginVO();
+        BeanUtils.copyProperties(hrPO, loginVO);
+        return ApiResponse.ok(loginVO);
     }
 
-    public ApiResponse addRecruit(){
+    public ApiResponse getFullInfo(String openId) {
         //TODO
+        HRPO hrPO = hrDao.getByOpenId(openId);
+        HRVO hrVO = new HRVO();
+        BeanUtils.copyProperties(hrPO, hrVO);
+        return ApiResponse.ok(hrVO);
+    }
+
+    public ApiResponse addRecruit(String openId, String seekerId) {
+        //TODO
+
+        return ApiResponse.ok();
+    }
+
+    public ApiResponse joinCompany(String openId, String companyId) {
+        hrDao.connectCompany(openId, companyId);
         return ApiResponse.ok();
     }
 }
