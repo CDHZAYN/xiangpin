@@ -13,7 +13,7 @@ public class HRDTO {
 
     private String phone;
 
-    private Boolean gender;
+    private String gender;
 
     private String avatar;
 
