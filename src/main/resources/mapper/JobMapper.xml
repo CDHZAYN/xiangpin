@@ -38,13 +38,13 @@
         where id = #{id};
     </delete>
 
-    <select id="selectJobById">
+    <select id="selectJobById" resultType="com.tencent.wxcloudrun.model.po.JobPO">
         select *
         from job
         where id = #{jobId};
     </select>
 
-    <select id="getHRByJobId">
+    <select id="getHRByJobId" resultType="com.tencent.wxcloudrun.model.po.HRPO">
         select hr.`name`, avatar, open_id
         from hr,
              hr_job
@@ -52,7 +52,7 @@
           and hr.open_id = hr_job.hr_id;
     </select>
 
-    <select id="getByHRId">
+    <select id="getByHRId" resultType="com.tencent.wxcloudrun.model.po.JobPO">
         select job.id,
                `name`,
                job_cate,
@@ -73,7 +73,7 @@
           and id = jid;
     </select>
 
-    <select id="getRecommend" parameterType="com.tencent.wxcloudrun.model.po.SearchPO">
+    <select id="getRecommend" parameterType="com.tencent.wxcloudrun.model.po.SearchPO" resultType="com.tencent.wxcloudrun.model.po.JobPO">
         select job.id,
         `name`,
         job_cate,

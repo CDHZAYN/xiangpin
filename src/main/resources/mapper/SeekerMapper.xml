@@ -16,13 +16,13 @@
         </foreach>;
     </insert>
 
-    <select id="getSeeker">
+    <select id="getSeeker" resultType="com.tencent.wxcloudrun.model.po.seeker.SeekerPO">
         select *
         from seeker
         where open_id = #{openId};
     </select>
 
-    <select id="getOpenId">
+    <select id="getOpenId" resultType="java.lang.String">
         select open_id
         from seeker
         where open_id = #{openId};
