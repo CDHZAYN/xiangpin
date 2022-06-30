@@ -14,5 +14,5 @@ public interface SupplementaryInformationDao {
 
     int insertSupplementaryInformation(String openId, SupplementaryInformationPO supplementaryInformationPo);
 
-    List<SupplementaryInformationPO> querySupplementaryInformationByOpenId(String openId);
+    SupplementaryInformationPO querySupplementaryInformationByOpenId(String openId);
 }

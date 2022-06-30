@@ -1,6 +1,7 @@
 package com.tencent.wxcloudrun.dao.introduction;
 
 import com.tencent.wxcloudrun.model.po.introduction.EducationalExperiencePO;
+import com.tencent.wxcloudrun.model.po.introduction.WorkExperiencePO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 public interface WorkExperienceDao {
     int deleteWorkExperiencesByOpenId(String openId);
 
-    int insertWorkExperience(String openId, EducationalExperiencePO educationalExperiencePo);
+    int insertWorkExperience(String openId, WorkExperiencePO workExperiencePO);
 
-    List<EducationalExperiencePO> queryEducationalExperiencesByOpenId(String openId);
+    List<WorkExperiencePO> queryWorkExperiencesByOpenId(String openId);
 }

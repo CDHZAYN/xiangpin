@@ -20,6 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class IntroductionDTO {
+
     SeekerVO seeker;
 
     List<EducationalExperienceVO> experienceList;

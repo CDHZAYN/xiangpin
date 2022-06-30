@@ -18,7 +18,7 @@
         delete from introduction_work_experience where openId = #{openId};
     </delete>
 
-    <select id="queryEducationalExperiencesByOpenId" resultMap="EducationExperienceMap">
+    <select id="queryWorkExperiencesByOpenId" resultMap="EducationExperienceMap">
         select jobName, supplement, timeStart, timeEnd from introduction_work_experience where openId = #{openId};
     </select>
 
