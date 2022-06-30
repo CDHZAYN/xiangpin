@@ -24,7 +24,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -105,7 +104,7 @@ public class JobServiceImpl implements JobService {
         SearchPO searchPO = new SearchPO();
         BeanUtils.copyProperties(seekerIntentionPO, searchPO);
         searchPO.setPosId(posId);
-        List<JobProfileVO> jobProfileVOList = getRecommend(searchPO);
+        List<JobProfileVO> jobProfileVOList = getRecList(searchPO);
         return ApiResponse.ok(jobProfileVOList);
     }
 
@@ -122,7 +121,7 @@ public class JobServiceImpl implements JobService {
     }
 
     public ApiResponse search(SearchPO searchPO) {
-        List<JobProfileVO> jobProfileVOList = getRecommend(searchPO);
+        List<JobProfileVO> jobProfileVOList = getRecList(searchPO);
         jobProfileVOList.sort(new Comparator<JobProfileVO>() {
             @Override
             public int compare(JobProfileVO o1, JobProfileVO o2) {
@@ -136,7 +135,7 @@ public class JobServiceImpl implements JobService {
         return ApiResponse.ok(jobProfileVOList);
     }
 
-    private List<JobProfileVO> getRecommend(SearchPO searchPO) {
+    private List<JobProfileVO> getRecList(SearchPO searchPO) {
         List<JobPO> jobPOList = jobDao.getRecommend(searchPO);
         jobPOList.sort(new Comparator<JobPO>() {
             @Override

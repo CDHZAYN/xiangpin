@@ -18,7 +18,7 @@ public class SearchPO {
 
     Integer minSalary;
 
-    Integer SalaryType;
+    Integer salaryType;
 
     Integer jobType;
 

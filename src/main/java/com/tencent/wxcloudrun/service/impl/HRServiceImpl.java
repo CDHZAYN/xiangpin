@@ -5,6 +5,7 @@ import com.tencent.wxcloudrun.config.ErrorList;
 import com.tencent.wxcloudrun.dao.HRDao;
 import com.tencent.wxcloudrun.model.dto.HRDTO;
 import com.tencent.wxcloudrun.model.po.HRPO;
+import com.tencent.wxcloudrun.model.vo.HRVO;
 import com.tencent.wxcloudrun.model.vo.LoginVO;
 import com.tencent.wxcloudrun.service.HRService;
 import org.springframework.beans.BeanUtils;
@@ -64,8 +65,8 @@ public class HRServiceImpl implements HRService {
         return ApiResponse.ok(loginVO);
     }
 
-    public ApiResponse getHRProfile(String openID) {
-        HRPO hrPO = hrDao.getByOpenId(openID);
+    public ApiResponse getHRProfile(String openId) {
+        HRPO hrPO = hrDao.getByOpenId(openId);
         LoginVO loginVO = new LoginVO();
         BeanUtils.copyProperties(hrPO, loginVO);
         return ApiResponse.ok(loginVO);
@@ -73,11 +74,15 @@ public class HRServiceImpl implements HRService {
 
     public ApiResponse getFullInfo(String openId) {
         //TODO
-        return ApiResponse.ok();
+        HRPO hrPO = hrDao.getByOpenId(openId);
+        HRVO hrVO = new HRVO();
+        BeanUtils.copyProperties(hrPO, hrVO);
+        return ApiResponse.ok(hrVO);
     }
 
     public ApiResponse addRecruit(String openId, String seekerId) {
         //TODO
+
         return ApiResponse.ok();
     }
 

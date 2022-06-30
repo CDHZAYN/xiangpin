@@ -90,17 +90,17 @@
         requirement
         from job, company, hr_job, company_hr
         where
-        <if test="expJob!=null">job.job_cate = #{expJob} and</if>
-        <if test="expIndustry!=null">
-            company.industry = #{expIndustry} and
+        <if test="job!=null">job.job_cate = #{job} and</if>
+        <if test="industry!=null">
+            company.industry = #{industry} and
             job.id = jid and hr_job.hr_id = company_hr.hr_id and
             company_hr.cid = company.id and
         </if>
-        <if test="expMaxSalary!=null">job.max_salary &gt;= #{expMaxSalary} and</if>
-        <if test="expMinSalary!=null">job.min_salary &lt;= #{expMinSalary} and</if>
-        <if test="SalaryType!=null">job.salary_type = #{SalaryType} and</if>
+        <if test="maxSalary!=null">job.max_salary &gt;= #{maxSalary} and</if>
+        <if test="minSalary!=null">job.min_salary &lt;= #{minSalary} and</if>
+        <if test="SalaryType!=null">job.salary_type = #{salaryType} and</if>
         <if test="jobType!=null">job.job_type = #{jobType} and</if>
-        <if test="city!=null">job.pos_id = #{city} and</if>
+        <if test="posId!=null">job.pos_id = #{posId}</if>
     </select>
 
 </mapper>
