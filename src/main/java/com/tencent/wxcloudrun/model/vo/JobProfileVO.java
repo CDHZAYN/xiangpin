@@ -13,7 +13,7 @@ public class JobProfileVO {
 
     private CompanyProfileVO company;
 
-    private String HRName;
+    private LoginVO hrVO;
 
     private Integer id;
 

@@ -14,7 +14,7 @@ import com.tencent.wxcloudrun.model.po.seeker.SeekerPO;
 import com.tencent.wxcloudrun.model.vo.introduction.EducationalExperienceVO;
 import com.tencent.wxcloudrun.model.vo.introduction.SupplementaryInformationVO;
 import com.tencent.wxcloudrun.model.vo.introduction.WorkExperienceVO;
-import com.tencent.wxcloudrun.model.vo.seeker.SeekerVO;
+import com.tencent.wxcloudrun.model.vo.SeekerVO;
 import com.tencent.wxcloudrun.service.IntroductionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

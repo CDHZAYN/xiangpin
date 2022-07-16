@@ -80,22 +80,15 @@ public class JobServiceImpl implements JobService {
         CompanyProfileVO companyProfileVO = new CompanyProfileVO();
         BeanUtils.copyProperties(companyPO, companyProfileVO);
         jobVO.setCompany(companyProfileVO);
-        jobVO.setLoginVO(loginVO);
+        jobVO.setHrVO(loginVO);
         return ApiResponse.ok(jobVO);
     }
 
     public ApiResponse getProfile(Integer jobId) {
         JobPO jobPO = jobDao.selectJobById(jobId);
-        JobProfileVO jobProfileVO = new JobProfileVO();
-        BeanUtils.copyProperties(jobPO, jobProfileVO);
-        HRPO hrLoginPO = jobDao.getHRByJobId(jobId);
-        LoginVO loginVO = new LoginVO();
-        BeanUtils.copyProperties(hrLoginPO, loginVO);
-        CompanyPO companyPO = companyDao.getCompanyByHRId(loginVO.getOpenId());
-        CompanyProfileVO companyProfileVO = new CompanyProfileVO();
-        BeanUtils.copyProperties(companyPO, companyProfileVO);
-        jobProfileVO.setCompany(companyProfileVO);
-        jobProfileVO.setHRName(loginVO.getName());
+        List<JobPO> jobPOList = new ArrayList<>();
+        jobPOList.add(jobPO);
+        JobProfileVO jobProfileVO = POToProfileVO(jobPOList).get(0);
         return ApiResponse.ok(jobProfileVO);
     }
 
@@ -125,11 +118,15 @@ public class JobServiceImpl implements JobService {
         jobProfileVOList.sort(new Comparator<JobProfileVO>() {
             @Override
             public int compare(JobProfileVO o1, JobProfileVO o2) {
-                //TODO
                 TextSimilarity textSimilarity = new CosineTextSimilarity();
-                double score1 = textSimilarity.similarScore(o1.getTags(), searchPO.getTags());
-                double score2 = textSimilarity.similarScore(o2.getTags(), searchPO.getTags());
-                return (int) (score2 * 10 - score1 * 10);
+                double score11 = textSimilarity.similarScore(o1.getTags(), searchPO.getTags());
+                double score21 = textSimilarity.similarScore(o2.getTags(), searchPO.getTags());
+                double score12 = textSimilarity.similarScore(o1.getName(), searchPO.getTags());
+                double score22 = textSimilarity.similarScore(o2.getName(), searchPO.getTags());
+                double score13 = textSimilarity.similarScore(o1.getCompany().getShortName(), searchPO.getTags());
+                double score23 = textSimilarity.similarScore(o2.getCompany().getShortName(), searchPO.getTags());
+
+                return (int) ((score21+score22+score23) * 10 - (score11+score12+score13) * 10);
             }
         });
         return ApiResponse.ok(jobProfileVOList);
@@ -147,7 +144,7 @@ public class JobServiceImpl implements JobService {
         return jobProfileVOList;
     }
 
-    private List<JobProfileVO> POToProfileVO(List<JobPO> jobPOList) {
+    public List<JobProfileVO> POToProfileVO(List<JobPO> jobPOList) {
         List<JobProfileVO> jobProfileVOList = new ArrayList<>();
         for (JobPO jobPO : jobPOList) {
             JobProfileVO jobProfileVO = new JobProfileVO();
@@ -159,7 +156,7 @@ public class JobServiceImpl implements JobService {
             CompanyProfileVO companyProfileVO = new CompanyProfileVO();
             BeanUtils.copyProperties(companyPO, companyProfileVO);
             jobProfileVO.setCompany(companyProfileVO);
-            jobProfileVO.setHRName(loginVO.getName());
+            jobProfileVO.setHrVO(loginVO);
             jobProfileVOList.add(jobProfileVO);
         }
         return jobProfileVOList;

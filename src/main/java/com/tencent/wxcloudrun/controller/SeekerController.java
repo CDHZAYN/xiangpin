@@ -3,7 +3,6 @@ package com.tencent.wxcloudrun.controller;
 import com.tencent.wxcloudrun.config.ApiResponse;
 import com.tencent.wxcloudrun.model.dto.seeker.SeekerRegisterDTO;
 import com.tencent.wxcloudrun.service.SeekerService;
-import com.tencent.wxcloudrun.service.impl.SeekerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,8 +29,23 @@ public class SeekerController{
         return seekerService.seekerLogin(openId);
     }
 
-    @GetMapping("/profile")
+    @GetMapping("/profiles")
     public ApiResponse getProfile(@RequestHeader String openId){
         return seekerService.getSeekerProfile(openId);
+    }
+
+    @GetMapping("/collect/add")
+    public ApiResponse collectJob(@RequestHeader("x-wx-openid")String openId, @RequestHeader Integer jobId){
+        return seekerService.collectJob(openId, jobId);
+    }
+
+    @GetMapping("/collect/list")
+    public ApiResponse getCollectList(@RequestHeader("x-wx-openid")String openId){
+        return seekerService.getCollectList(openId);
+    }
+
+    @DeleteMapping("/collect/delete")
+    public ApiResponse deleteCollect(@RequestHeader("x-wx-openid")String openId, @RequestHeader Integer jobId){
+        return seekerService.deleteCollect(openId, jobId);
     }
 }

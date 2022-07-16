@@ -11,7 +11,7 @@ public class JobVO {
 
     private CompanyProfileVO company;
 
-    private LoginVO loginVO;
+    private LoginVO hrVO;
 
     private Integer id;
 

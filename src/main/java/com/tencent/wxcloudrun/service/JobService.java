@@ -36,4 +36,6 @@ public interface JobService {
     ApiResponse getResponsible(String openId);
 
     ApiResponse search(SearchPO searchPO);
+
+    List<JobProfileVO> POToProfileVO(List<JobPO> jobPOList);
 }

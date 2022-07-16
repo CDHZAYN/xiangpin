@@ -73,7 +73,6 @@ public class HRServiceImpl implements HRService {
     }
 
     public ApiResponse getFullInfo(String openId) {
-        //TODO
         HRPO hrPO = hrDao.getByOpenId(openId);
         HRVO hrVO = new HRVO();
         BeanUtils.copyProperties(hrPO, hrVO);
@@ -81,8 +80,7 @@ public class HRServiceImpl implements HRService {
     }
 
     public ApiResponse addRecruit(String openId, String seekerId) {
-        //TODO
-
+        //TODO: 招募大牛
         return ApiResponse.ok();
     }
 

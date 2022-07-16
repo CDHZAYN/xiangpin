@@ -2,6 +2,7 @@ package com.tencent.wxcloudrun.service.impl;
 
 import com.tencent.wxcloudrun.config.ApiResponse;
 import com.tencent.wxcloudrun.dao.CompanyDao;
+import com.tencent.wxcloudrun.dao.HRDao;
 import com.tencent.wxcloudrun.model.dto.CompanyDTO;
 import com.tencent.wxcloudrun.model.po.CompanyPO;
 import com.tencent.wxcloudrun.model.vo.CompanyProfileVO;
@@ -10,26 +11,29 @@ import com.tencent.wxcloudrun.service.CompanyService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
-
-import java.util.Arrays;
-import java.util.List;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
 
     private final CompanyDao companyDao;
 
+    private final HRDao hrDao;
+
     @Autowired
-    public CompanyServiceImpl(CompanyDao companyDao) {
+    public CompanyServiceImpl(CompanyDao companyDao, HRDao hrDao) {
         this.companyDao = companyDao;
+        this.hrDao = hrDao;
     }
 
-    public ApiResponse register(CompanyDTO companyDTO) {
+    @Transactional
+    public ApiResponse register(String openId, CompanyDTO companyDTO) {
         CompanyPO companyPO = new CompanyPO();
         BeanUtils.copyProperties(companyDTO, companyPO);
         companyPO.setId(generateId(companyPO.getShortName()));
         companyDao.register(companyPO);
+        hrDao.connectCompany(openId, companyPO.getId());
         return getProfile(companyPO.getId());
     }
 

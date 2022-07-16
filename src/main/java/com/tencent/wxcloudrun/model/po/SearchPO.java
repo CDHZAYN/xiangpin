@@ -10,7 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @NoArgsConstructor
 public class SearchPO {
 
-    Integer industry;
+    String industry;
 
     String job;
 

@@ -9,11 +9,9 @@
     </insert>
 
     <insert id="setSeekerIntention">
-        insert into seeker_intention(open_id, industry, job, job_type, max_salary, min_salary, salary_type) values
-        <foreach collection="list" item="item" index="index" separator=",">
-            (#{item.openId}, #{item.industry}, #{item.job},
-            #{item.jobType}, #{item.maxSalary}, #{item.minSalary}, #{item.salaryType})
-        </foreach>;
+        insert into seeker_intention(open_id, industry, job, job_type, max_salary, min_salary, salary_type)
+            value (#{openId}, #{industry}, #{job},
+                   #{jobType}, #{maxSalary}, #{minSalary}, #{salaryType});
     </insert>
 
     <select id="getSeeker" resultType="com.tencent.wxcloudrun.model.po.seeker.SeekerPO">
@@ -33,5 +31,23 @@
         from seeker_intention
         where open_id = #{openId};
     </select>
+
+    <insert id="collectByJobId">
+        insert into seeker_collect(open_id, job_id)
+            value (#{openId}, #{jobId});
+    </insert>
+
+    <select id="getCollection" resultType="int">
+        select job_id
+        from seeker_collect
+        where open_id = #{openId};
+    </select>
+
+    <delete id="deleteByIds">
+        delete
+        from seeker_collect
+        where open_id = #{openId}
+          and job_id = #{jobId};
+    </delete>
 
 </mapper>
